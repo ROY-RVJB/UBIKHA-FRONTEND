@@ -1,0 +1,75 @@
+.header {
+  background-color: #F5F0EB;
+  color: #000;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #D8D6D2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Contenedor del logo + título */
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos del logo */
+.header-logo {
+  height: 50px; /* Ajusta según tu diseño */
+  width: auto; /* Mantiene proporción */
+  object-fit: contain; /* Evita distorsión */
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #031B2E;
+}
+
+/* Contenedor de enlaces */
+.header-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.texto_1,
+.texto_2 {
+  color: #031B2E;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.texto_1:hover,
+.texto_2:hover {
+  color: var(--color-bg);
+  background-color:var(--color-secondary-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .header-brand {
+    justify-content: center;
+  }
+  
+  .header-logo {
+    height: 40px;
+  }
+  
+  .header-title {
+    font-size: 1.5rem;
+  }
+}

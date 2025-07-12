@@ -1,11 +1,11 @@
-import { Header } from './components/Header/Header';
+import { Header } from './components/home/Header/Header';
 
 function App() {
   return (
     <div className="app-container">
       <Header title="UBIKHA"
-      text_1="Regístrate"
-      text_2="Pon tu espacio en UBIKHA"
+      text_1="Pon tu espacio en UBIKHA"
+      text_2="Registrate"
       />
     </div>
   );
