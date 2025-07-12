@@ -1,0 +1,17 @@
+/* Estilos específicos para el Header */
+.header {
+  background-color: #F5F0EB;
+  color: rgb(0, 0, 0);
+  padding: 1rem 1rem;
+  text-align: left;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  
+}
+
+.header-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+
+}
