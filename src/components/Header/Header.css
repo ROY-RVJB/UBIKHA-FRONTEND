@@ -1,17 +1,38 @@
-/* Estilos específicos para el Header */
+/* src/components/Header/Header.css */
+
 .header {
   background-color: #F5F0EB;
-  color: rgb(0, 0, 0);
-  padding: 1rem 1rem;
-  text-align: left;
+  color: #000;
+  padding: 1rem;
   margin-bottom: 2rem;
-  border-bottom: 2px solid rgb(0, 0, 0);
-  
+  border-bottom: 1px solid #D8D6D2;
+
+  display: flex;
+  justify-content: space-between; /* separa título y links */
+  align-items: center;
 }
 
 .header-title {
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
+}
 
+.header-links {
+  display: flex;
+  gap: 1rem; /* espacio entre los enlaces */
+}
+
+.texto_1,
+.texto_2 {
+  color: #031B2E;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.texto_1:hover,
+.texto_2:hover {
+  color: #0B132B;
 }

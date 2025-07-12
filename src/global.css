@@ -1,4 +1,22 @@
-/* Estilos globales MÍNIMOS - Solo lo básico */
+/* PAlETA DE COLORES*/
+:root {
+  --color-bg: #F5F0EB;
+  --color-surface: #EFE6DC;
+  --color-divider: #D8D6D2;
+
+  --color-primary-dark: #031B2E;
+  --color-secondary-dark: #0B132B;
+
+  --color-accent-warm: #A3786E;
+  --color-accent-soft: #E5C3B5;
+  --color-accent-cool: #3C6E71;
+  --color-success: #2E7D61;
+  --color-accent-muted: #D4A59A;
+
+  --color-text-main: #1C1C1C;
+  --color-text-light: #FFFFFF;
+}
+
 
 * {
   margin: 0;
@@ -8,8 +26,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #F5F0EB;
-  color: #333;
+  background-color:var(--color-bg);
   line-height: 1.6;
 }
 
