@@ -2,6 +2,7 @@
 import './Header.css';
 import logo from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
 
+
 interface HeaderProps {
   title: string;
   text_1: string;
@@ -14,8 +15,8 @@ export const Header = ({ title, text_1, text_2 }: HeaderProps) => {
       <div className="header-brand">
         <img 
           src={logo} 
-          alt="UBIKHA Logo" 
-          className="header-logo" 
+          alt="ubikhaLogo" 
+          className="headerLogo" 
         />
         <h1 className="header-title">{title}</h1>
       </div>

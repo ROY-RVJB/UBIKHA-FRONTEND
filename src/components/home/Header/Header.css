@@ -16,7 +16,7 @@
 }
 
 /* Estilos del logo */
-.header-logo {
+.headerLogo {
   height: 50px; /* Ajusta según tu diseño */
   width: auto; /* Mantiene proporción */
   object-fit: contain; /* Evita distorsión */

@@ -1,0 +1,32 @@
+.main-body {
+  padding: 2rem;
+  background-color: #F5F0EB; /* Beige suave */
+  color: var(--color-primary-dark);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.intro-section {
+  display: flex;
+  flex-direction:row;
+  align-items: center; /* izquierda por defecto */
+  max-width: 1080px;     
+  margin:auto;
+  gap: 7rem;
+}
+
+.portadaBody {
+  /* max-width: 800px; */
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px var(--color-primary-dark);
+}
+.portada-text h2{
+
+  font-weight: 700;
+  line-height: 1.2;
+  font-size: 2.8rem; /* Tamaño grande */
+}
+.portada-text p{
+color:rgb(136, 130, 128);
+}
