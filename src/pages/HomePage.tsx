@@ -1,6 +1,7 @@
 
 
-import { Header, Footer, MainContent } from '../components/layout';
+import { Header, Footer, MainContent, Features} from '../components/layout';
+
 
 
 function HomePage() {
@@ -14,7 +15,20 @@ function HomePage() {
       <MainContent
         headline="Encuentra lugares para quedarte en Ubikha"
         description="Ya sea que estés buscando un cuarto,apartamento en un complejo o un castillo, en Ubikha vas a encontrar tu lugar ideal."
-      />  
+      /> 
+       <Features 
+        feature1Title="Aprovecha la flexibilidad"
+        feature1Description="Gracias a los alojamientos con cancelación flexible, será más fácil que reconsideres tu reservación si cambias de planes."
+        feature1Icon="fa-solid fa-calendar-days"
+  
+        feature2Title="Con las comodidades que buscas."
+        feature2Description="Jacuzzis, piscinas, parrillas. Descubre docenas de servicios adicionales que se adaptan a tus necesidades."
+        feature2Icon="fa-solid fa-water-ladder"
+  
+        feature3Title="Lee las reseñas reales"
+        feature3Description="Descubre alojamientos en los que otras personas tuvieron experiencias fantásticas. ¡Te encantarán!"
+        feature3Icon="fa-regular fa-star"
+      />
       <Footer 
         companyName="UBIKHA"
         year={2025}

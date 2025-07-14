@@ -1,0 +1,44 @@
+.features-section {
+  max-width: 1400px;
+  margin: 80px auto;
+  padding: 40px 60px;
+
+  border-radius: 16px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  padding: 0 40px;
+}
+
+.feature-card {
+  text-align: left;
+  padding: 0;
+  background-color: transparent;
+}
+
+.feature-icon {
+  font-size: 24px;
+  color: black;
+  margin-bottom: 20px;
+  display: block;
+  height: auto;
+  text-align: left;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}

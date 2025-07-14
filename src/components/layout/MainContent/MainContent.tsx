@@ -4,6 +4,7 @@ import portada from '../../../assets/puertoMaldonado.jpg';
 export interface MainContentProps {
   headline: string;
   description: string;
+  
 }
 
 export const MainContent = ({ headline, description }: MainContentProps) => {
@@ -25,3 +26,4 @@ export const MainContent = ({ headline, description }: MainContentProps) => {
     </main>
   );
 };
+

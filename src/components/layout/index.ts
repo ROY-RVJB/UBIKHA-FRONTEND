@@ -2,6 +2,8 @@
 export { Header } from './Header/Header';
 export { Footer } from './Footer/footer';
 export { MainContent } from './MainContent/MainContent';
+export { Features } from './MainContent/features';
+
 
 // Types
 export type { HeaderProps } from './Header/Header';
