@@ -1,12 +1,12 @@
-// src/components/Body/Body.tsx
-import './Body.css';
+import './MainContent.css';
 import portada from '../../../assets/puertoMaldonado.jpg';
-interface BodyProps {
+
+export interface MainContentProps {
   headline: string;
   description: string;
 }
 
-export const Body = ({ headline, description,}: BodyProps) => {
+export const MainContent = ({ headline, description }: MainContentProps) => {
   return (
     <main className="main-body">
       <section className="intro-section">

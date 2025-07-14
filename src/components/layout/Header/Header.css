@@ -37,24 +37,6 @@
   gap: 1rem;
 }
 
-.texto_1,
-.texto_2 {
-  color: var(--color-text-main);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium, 500);
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.texto_1:hover,
-.texto_2:hover {
-  color: var(--color-text-light);
-  background-color: var(--color-primary-dark);
-  transform: translateY(-1px);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .header {
@@ -80,11 +62,6 @@
     flex-direction: column;
     gap: 0.75rem;
     width: 100%;
-  }
-  
-  .texto_1,
-  .texto_2 {
-    text-align: center;
   }
 }
 

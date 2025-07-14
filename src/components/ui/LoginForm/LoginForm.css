@@ -2,11 +2,12 @@
 .ubikha-login-form {
   width: 100%;
   max-width: 400px;
+  border:1px solid var(--color-secondary-dark) ;
   margin: 0 auto;
   padding: 2rem;
   background-color: var(--color-text-light);
   border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); */
 }
 
 .ubikha-login-form__header {
@@ -23,7 +24,7 @@
 
 .ubikha-login-form__subtitle {
   font-size: 1rem;
-  color: var(--color-accent-warm);
+  color: var(--color-primary-dark);
   margin: 0;
 }
 

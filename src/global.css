@@ -46,3 +46,13 @@ body {
   margin: 0 auto;
 }
 
+/* Estilos para páginas de login */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: 2rem;
+}
+

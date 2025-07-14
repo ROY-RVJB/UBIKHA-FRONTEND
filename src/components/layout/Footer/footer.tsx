@@ -1,6 +1,6 @@
 import './Footer.css';
 
-interface FooterProps {
+export interface FooterProps {
   companyName: string;
   year: number;
 }

@@ -15,7 +15,7 @@
   overflow: hidden;
 }
 
-/* Tamaños */
+/* Tamaños */ 
 .ubikha-button--sm {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -70,7 +70,7 @@
 
 .ubikha-button--ghost {
   background-color: transparent;
-  color: var(--color-accent-cool);
+  color: var(--color-primary-dark);
   border-color: transparent;
 }
 
