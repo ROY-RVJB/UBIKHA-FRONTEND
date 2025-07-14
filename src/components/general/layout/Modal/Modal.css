@@ -1,0 +1,148 @@
+/* Modal Component Styles */
+.ubikha-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.ubikha-modal {
+  background-color: var(--color-text-light);
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideIn 0.2s ease-out;
+}
+
+/* Tamaños del modal */
+.ubikha-modal--sm {
+  width: 100%;
+  max-width: 400px;
+}
+
+.ubikha-modal--md {
+  width: 100%;
+  max-width: 500px;
+}
+
+.ubikha-modal--lg {
+  width: 100%;
+  max-width: 700px;
+}
+
+.ubikha-modal--xl {
+  width: 100%;
+  max-width: 900px;
+}
+
+.ubikha-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--color-divider);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.ubikha-modal__title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.ubikha-modal__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-accent-warm);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.ubikha-modal__close:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+}
+
+.ubikha-modal__content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ubikha-modal-overlay {
+    padding: 0.5rem;
+  }
+  
+  .ubikha-modal {
+    border-radius: 0.5rem;
+    max-height: 95vh;
+  }
+  
+  .ubikha-modal__header {
+    padding: 1rem 1rem 0 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .ubikha-modal__title {
+    font-size: 1.125rem;
+  }
+  
+  .ubikha-modal__content {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ubikha-modal-overlay {
+    padding: 0;
+  }
+  
+  .ubikha-modal {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+  }
+}

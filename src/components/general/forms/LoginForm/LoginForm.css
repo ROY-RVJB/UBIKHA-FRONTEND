@@ -1,0 +1,113 @@
+/* LoginForm Component Styles */
+.ubikha-login-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--color-text-light);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.ubikha-login-form__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ubikha-login-form__title {
+  font-size: 1.875rem;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--color-text-main);
+  margin-bottom: 0.5rem;
+}
+
+.ubikha-login-form__subtitle {
+  font-size: 1rem;
+  color: var(--color-accent-warm);
+  margin: 0;
+}
+
+.ubikha-login-form__error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.ubikha-login-form__form {
+  margin-bottom: 1.5rem;
+}
+
+.ubikha-login-form__forgot {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.ubikha-login-form__forgot-link {
+  background: none;
+  border: none;
+  color: var(--color-accent-cool);
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ubikha-login-form__forgot-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+.ubikha-login-form__register {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-divider);
+  font-size: 0.875rem;
+  color: var(--color-text-main);
+}
+
+.ubikha-login-form__register-link {
+  background: none;
+  border: none;
+  color: var(--color-accent-cool);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ubikha-login-form__register-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ubikha-login-form {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: none;
+  }
+  
+  .ubikha-login-form__title {
+    font-size: 1.5rem;
+  }
+  
+  .ubikha-login-form__subtitle {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ubikha-login-form {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .ubikha-login-form__header {
+    margin-bottom: 1.5rem;
+  }
+}

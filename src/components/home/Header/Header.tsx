@@ -1,7 +1,5 @@
-
 import './Header.css';
 import logo from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
-
 
 interface HeaderProps {
   title: string;

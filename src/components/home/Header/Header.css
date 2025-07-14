@@ -1,9 +1,9 @@
 .header {
-  background-color: #F5F0EB;
+  background-color: var(--color-bg);
   color: #000;
   padding: 1rem 2rem;
   margin-bottom: 2rem;
-  border-bottom: 1px solid #D8D6D2;
+  border-bottom: 1px solid var(--color-divider);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,44 +13,46 @@
 .header-brand {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 /* Estilos del logo */
 .headerLogo {
-  height: 50px; /* Ajusta según tu diseño */
-  width: auto; /* Mantiene proporción */
-  object-fit: contain; /* Evita distorsión */
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 .header-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold, 700);
   margin: 0;
-  color: #031B2E;
+  color: var(--color-primary-dark);
 }
 
 /* Contenedor de enlaces */
 .header-links {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
 .texto_1,
 .texto_2 {
-  color: #031B2E;
+  color: var(--color-text-main);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium, 500);
   font-size: 1rem;
-  transition: color 0.3s ease;
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   transition: all 0.3s ease;
 }
 
 .texto_1:hover,
 .texto_2:hover {
-  color: var(--color-bg);
-  background-color:var(--color-secondary-dark);
+  color: var(--color-text-light);
+  background-color: var(--color-accent-cool);
+  transform: translateY(-1px);
 }
 
 /* Responsive */
@@ -59,17 +61,47 @@
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    padding: 1rem;
   }
   
   .header-brand {
     justify-content: center;
   }
   
-  .header-logo {
+  .headerLogo {
     height: 40px;
   }
   
   .header-title {
     font-size: 1.5rem;
+  }
+  
+  .header-links {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .texto_1,
+  .texto_2 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem;
+  }
+  
+  .header-brand {
+    gap: 0.5rem;
+  }
+  
+  .headerLogo {
+    height: 35px;
+  }
+  
+  .header-title {
+    font-size: 1.25rem;
   }
 }

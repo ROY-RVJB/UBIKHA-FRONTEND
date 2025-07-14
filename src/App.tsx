@@ -15,7 +15,7 @@ function App() {
       />  
       <Footer 
         companyName="UBIKHA"
-        year={2025}
+        year={2025  }
       />
       
     </div>

@@ -1,0 +1,71 @@
+/* Input Component Styles */
+.ubikha-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ubikha-input-label {
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-main);
+  margin-bottom: 0.25rem;
+}
+
+.ubikha-input-required {
+  color: #ef4444;
+  margin-left: 0.25rem;
+}
+
+.ubikha-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-divider);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: var(--color-text-light);
+  color: var(--color-text-main);
+  transition: all 0.2s ease-in-out;
+}
+
+.ubikha-input:focus {
+  outline: none;
+  border-color: var(--color-accent-cool);
+  box-shadow: 0 0 0 3px rgba(60, 110, 113, 0.1);
+}
+
+.ubikha-input::placeholder {
+  color: var(--color-divider);
+}
+
+/* Estados del input */
+.ubikha-input--error {
+  border-color: #ef4444;
+}
+
+.ubikha-input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.ubikha-input--disabled {
+  background-color: var(--color-surface);
+  color: var(--color-divider);
+  cursor: not-allowed;
+}
+
+.ubikha-input-error-message {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ubikha-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+}
