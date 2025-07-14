@@ -51,7 +51,7 @@
 .texto_1:hover,
 .texto_2:hover {
   color: var(--color-text-light);
-  background-color: var(--color-accent-cool);
+  background-color: var(--color-primary-dark);
   transform: translateY(-1px);
 }
 
