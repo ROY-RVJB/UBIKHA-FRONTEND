@@ -1,0 +1,81 @@
+.navbar {
+  background-color: var(--color-bg);
+  color: #000;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-divider);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Contenedor del logo + título */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Estilos del logo */
+.navbarLogo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  align-items: start;
+}
+
+/* Contenedor de enlaces */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 9rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Espaciador para mantener el balance */
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .navbar-brand {
+    justify-content: center;
+  }
+  
+  .navbarLogo {
+    height: 40px;
+  }
+  
+  .navbar-title {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+  
+  .navbar-brand {
+    gap: 0.5rem;
+  }
+  
+  .navbarLogo {
+    height: 35px;
+  }
+  
+
+}
