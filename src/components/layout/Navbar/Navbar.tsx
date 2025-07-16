@@ -23,21 +23,21 @@ export const Navbar = ({ text_1, text_2,text_3 }: NavbarProps) => {
       
       <div className="navbar-links">
         <Button 
-        variant='ghost' 
+        variant='inlining' 
         size='sm'
         onClick={() => navigate('/')}>
           {text_1}
         </Button>
 
         <Button 
-        variant='ghost' 
+        variant='inlining' 
         size='sm' 
         onClick={() => navigate('/')}>
           {text_2}
         </Button>
 
         <Button 
-        variant='ghost' 
+        variant='inlining' 
         size='sm' 
         onClick={() => navigate('/')}>
           {text_3}

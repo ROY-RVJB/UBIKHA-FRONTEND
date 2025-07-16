@@ -78,6 +78,18 @@
   background-color: var(--color-surface);
 }
 
+.ubikha-button--inlining {
+ 
+  background-color: transparent;
+  color: var(--color-primary-dark);
+  border-color: transparent;
+}
+
+.ubikha-button--inlining:hover:not(:disabled) {
+   text-decoration:underline;
+  
+}
+
 /* Estados */
 .ubikha-button:disabled {
   opacity: 0.6;
