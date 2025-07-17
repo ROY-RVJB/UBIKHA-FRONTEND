@@ -5,6 +5,8 @@ export { MainContent } from './MainContent/MainContent';
 export { Features } from './MainContent/features';
 export { Navbar } from './Navbar/Navbar';
 
+export { NavbarArrendatario } from './Navbar/NavbarArrendatario';
+
 
 // Types
 export type { HeaderProps } from './Header/Header';
