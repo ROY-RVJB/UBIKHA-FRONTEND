@@ -28,12 +28,16 @@
 .navbar-links {
   display: flex;
   align-items: center;
-  gap: 9rem;
+  gap: 5rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
-
+.especial{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 /* Espaciador para mantener el balance */
 
 /* Responsive */

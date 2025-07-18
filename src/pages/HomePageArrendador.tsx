@@ -1,4 +1,5 @@
-import {Navbar } from "../components/layout";
+import { Navbar } from "../components/layout";
+import { Footer } from "../components/layout";
 
 
 
@@ -7,10 +8,17 @@ function  HomePageArrendador(){
         
        <div>
       <Navbar 
-        text_1="inicio" 
-        text_2="anuncios" 
-        text_3="mensajes" 
+        text_1="Inicio" 
+        text_2="Anuncios" 
+        text_3="Mensajes"
+        text_4="Comviertete en Arrendador" 
+        
       />
+      <Footer 
+          companyName="UBIKHA"
+          year={2025}
+      />
+            
       </div>
     
      );

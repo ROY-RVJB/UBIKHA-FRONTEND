@@ -46,6 +46,6 @@ export const Button: React.FC<ButtonProps> = ({
       <span className={loading ? 'ubikha-button-content--loading' : ''}>
         {children}
       </span>
-    </button>
+    </button> 
   );
 };

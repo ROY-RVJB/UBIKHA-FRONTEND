@@ -2,14 +2,16 @@ import './Navbar.css';
 import logo from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
 import { Button } from '../../ui/Button/Button';
 import { useNavigate} from 'react-router-dom';
+import  Avatar    from '../../ui/Avatar/Avatar';
 
 
 export interface NavbarProps {
   text_1:string;
   text_2:string;
   text_3:string;
+  text_4:string;
 }
-export const Navbar = ({ text_1, text_2,text_3 }: NavbarProps) => {
+export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
   const navigate = useNavigate();
   return (
     <nav className="navbar">
@@ -42,6 +44,17 @@ export const Navbar = ({ text_1, text_2,text_3 }: NavbarProps) => {
         onClick={() => navigate('/')}>
           {text_3}
         </Button>
+      </div>
+      <div className='especial'>
+        <Button
+        variant='ghost'
+        size='sm'
+        onClick={()=>navigate('/')}>
+          {text_4}
+        </Button>
+      <div>
+        <Avatar name="Roy" />
+      </div>
       </div>
       
       
