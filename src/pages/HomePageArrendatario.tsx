@@ -7,7 +7,7 @@ function HomePageArrendatario() {
     <div>
       <NavbarArrendatario
         becomeHostText="Conviértete en Arrendador"
-        userProfileText="Mi perfil"
+        userProfileText=""
       />
       
       <SearchBar 

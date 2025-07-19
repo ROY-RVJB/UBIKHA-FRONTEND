@@ -2,7 +2,7 @@ import './NavbarArrendatario.css';
 import logo from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
 import { Button } from '../../ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
-
+import  Avatar    from '../../ui/Avatar/Avatar';
 export interface NavbarArrendatarioProps {
   becomeHostText?: string;
   userProfileText?: string;
@@ -36,12 +36,15 @@ export const NavbarArrendatario = ({
           {becomeHostText}
         </Button>
 
-        <button 
-          className="user-profile-btn"
-          onClick={() => navigate('/profile')}
-          aria-label={userProfileText}>
-          <i className="fa-solid fa-user"></i>
-        </button>
+         <Button
+        variant='ghost'
+        size='sm'
+        onClick={()=>navigate('/')}>
+          {userProfileText}
+        </Button>
+      <div>
+        <Avatar name="Roy" />
+      </div>
       </div>
     </nav>
   );
