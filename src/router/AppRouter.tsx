@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginArrendadorPage, LoginArrendatarioPage, LoginAdministradorPage, HomePageArrendador  } from '../pages';
+import { HomePage, LoginArrendadorPage, LoginArrendatarioPage, LoginAdministradorPage, HomePageArrendador} from '../pages';
 import HomePageArrendatario from '../pages/HomePageArrendatario';
 
 
