@@ -18,8 +18,9 @@ function LoginArrendadorPage() {
       
       console.log('Login arrendador exitoso:', result);
       
-      // Redirigir al dashboard de arrendador
-      navigate('/home-arrendador');
+      // ✅ Redirección basada en el rol REAL del backend
+      const redirectPath = authService.getRedirectPath(result.user.role);
+      navigate(redirectPath);
       
     } catch (error) {
       // El servicio ya maneja los diferentes tipos de error

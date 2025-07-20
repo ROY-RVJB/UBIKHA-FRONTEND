@@ -18,8 +18,9 @@ function LoginAdministradorPage() {
       
       console.log('Login exitoso:', result);
       
-      // Completar la redirección que estaba pendiente
-      navigate('/admin-dashboard');
+      // ✅ Redirección basada en el rol REAL del backend
+      const redirectPath = authService.getRedirectPath(result.user.role);
+      navigate(redirectPath);
       
     } catch (error) {
       // El servicio ya maneja los diferentes tipos de error

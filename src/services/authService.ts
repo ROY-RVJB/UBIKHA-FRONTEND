@@ -5,14 +5,20 @@ export interface LoginCredentials {
   password: string;
 }
 
+// Interfaz para la respuesta real del backend
+interface BackendLoginResponse {
+  access_token: string;
+  token_type: string;
+  usuario: string;
+  rol: 'client' | 'owner' | 'admin';
+}
+
+// Interfaz normalizada para el frontend
 export interface LoginResponse {
   token: string;
-  message?: string;
-  user?: {
-    id: string;
+  user: {
     email: string;
-    role: string;
-    name?: string;
+    role: 'arrendatario' | 'arrendador' | 'administrador';
   };
 }
 
@@ -26,9 +32,33 @@ class AuthService {
   }
 
   /**
+   * Mapea roles del backend al frontend
+   */
+  private mapRole(backendRole: 'client' | 'owner' | 'admin'): 'arrendatario' | 'arrendador' | 'administrador' {
+    const roleMap = {
+      'client': 'arrendatario' as const,
+      'owner': 'arrendador' as const, 
+      'admin': 'administrador' as const
+    };
+    return roleMap[backendRole];
+  }
+
+  /**
+   * Obtiene la ruta de redirección basada en el rol del usuario
+   */
+  getRedirectPath(role: 'arrendatario' | 'arrendador' | 'administrador'): string {
+    const redirectMap = {
+      'administrador': '/admin-dashboard',
+      'arrendador': '/home-arrendador', 
+      'arrendatario': '/home-arrendatario'
+    };
+    return redirectMap[role];
+  }
+
+  /**
    * Método universal de login
    */
-  private async login(credentials: LoginCredentials, userType?: UserType): Promise<LoginResponse> {
+  private async login(credentials: LoginCredentials): Promise<LoginResponse> {
     const response = await fetch(`${this.baseURL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -36,36 +66,73 @@ class AuthService {
       },
       body: JSON.stringify({
         email: credentials.email,
-        password: credentials.password,
-        userType // Opcional: para que el backend diferencie
+        password: credentials.password
       })
     });
     
-    const data = await response.json();
-    
     if (!response.ok) {
-      throw new Error(data.message || 'Credenciales incorrectas');
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Credenciales incorrectas');
     }
 
-    // Auto-guardar token (igual que antes)
-    localStorage.setItem('authToken', data.token);
+    const backendData: BackendLoginResponse = await response.json();
     
-    return data;
+    // Normalizar respuesta del backend al formato que espera el frontend
+    const normalizedResponse: LoginResponse = {
+      token: backendData.access_token,
+      user: {
+        email: backendData.usuario,
+        role: this.mapRole(backendData.rol)
+      }
+    };
+
+    // Auto-guardar token
+    localStorage.setItem('authToken', normalizedResponse.token);
+    
+    return normalizedResponse;
   }
 
   /**
    * Métodos específicos para cada tipo de usuario
    */
   async loginAdmin(credentials: LoginCredentials): Promise<LoginResponse> {
-    return this.login(credentials, 'administrador');
+    const result = await this.login(credentials);
+    
+    // Verificar que realmente sea admin
+    if (result.user.role !== 'administrador') {
+      throw new Error('Acceso denegado: Se requieren permisos de administrador');
+    }
+    
+    return result;
   }
 
   async loginArrendador(credentials: LoginCredentials): Promise<LoginResponse> {
-    return this.login(credentials, 'arrendador');
+    const result = await this.login(credentials);
+    
+    // Verificar que realmente sea arrendador
+    if (result.user.role !== 'arrendador') {
+      throw new Error('Acceso denegado: Se requieren permisos de arrendador');
+    }
+    
+    return result;
   }
 
   async loginArrendatario(credentials: LoginCredentials): Promise<LoginResponse> {
-    return this.login(credentials, 'arrendatario');
+    const result = await this.login(credentials);
+    
+    // Verificar que realmente sea arrendatario
+    if (result.user.role !== 'arrendatario') {
+      throw new Error('Acceso denegado: Se requieren permisos de arrendatario');
+    }
+    
+    return result;
+  }
+
+  /**
+   * Login universal (para futuro login único)
+   */
+  async loginUniversal(credentials: LoginCredentials): Promise<LoginResponse> {
+    return this.login(credentials);
   }
 
   /**
@@ -81,6 +148,22 @@ class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  /**
+   * Obtener rol del usuario actual
+   */
+  getCurrentUserRole(): 'administrador' | 'arrendador' | 'arrendatario' | null {
+    const token = this.getToken();
+    if (!token) return null;
+    
+    try {
+      // Decodificar JWT para obtener rol (base64 decode del payload)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return this.mapRole(payload.rol);
+    } catch {
+      return null;
+    }
   }
 
   /**
