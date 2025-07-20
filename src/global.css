@@ -17,7 +17,6 @@
   --color-text-light: #FFFFFF;
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -56,3 +55,10 @@ body {
   padding: 2rem;
 }
 
+/* Estilos base para páginas principales */
+.arrendador-page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}

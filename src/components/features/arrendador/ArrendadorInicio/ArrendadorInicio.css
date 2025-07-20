@@ -1,0 +1,23 @@
+.arrendador-inicio {
+  flex: 1;
+  padding: 0 2rem 3rem 2rem;
+}
+
+.arrendador-inicio-container {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .arrendador-inicio {
+    padding: 0 1.5rem 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .arrendador-inicio {
+    padding: 0 1rem 1.5rem 1rem;
+  }
+}
