@@ -14,7 +14,10 @@ export const AppRouter = () => {
         <Route path="/login-administrador" element={<LoginAdministradorPage />} />
         <Route path="/home-arrendador" element={<HomePageArrendador/>}/>
         <Route path="/home-arrendatario" element={<HomePageArrendatario/>}/>
+        {/* Nueva ruta para el dashboard del administrador */}
+        <Route path="/admin-dashboard" element={<div style={{padding: '2rem', textAlign: 'center'}}><h1>🎯 Dashboard Administrador</h1><p>Login exitoso! Aquí iría el panel de administrador.</p></div>} />
       </Routes>
     </Router>
   );
 };
+
