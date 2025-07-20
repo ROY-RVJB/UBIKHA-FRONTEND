@@ -1,0 +1,35 @@
+.sidebar {
+  width: 200px;
+  background-color: #0a2647;
+  color: white;
+  height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 2rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+nav li:hover {
+  background-color: #144272;
+  border-radius: 5px;
+  padding-left: 0.5rem;
+}
