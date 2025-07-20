@@ -4,8 +4,8 @@ export { Footer } from './Footer/footer';
 export { MainContent } from './MainContent/MainContent';
 export { Features } from './MainContent/features';
 export { Navbar } from './Navbar/Navbar';
-
 export { NavbarArrendatario } from './Navbar/NavbarArrendatario';
+export { SearchBar } from './Search/SearchBar';
 
 
 // Types
