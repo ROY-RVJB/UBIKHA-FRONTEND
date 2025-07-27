@@ -26,14 +26,14 @@ export const Header = ({ title,text_1,text_2 }: HeaderProps) => {
         <Button 
         variant='ghost' 
         size='sm'
-        onClick={()=>navigate('/login-arrendador')}>
+        onClick={()=>navigate('/login')}>
           {text_1}
         </Button>
 
         <Button 
         variant='ghost' 
         size='sm' 
-        onClick={()=>navigate('/login-arrendatario')}>
+        onClick={()=>navigate('/login')}>
           {text_2}
         </Button>
 

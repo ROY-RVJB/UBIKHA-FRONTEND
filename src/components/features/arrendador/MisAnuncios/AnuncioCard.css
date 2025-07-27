@@ -1,0 +1,200 @@
+/* AnuncioCard - Card para gestión de anuncios del arrendador */
+.anuncio-card {
+  background: var(--color-text-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.2s ease;
+  border: 1px solid var(--color-divider);
+  max-width: 400px;
+  width: 100%;
+}
+
+.anuncio-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen */
+.anuncio-card__image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.anuncio-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.anuncio-card:hover .anuncio-card__image {
+  transform: scale(1.05);
+}
+
+.anuncio-card__tipo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--color-text-light);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.anuncio-card__tipo-label {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* Contenido */
+.anuncio-card__content {
+  padding: 1.25rem;
+}
+
+.anuncio-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+}
+
+.anuncio-card__titulo {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-main, #333);
+  min-height: 3.5rem;
+  margin: 0;
+  flex: 1;
+  will-change: auto;
+}
+
+/* Estado Badge */
+.estado-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.estado-badge--warning {
+  background: rgba(255, 193, 7, 0.15);
+  color: #856404;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.estado-badge--pending {
+  background: rgba(108, 117, 125, 0.15);
+  color: #495057;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.estado-badge--active {
+  background: rgba(40, 167, 69, 0.15);
+  color: #155724;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.estado-badge--paused {
+  background: rgba(220, 53, 69, 0.15);
+  color: #721c24;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.estado-badge__icon {
+  font-size: 0.8rem;
+}
+
+/* Información */
+.anuncio-card__info {
+  margin-bottom: 1.25rem;
+}
+
+.anuncio-card__info p {
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+}
+
+.anuncio-card__info p:last-child {
+  margin-bottom: 0;
+}
+
+.anuncio-card__icon {
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.anuncio-card__precio {
+  font-weight: 600;
+  color: var(--color-accent-cool) !important;
+}
+
+.anuncio-card__fecha {
+  color: #6c757d !important;
+  font-size: 0.8rem !important;
+}
+
+/* Acciones */
+.anuncio-card__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.anuncio-card__actions .ubikha-button {
+  flex: 1;
+  min-width: fit-content;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .anuncio-card {
+    max-width: 100%;
+  }
+  
+  .anuncio-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .anuncio-card__actions {
+    flex-direction: column;
+  }
+  
+  .anuncio-card__actions .ubikha-button {
+    flex: none;
+  }
+}
+
+/* Estados especiales */
+.anuncio-card--disabled {
+  opacity: 0.7;
+}
+
+.anuncio-card--featured {
+  border: 2px solid var(--color-accent-cool);
+}
+
+/* Tipo icon */
+.tipo-icon {
+  font-size: 1rem;
+}

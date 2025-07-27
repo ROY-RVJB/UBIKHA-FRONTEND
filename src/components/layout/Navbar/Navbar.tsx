@@ -27,22 +27,22 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
         <Button 
         variant='inlining' 
         size='sm'
-        onClick={() => navigate('/')}>
-          {text_1}
+        onClick={() => navigate('/home-arrendador')}>
+        {text_1}
         </Button>
 
         <Button 
         variant='inlining' 
         size='sm' 
-        onClick={() => navigate('/')}>
-          {text_2}
+        onClick={() => navigate('/mis-anuncios')}>
+        {text_2}
         </Button>
 
         <Button 
         variant='inlining' 
         size='sm' 
-        onClick={() => navigate('/')}>
-          {text_3}
+        onClick={() => navigate('/mensajes')}>
+        {text_3}
         </Button>
       </div>
       <div className='especial'>

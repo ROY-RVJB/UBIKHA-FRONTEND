@@ -7,3 +7,10 @@ export type { NotificationsListProps, Notification } from './NotificationsList/N
 
 export { ArrendadorInicio } from './ArrendadorInicio/ArrendadorInicio';
 export type { ArrendadorInicioProps } from './ArrendadorInicio/ArrendadorInicio';
+
+// MisAnuncios Components
+export { MisAnuncios } from './MisAnuncios/MisAnuncios';
+export { AnuncioCard } from './MisAnuncios/AnuncioCard';
+export { CreateAnuncioModal } from './MisAnuncios/CreateAnuncioModal';
+export type { Anuncio, AnuncioCardProps } from './MisAnuncios/AnuncioCard';
+export type { CreateAnuncioModalProps } from './MisAnuncios/CreateAnuncioModal';

@@ -3,7 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { LoginForm } from '../components/ui';
 import { authService } from '../services/authService';
 
-function LoginArrendatarioPage() {
+/**
+ * 🎯 LOGIN UNIVERSAL - Página única para todos los roles
+ * 
+ * Esta página reemplaza a:
+ * - LoginAdministradorPage.tsx  ❌
+ * - LoginArrendadorPage.tsx     ❌  
+ * - LoginArrendatarioPage.tsx   ❌
+ * 
+ * Funcionalidades:
+ * ✅ Login universal para todos los roles
+ * ✅ Redirección automática basada en rol del backend
+ * ✅ Reutiliza toda la infraestructura existente
+ * ✅ UX unificada y profesional
+ */
+function LoginPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -13,19 +27,19 @@ function LoginArrendatarioPage() {
     setError(undefined);
     
     try {
-      // Usar el servicio de autenticación para arrendatario
-      const result = await authService.loginArrendatario(credentials);
+      // 🎯 Usar método universal - detecta automáticamente el rol
+      const result = await authService.loginUniversal(credentials);
       
-      console.log('Login arrendatario exitoso:', result);
+      console.log('Login exitoso:', result);
       
-      // ✅ Redirección basada en el rol REAL del backend
+      // ✅ Redirección automática basada en el rol REAL del backend
       const redirectPath = authService.getRedirectPath(result.user.role);
       navigate(redirectPath);
       
     } catch (error) {
-      // El servicio ya maneja los diferentes tipos de error
+      // Manejo de errores unificado
       setError(error instanceof Error ? error.message : 'Error de conexión con el servidor');
-      console.error('Error:', error);
+      console.error('Error en login universal:', error);
     } finally {
       setLoading(false);
     }
@@ -34,8 +48,8 @@ function LoginArrendatarioPage() {
   return (
     <div className="login-page">
       <LoginForm
-        title="Arrendatario"
-        subtitle="Te damos la bienvenida a Ubikha"
+        title="Iniciar Sesión"
+        subtitle="Accede a tu cuenta UBIKHA"
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
@@ -44,4 +58,4 @@ function LoginArrendatarioPage() {
   );
 }
 
-export default LoginArrendatarioPage;
+export default LoginPage;

@@ -1,0 +1,215 @@
+/* IconButton - Componente genérico para botones con íconos */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.08s ease-out;
+  position: relative;
+  font-family: inherit;
+  outline: none;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--color-accent-cool);
+  outline-offset: 2px;
+}
+
+/* Tamaños */
+.icon-button--sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.icon-button--md {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.icon-button--lg {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+}
+
+/* Formas */
+.icon-button--circle.icon-button--sm {
+  border-radius: 50%;
+}
+
+.icon-button--circle.icon-button--md {
+  border-radius: 50%;
+}
+
+.icon-button--circle.icon-button--lg {
+  border-radius: 50%;
+}
+
+/* Variantes */
+.icon-button--primary {
+  background: var(--color-accent-cool);
+  color: var(--color-text-light);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(60, 110, 113, 0.2);
+}
+
+.icon-button--primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 8px rgba(60, 110, 113, 0.3);
+}
+
+.icon-button--primary:active {
+  box-shadow: 0 1px 2px rgba(60, 110, 113, 0.2);
+}
+
+.icon-button--secondary {
+  background: var(--color-text-light);
+  color: var(--color-accent-cool);
+  border: 2px solid var(--color-accent-cool);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.icon-button--secondary:hover {
+  background: var(--color-accent-cool);
+  color: var(--color-text-light);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.icon-button--ghost {
+  background: transparent;
+  color: var(--color-text-main);
+  border-radius: 50%;
+  border: 1px transparent ;
+}
+
+.icon-button--ghost:hover {
+  background: rgba(60, 110, 113, 0.1);
+  color: var(--color-accent-cool);
+  border-color: rgba(60, 110, 113, 0.2);
+}
+
+.icon-button--outline {
+  background: transparent;
+  color: var(--color-accent-cool);
+  border: 1px solid var(--color-divider);
+}
+
+.icon-button--outline:hover {
+  background: var(--color-accent-cool);
+  color: var(--color-text-light);
+  border-color: var(--color-accent-cool);
+}
+
+/* Estados */
+.icon-button--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.icon-button--loading {
+  pointer-events: none;
+}
+
+/* Ícono wrapper */
+.icon-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease-out;
+  transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Animaciones generales */
+.icon-button:hover .icon-button__icon {
+  transform: scale(1.05) translateZ(0);
+}
+
+/* Animaciones específicas por ícono - OPTIMIZADAS */
+.icon-button:hover .icon-button__icon[data-icon="plus"] {
+  transform: rotate(90deg) scale(1.08) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="search"] {
+  transform: scale(1.15) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="edit"] {
+  transform: rotate(-3deg) scale(1.08) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="delete"] {
+  transform: scale(1.12) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="eye"] {
+  transform: scale(1.12) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="settings"] {
+  transform: rotate(30deg) scale(1.05) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="close"] {
+  transform: rotate(90deg) scale(1.08) translateZ(0);
+}
+
+.icon-button:hover .icon-button__icon[data-icon="heart"] {
+  transform: scale(1.15) translateZ(0);
+}
+
+/* Spinner de loading */
+.icon-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: icon-button-spin 1s linear infinite;
+}
+
+@keyframes icon-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estados activos para toggles */
+.icon-button--active {
+  background: var(--color-accent-cool);
+  color: var(--color-text-light);
+}
+
+.icon-button--ghost.icon-button--active {
+  background: rgba(60, 110, 113, 0.15);
+  color: var(--color-accent-cool);
+  border-color: var(--color-accent-cool);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .icon-button--lg {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .icon-button--md {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .icon-button--sm {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Solo animaciones del ícono, no del botón */
