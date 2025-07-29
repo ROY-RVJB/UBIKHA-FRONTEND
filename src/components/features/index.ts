@@ -1,2 +1,2 @@
 // Features Components
-export { PropertyCard } from './PropertyCard/PropertyCard';
+export { PropertyCard } from './arrendatario/PropertyCard/PropertyCard';

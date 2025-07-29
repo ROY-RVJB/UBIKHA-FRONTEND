@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, IconButton, RetractableSearch } from '../../../ui';
 import { AnuncioCard, type Anuncio } from './AnuncioCard';
+import { AnuncioTableRow } from './AnuncioTableRow';
 import { CreateAnuncioModal } from './CreateAnuncioModal';
 import './MisAnuncios.css';
 
@@ -54,6 +55,7 @@ export const MisAnuncios: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [anuncios] = useState<Anuncio[]>(mockAnuncios);
+  const [viewMode, setViewMode] = useState<'grid' | 'rows'>('grid');
 
   // Filtrar anuncios por búsquedaa
   const filteredAnuncios = anuncios.filter(anuncio =>
@@ -73,10 +75,10 @@ export const MisAnuncios: React.FC = () => {
     setShowCreateModal(true);
   };
 
-  const handleOpenFilters = () => {
-    // Por implementar: abrir modal de filtros
-    console.log('Abrir filtros avanzados');
-  };
+  const handleToggleViewMode = () => {
+    // Cambiar vista entre grid y filas
+    setViewMode(prev => prev === 'grid' ? 'rows' : 'grid');
+  };  
 
   const handleTypeSelect = (tipo: 'casa' | 'departamento' | 'cuarto') => {
     // Navegar a página de creación (por implementar)
@@ -120,14 +122,13 @@ export const MisAnuncios: React.FC = () => {
           />
         </div>
         
-        {/* Botón adicional (ejemplo: filtros) */}
+        {/* Botón de cambio de vista (grid/filas) */}
         <IconButton 
-          icon="row"
-          onClick={handleOpenFilters}
-          variant="primary"
-          shape="circle"
+          icon="rows"
+          onClick={handleToggleViewMode}
+          variant={viewMode === 'rows' ? 'primary' :'primary' }
           size="lg"
-          tooltip="Filtros"
+          tooltip={viewMode === 'grid' ? 'Vista en filas' : 'Vista en cuadrícula'}
         />
         
         <IconButton 
@@ -163,16 +164,58 @@ export const MisAnuncios: React.FC = () => {
       {/* Lista de anuncios */}
       <div className="mis-anuncios__content">
         {filteredAnuncios.length > 0 ? (
-          <div className="mis-anuncios__grid">
-            {filteredAnuncios.map((anuncio) => (
-              <AnuncioCard
-                key={anuncio.id}
-                anuncio={anuncio}
-                onEdit={handleEditAnuncio}
-                onToggleStatus={handleToggleStatus}
-                onViewDetails={handleViewDetails}
-              />
-            ))}
+          <div className={`mis-anuncios__grid mis-anuncios__grid--${viewMode}`}>
+            {viewMode === 'grid' ? (
+              // Vista en cuadrícula (cards)
+              filteredAnuncios.map((anuncio) => (
+                <AnuncioCard
+                  key={anuncio.id}
+                  anuncio={anuncio}
+                  onEdit={handleEditAnuncio}
+                  onToggleStatus={handleToggleStatus}
+                  onViewDetails={handleViewDetails}
+                />
+              ))
+            ) : (
+              // Vista en tabla (filas) - Desktop | Cards - Móvil
+              <>
+                <table className="mis-anuncios__table">
+                  <thead className="mis-anuncios__table-header">
+                    <tr>
+                      <th>Anuncio</th>
+                      <th>Tipo</th>
+                      <th>Ubicación</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredAnuncios.map((anuncio) => (
+                      <AnuncioTableRow
+                        key={anuncio.id}
+                        anuncio={anuncio}
+                        onEdit={handleEditAnuncio}
+                        onToggleStatus={handleToggleStatus}
+                        onViewDetails={handleViewDetails}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+                
+                {/* Fallback para móvil */}
+                <div className="mis-anuncios__mobile-rows">
+                  {filteredAnuncios.map((anuncio) => (
+                    <AnuncioCard
+                      key={`mobile-${anuncio.id}`}
+                      anuncio={anuncio}
+                      onEdit={handleEditAnuncio}
+                      onToggleStatus={handleToggleStatus}
+                      onViewDetails={handleViewDetails}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         ) : (
           <div className="mis-anuncios__empty">

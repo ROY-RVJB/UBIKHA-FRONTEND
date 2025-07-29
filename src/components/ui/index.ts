@@ -10,11 +10,6 @@ export { SidebarAdminPropiedades } from './SidebarAdmin/SidebarAdminPropiedades'
 export { TopbarAdminPropiedades } from './TopbarAdmin/TopbarAdminPropiedades';
 export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
 
-
-
-
-
-
 // Types
 export type { InputProps } from './Input/Input';
 export type { ButtonProps } from './Button/Button';
