@@ -17,6 +17,15 @@ interface Property {
   calificacion?: number;
   fechaDisponible?: string;
   descripcion?: string;
+  arrendador?: {
+    nombre: string;
+    fechaUnion: string;
+    reseñas: number;
+    verificado: boolean;
+    superArrendador: boolean;
+    indiceRespuestas: number;
+    tiempoRespuesta: string;
+  };
 }
 
 const DetallePropiedad: React.FC = () => {
@@ -55,6 +64,15 @@ const DetallePropiedad: React.FC = () => {
     calificacion: 4.5,
     fechaDisponible: '2025-08-01',
     descripcion: 'Hermosa casa familiar ubicada en el corazón de Puerto Maldonado, perfecta para estudiantes o profesionales. Cuenta con amplios espacios y áreas verdes.',
+    arrendador: {
+      nombre: "Mark",
+      fechaUnion: "Marzo del 2020",
+      reseñas: 30,
+      verificado: true,
+      superArrendador: true,
+      indiceRespuestas: 100,
+      tiempoRespuesta: "En menos de una hora"
+    }
   };
 
   const toggleLightbox = () => {
@@ -77,7 +95,7 @@ const DetallePropiedad: React.FC = () => {
         </Button>
       </div>
 
-      {/* TÍTULO SOBRE LA GALERÍA */}
+      {/* TÍTULO Y METADATOS */}
       <div className="detalle-propiedad__info">
         <h1>{propertyData.titulo}</h1>
         <div className="detalle-propiedad__meta">
@@ -89,16 +107,14 @@ const DetallePropiedad: React.FC = () => {
         </div>
       </div>
 
-      {/* GALERÍA */}
+      {/* GALERÍA DE IMÁGENES */}
       <div className="detalle-propiedad__gallery">
         <div className="gallery-left">
           <img
             src={propertyData.imagenes[imagenActual]}
             alt="Imagen principal"
             className="gallery-main-image"
-            onClick={() => {
-              setMostrarLightbox(true);
-            }}
+            onClick={() => setMostrarLightbox(true)}
           />
           <div className="show-all-photos-btn" onClick={toggleTodasFotos}>
             <span className="photos-icon">📷</span> Mostrar todas las fotos ({propertyData.imagenes.length})
@@ -119,35 +135,6 @@ const DetallePropiedad: React.FC = () => {
             ))}
         </div>
       </div>
-
-      {/* TODAS LAS FOTOS - GRID COMPLETO */}
-      {mostrarTodasFotos && (
-        <div className="todas-fotos-overlay">
-          <div className="todas-fotos-container">
-            <div className="todas-fotos-header">
-              <h2>Todas las fotos ({propertyData.imagenes.length})</h2>
-              <button onClick={toggleTodasFotos} className="todas-fotos-close">
-                &times;
-              </button>
-            </div>
-            <div className="todas-fotos-grid">
-              {propertyData.imagenes.map((img, index) => (
-                <div
-                  className={`todas-fotos-item ${index === imagenActual ? 'active' : ''}`}
-                  key={index}
-                  onClick={() => {
-                    cambiarImagenPrincipal(index);
-                    setMostrarTodasFotos(false);
-                    setMostrarLightbox(true);
-                  }}
-                >
-                  <img src={img} alt={`Foto ${index + 1}`} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* LIGHTBOX */}
       {mostrarLightbox && (
@@ -196,13 +183,45 @@ const DetallePropiedad: React.FC = () => {
         </div>
       )}
 
+      {/* GRID COMPLETO DE FOTOS */}
+      {mostrarTodasFotos && (
+        <div className="todas-fotos-overlay">
+          <div className="todas-fotos-container">
+            <div className="todas-fotos-header">
+              <h2>Todas las fotos ({propertyData.imagenes.length})</h2>
+              <button onClick={toggleTodasFotos} className="todas-fotos-close">
+                &times;
+              </button>
+            </div>
+            <div className="todas-fotos-grid">
+              {propertyData.imagenes.map((img, index) => (
+                <div
+                  className={`todas-fotos-item ${index === imagenActual ? 'active' : ''}`}
+                  key={index}
+                  onClick={() => {
+                    cambiarImagenPrincipal(index);
+                    setMostrarTodasFotos(false);
+                    setMostrarLightbox(true);
+                  }}
+                >
+                  <img src={img} alt={`Foto ${index + 1}`} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CONTENIDO PRINCIPAL */}
       <div className="detalle-propiedad__content">
         <div className="detalle-propiedad__info">
+          {/* DESCRIPCIÓN */}
           <div className="detalle-propiedad__section">
             <h2>Acerca de este lugar</h2>
             <p>{propertyData.descripcion}</p>
           </div>
 
+          {/* CARACTERÍSTICAS */}
           <div className="detalle-propiedad__section">
             <h2>Lo que este lugar ofrece</h2>
             <div className="detalle-propiedad__features">
@@ -215,69 +234,95 @@ const DetallePropiedad: React.FC = () => {
             </div>
           </div>
 
-          {/* NUEVA SECCIÓN - CONOCE AL ARRENDADOR */}
-          <div className="detalle-propiedad__section arrendador-layout"> 
-            <h2>Conoce al arrendador</h2>
-
-            <div className="arrendador-contenido">
-              <div className="arrendador-card">
-                <div className="arrendador-user">
-                  <i className="fa-regular fa-user fa-4x" style={{ color: '#333' }}></i>
-                  <div>
-                    <h3>Mark</h3>
-                    <p>Se unió en Marzo del 2020</p>
+          {/* ARRENDADOR */}
+          {propertyData.arrendador && (
+            <div className="detalle-propiedad__section arrendador-layout">
+              <h2>Conoce al arrendador</h2>
+              <div className="arrendador-contenido">
+                <div className="arrendador-card">
+                  <div className="arrendador-user">
+                    <i className="fa-regular fa-user fa-4x" style={{ color: '#333' }}></i>
+                    <div>
+                      <h3>{propertyData.arrendador.nombre}</h3>
+                      <p>Se unió en {propertyData.arrendador.fechaUnion}</p>
+                    </div>
                   </div>
+
+                  <div className="arrendador-badges">
+                    <span><i className="fas fa-star" /> {propertyData.arrendador.reseñas} reseñas</span>
+                    <span><i className="fas fa-check-circle" /> Identidad verificada</span>
+                    {propertyData.arrendador.superArrendador && (
+                      <span><i className="fas fa-medal" /> Superarrendador</span>
+                    )}
+                  </div>
+
+                  <button className="btn-outline">Información del arrendador</button>
                 </div>
 
-                <div className="arrendador-badges">
-                  <span><i className="fas fa-star" /> 30 reseñas</span>
-                  <span><i className="fas fa-check-circle" /> Identidad verificada</span>
-                  <span><i className="fas fa-medal" /> Superarrendador</span>
+                <div className="arrendador-info">
+                  <h4>{propertyData.arrendador.nombre} es un Superarrendador</h4>
+                  <p>
+                    Los Superarrendadores tienen mucha experiencia, tienen valoraciones excelentes 
+                    y se esfuerzan al máximo para ofrecerles a los huéspedes estadías maravillosas.
+                  </p>
+
+                  <h4>Información sobre el arrendador</h4>
+                  <p><strong>Índice de respuestas:</strong> {propertyData.arrendador.indiceRespuestas}%</p>
+                  <p><strong>Tiempo de respuesta:</strong> {propertyData.arrendador.tiempoRespuesta}</p>
                 </div>
-
-                <button className="btn-outline">Información del arrendador</button>
-              </div>
-
-              <div className="arrendador-info">
-                <h4>Mark es un Superarrendador</h4>
-                <p>
-                  Los Superarrendadores tienen mucha experiencia, tienen valoraciones excelentes 
-                  y se esfuerzan al máximo para ofrecerles a los huéspedes estadías maravillosas.
-                </p>
-
-                <h4>Información sobre el arrendador</h4>
-                <p><strong>Índice de respuestas:</strong> 100%</p>
-                <p><strong>Tiempo de respuesta:</strong> En menos de una hora</p>
               </div>
             </div>
-          </div>
-
-          
+          )}
         </div>
 
-
+        {/* TARJETA DE RESERVA */}
+        {/* TARJETA DE RESERVA */}
+       {/* TARJETA DE RESERVA Y REPORTE (STICKY CONTAINER) */}
         <div className="detalle-propiedad__sidebar">
-          <div className="detalle-propiedad__contact-card">
-            <div className="detalle-propiedad__price">
-              <span>S/ {propertyData.precio.toLocaleString('es-PE')}</span>
-              <span> por un mes</span>
-            </div>
-            {propertyData.fechaDisponible && (
-              <div className="detalle-propiedad__availability">
-                🗓️ Disponible desde{' '}
-                {new Date(propertyData.fechaDisponible).toLocaleDateString('es-PE')}
+          <div className="sidebar-sticky-container"> {/* NEW CONTAINER HERE */}
+            <div className="reserva-card">
+              <div className="reserva-top-row">
+                <div className="reserva-precio">
+                  <span className="precio-monto">S/ {propertyData.precio.toLocaleString('es-PE')}</span>
+                  <span className="precio-periodo">/ mes</span>
+                </div>
+
+                {propertyData.calificacion && (
+                  <div className="reserva-rating">
+                    <i className="fas fa-star estrella-icono"></i>
+                    <span className="rating-num">{propertyData.calificacion.toFixed(1)}</span>
+                    <span className="reseñas">
+                      · <a href="#opiniones">7 reseñas</a>
+                    </span>
+                  </div>
+                )}
               </div>
-            )}
-            <Button variant="primary" size="lg" fullWidth>
-              Reserva
-            </Button>
-            <h4>No se hará ningún cargo por el momento</h4>
-          </div>
+
+              {propertyData.fechaDisponible && (
+                <div className="detalle-propiedad__availability">
+                  🗓️ Disponible desde {new Date(propertyData.fechaDisponible).toLocaleDateString('es-PE')}
+                </div>
+              )}
+
+              <div className="reserva-garantia">
+                Pago con garantía: + S/ {propertyData.precio.toLocaleString('es-PE')}
+              </div>
+
+              <Button variant="primary" size="lg" fullWidth className="btn-reserva">
+                Reserva
+              </Button>
+
+              <div className="reserva-nota">
+                No se hará ningún cargo por el momento
+              </div>
+            </div>
+            {/* The report-ad is now inside the new sticky container */}
+            <div className="report-ad">
+              <i className="fa-regular fa-flag"></i>
+              <a href="#">Reporta este anuncio</a>
+            </div>
+          </div> {/* END NEW CONTAINER */}
         </div>
-
-
-
-
       </div>
     </div>
   );
