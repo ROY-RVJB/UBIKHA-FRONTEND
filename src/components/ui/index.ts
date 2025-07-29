@@ -6,9 +6,9 @@ export { Modal } from './Modal/Modal';
 export { IconButton } from './IconButton/IconButton';
 export { RetractableSearch } from './RetractableSearch/RetractableSearch';
 
-export { SidebarAdmin } from './SidebarAdmin/SidebarAdmin';
-export { TopbarAdmin } from './TopbarAdmin/TopbarAdmin';
-
+export { SidebarAdminPropiedades } from './SidebarAdmin/SidebarAdminPropiedades';
+export { TopbarAdminPropiedades } from './TopbarAdmin/TopbarAdminPropiedades';
+export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
 
 
 

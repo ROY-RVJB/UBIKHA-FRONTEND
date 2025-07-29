@@ -13,7 +13,7 @@ function MisAnunciosPage() {
       
       <MisAnuncios />
       
-      <Footer 
+      <Footer
         companyName="UBIKHA"
         year={2025}
       />

@@ -1,10 +1,11 @@
-import styles from './SidebarAdmin.module.css';
+import styles from './SidebarAdminPropiedades.module.css';
 import { Home, Users, FileText, BarChart2, HomeIcon, DollarSign, LogOut } from 'lucide-react';
-
-export const SidebarAdmin = () => {
+import logoUbikha from '../../../assets/LOGO-UBIKHA/ISOTIPO.jpg';
+export const SidebarAdminPropiedades = () => {
   return (
     <aside className={styles.sidebar}>
-      <div className={styles.logo}>UBIKHA</div>
+      <div className={styles.logo}> <img src={logoUbikha} alt="Logo Ubikha" className={styles.logoImage} />
+  <span className={styles.logoText}>UBIKHA</span></div>
       <nav>
         <ul>
           <li><Home size={18} /> Home</li>

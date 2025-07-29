@@ -1,25 +1,25 @@
 // src/components/ui/AdminDashboardLayout/AdminDashboardLayout.tsx
 
-import styles from './AdminDashboardLayout.module.css';
-import { SidebarAdmin } from '../SidebarAdmin/SidebarAdmin';
-import { TopbarAdmin } from '../TopbarAdmin/TopbarAdmin';
+import styles from './AdminPropiedadesLayout.module.css';
+import {  SidebarAdminPropiedades } from '../SidebarAdmin/SidebarAdminPropiedades';
+import { TopbarAdminPropiedades } from '../TopbarAdmin/TopbarAdminPropiedades';
 
 import type { ReactNode } from 'react';
 
-interface AdminDashboardLayoutProps {
+interface AdminPropiedadesLayoutProps {
   children: ReactNode;
 }
 
-export const AdminDashboardLayout = ({ children }: AdminDashboardLayoutProps) => {
+export const AdminPropiedadesLayout = ({ children }: AdminPropiedadesLayoutProps) => {
   return (
     <div className={styles.dashboardContainer}>
       <aside className={styles.sidebar}>
-        <SidebarAdmin />
+        <SidebarAdminPropiedades />
       </aside>
 
       <main className={styles.mainContent}>
         <header className={styles.topbar}>
-          <TopbarAdmin />
+          <TopbarAdminPropiedades />
         </header>
 
         <section className={styles.contentArea}>

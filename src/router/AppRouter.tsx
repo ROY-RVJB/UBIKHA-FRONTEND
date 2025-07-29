@@ -2,7 +2,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage} from '../pages';
 import HomePageArrendatario from '../pages/HomePageArrendatario';
-import UsuariosAdministradorPage from '../pages/UsuariosAdministradorPage';
+import PropiedadesAdministradorPage from '../pages/PropiedadesAdministradorPage';
+
 
 
 
@@ -20,8 +21,8 @@ export const AppRouter = () => {
         {/* 🏠 Dashboards por rol */}
         <Route path="/home-arrendador" element={<HomePageArrendador/>}/>
         <Route path="/home-arrendatario" element={<HomePageArrendatario/>}/>
-        <Route path="/admin-dashboard" element={<UsuariosAdministradorPage/>} />
-        
+        <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage/>} />
+
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage/>} />
         
