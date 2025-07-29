@@ -10,12 +10,6 @@ export { SidebarAdmin } from './SidebarAdmin/SidebarAdmin';
 export { TopbarAdmin } from './TopbarAdmin/TopbarAdmin';
 
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
-
-
-
-
-
 // Types
 export type { InputProps } from './Input/Input';
 export type { ButtonProps } from './Button/Button';
