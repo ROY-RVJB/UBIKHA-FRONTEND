@@ -1,11 +1,8 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage} from '../pages';
+import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage } from '../pages';
 import HomePageArrendatario from '../pages/HomePageArrendatario';
 import UsuariosAdministradorPage from '../pages/UsuariosAdministradorPage';
-
-
-
+import DetallePropiedadPage from '../pages/DetallePropiedadPage'; // Importación por defecto
 
 export const AppRouter = () => {
   return (
@@ -14,7 +11,7 @@ export const AppRouter = () => {
         {/* 🏠 Página principal */}
         <Route path="/" element={<HomePage />} />
         
-        {/* 🔐 Login universal - Reemplaza 3 páginas anteriores */}
+        {/* 🔐 Login universal */}
         <Route path="/login" element={<LoginPage />} />
         
         {/* 🏠 Dashboards por rol */}
@@ -24,8 +21,14 @@ export const AppRouter = () => {
         
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage/>} />
+
         </Routes>
-    </Router>
+
+        
+        {/* 🏡 Detalle de propiedad (accesible para arrendatarios) */}
+        <Route path="/propiedad/:id" element={<DetallePropiedadPage />} />
+      </Router>
+
+
   );
 };
-

@@ -8,6 +8,7 @@ export { NavbarArrendatario } from './Navbar/NavbarArrendatario';
 export { SearchBar } from './Search/SearchBar';
 
 
+
 // Types
 export type { HeaderProps } from './Header/Header';
 export type { FooterProps } from './Footer/footer';

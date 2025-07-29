@@ -10,6 +10,7 @@ export { SidebarAdmin } from './SidebarAdmin/SidebarAdmin';
 export { TopbarAdmin } from './TopbarAdmin/TopbarAdmin';
 
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 
