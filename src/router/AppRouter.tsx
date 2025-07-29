@@ -24,9 +24,7 @@ export const AppRouter = () => {
         
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage/>} />
-        
-        {/* ❌ ELIMINADAS - Rutas de login específicas: */}
-        {/* /login-arrendador, /login-arrendatario, /login-administrador */}      </Routes>
+        </Routes>
     </Router>
   );
 };

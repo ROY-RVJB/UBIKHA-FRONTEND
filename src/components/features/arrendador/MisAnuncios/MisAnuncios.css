@@ -6,6 +6,17 @@
   /* Eliminado: max-width y margin auto para evitar márgenes laterales grandes */
 }
 
+/* Mobile fallback para vista de filas */
+.mis-anuncios__mobile-rows {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .mis-anuncios__mobile-rows {
+    display: none !important;
+  }
+}
+
 /* Header con 4 columnas: título | buscador | botón extra | botón plus */
 .mis-anuncios__header {
   display: grid;
@@ -101,11 +112,53 @@
   min-height: 300px;
 }
 
+/* Lista de anuncios - responsive grid y filas */
 .mis-anuncios__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
   align-items: start;
+}
+
+/* Vista en cuadrícula (default) */
+.mis-anuncios__grid--grid {
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+/* Vista en filas - TABLA */
+.mis-anuncios__grid--rows {
+  display: block;
+  gap: 0;
+}
+
+.mis-anuncios__table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-text-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mis-anuncios__table-header {
+  background: rgba(60, 110, 113, 0.05);
+}
+
+.mis-anuncios__table-header th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  border-bottom: 2px solid var(--color-divider);
+}
+
+.mis-anuncios__table-header th:first-child {
+  padding-left: 1rem;
+}
+
+.mis-anuncios__table-header th:last-child {
+  padding-right: 1rem;
+  text-align: right;
 }
 
 /* Estado vacío */
@@ -172,9 +225,25 @@
     grid-template-columns: repeat(2, 1fr);
   }
   
-  .mis-anuncios__grid {
+  .mis-anuncios__grid--grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+  }
+  
+  .mis-anuncios__grid--rows {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* En móvil, la tabla se convierte en cards */
+  .mis-anuncios__table {
+    display: none;
+  }
+  
+  .mis-anuncios__mobile-rows {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
   
   .empty-state {

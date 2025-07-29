@@ -32,7 +32,7 @@ export const NavbarArrendatario = ({
           variant='ghost' 
           size='sm'
           className="become-host-btn"
-          onClick={() => navigate('/login-arrendatario')}>
+          onClick={() => navigate('/login')}>
           {becomeHostText}
         </Button>
 

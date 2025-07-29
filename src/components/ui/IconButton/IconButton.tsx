@@ -33,8 +33,8 @@ const iconMap = {
   upload: Upload,
   heart: Heart,
   share: Share,
-  row: Rows,
-  filter: Filter
+  filter: Filter,
+  rows: Rows
 } as const;
 
 export type IconType = keyof typeof iconMap;
