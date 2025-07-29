@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '../../../ui';
+import ReportModal from '../ReportModal/ReportModal'; // IMPORT THE NEW MODAL COMPONENT
 import './DetallePropiedad.css';
 
 interface Property {
@@ -34,6 +35,7 @@ const DetallePropiedad: React.FC = () => {
   const [imagenActual, setImagenActual] = useState(0);
   const [mostrarLightbox, setMostrarLightbox] = useState(false);
   const [mostrarTodasFotos, setMostrarTodasFotos] = useState(false);
+  const [mostrarReportModal, setMostrarReportModal] = useState(false); // Only this state remains for the modal
 
   // Datos simulados
   const propertyData: Property = {
@@ -85,6 +87,23 @@ const DetallePropiedad: React.FC = () => {
 
   const cambiarImagenPrincipal = (index: number) => {
     setImagenActual(index);
+  };
+
+  const openReportModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMostrarReportModal(true);
+  };
+
+  const closeReportModal = () => {
+    setMostrarReportModal(false);
+  };
+
+  const handleReportSubmit = (reason: string) => {
+    console.log(`Reportando anuncio por: ${reason}`);
+    // Here you would typically send the report data to your backend API
+    // Example: sendReportApi(propertyData.id, reason);
+    alert(`Anuncio reportado: ${reason}`);
+    closeReportModal();
   };
 
   return (
@@ -150,7 +169,7 @@ const DetallePropiedad: React.FC = () => {
                 className="lightbox-nav-btn prev"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setImagenActual((prev) => 
+                  setImagenActual((prev) =>
                     prev === 0 ? propertyData.imagenes.length - 1 : prev - 1
                   );
                 }}
@@ -164,7 +183,7 @@ const DetallePropiedad: React.FC = () => {
                 className="lightbox-nav-btn next"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setImagenActual((prev) => 
+                  setImagenActual((prev) =>
                     prev === propertyData.imagenes.length - 1 ? 0 : prev + 1
                   );
                 }}
@@ -262,7 +281,7 @@ const DetallePropiedad: React.FC = () => {
                 <div className="arrendador-info">
                   <h4>{propertyData.arrendador.nombre} es un Superarrendador</h4>
                   <p>
-                    Los Superarrendadores tienen mucha experiencia, tienen valoraciones excelentes 
+                    Los Superarrendadores tienen mucha experiencia, tienen valoraciones excelentes
                     y se esfuerzan al máximo para ofrecerles a los huéspedes estadías maravillosas.
                   </p>
 
@@ -275,11 +294,9 @@ const DetallePropiedad: React.FC = () => {
           )}
         </div>
 
-        {/* TARJETA DE RESERVA */}
-        {/* TARJETA DE RESERVA */}
-       {/* TARJETA DE RESERVA Y REPORTE (STICKY CONTAINER) */}
+        {/* TARJETA DE RESERVA Y REPORTE (STICKY CONTAINER) */}
         <div className="detalle-propiedad__sidebar">
-          <div className="sidebar-sticky-container"> {/* NEW CONTAINER HERE */}
+          <div className="sidebar-sticky-container">
             <div className="reserva-card">
               <div className="reserva-top-row">
                 <div className="reserva-precio">
@@ -316,14 +333,20 @@ const DetallePropiedad: React.FC = () => {
                 No se hará ningún cargo por el momento
               </div>
             </div>
-            {/* The report-ad is now inside the new sticky container */}
             <div className="report-ad">
               <i className="fa-regular fa-flag"></i>
-              <a href="#">Reporta este anuncio</a>
+              <a href="#" onClick={openReportModal}>Reporta este anuncio</a>
             </div>
-          </div> {/* END NEW CONTAINER */}
+          </div>
         </div>
       </div>
+
+      {/* Render the ReportModal component */}
+      <ReportModal
+        isOpen={mostrarReportModal}
+        onClose={closeReportModal}
+        onSubmit={handleReportSubmit}
+      />
     </div>
   );
 };
