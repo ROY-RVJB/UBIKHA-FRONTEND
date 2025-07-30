@@ -82,7 +82,7 @@ export const MisAnuncios: React.FC = () => {
 
   const handleTypeSelect = (tipo: 'casa' | 'departamento' | 'cuarto') => {
     // Navegar a página de creación (por implementar)
-    navigate(`/crear-anuncio?tipo=${tipo}`);
+    alert(`Seleccionaste: ${tipo}\n\nPágina de creación por implementar`);
   };
 
   const handleEditAnuncio = (id: string) => {
