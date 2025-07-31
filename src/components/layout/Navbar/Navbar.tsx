@@ -41,7 +41,7 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
         <Button 
         variant='inlining' 
         size='sm' 
-        onClick={() => navigate('/mensajes')}>
+        onClick={() => navigate('/mis-mensajes')}>
         {text_3}
         </Button>
       </div>
@@ -49,7 +49,7 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
         <Button
         variant='ghost'
         size='sm'
-        onClick={()=>navigate('/')}>
+        onClick={()=>navigate('/login')}>
           {text_4}
         </Button>
       <div>

@@ -1,4 +1,4 @@
-import { Import } from 'lucide-react';
+
 import { AdminPropiedadesLayout } from '../components/ui/AdminDashboardLayout/AdminPropiedadesLayout';
 //import { AdminPropiedadesLayout } from '../components/ui/AdminPropiedadesLayout/AdminPropiedadesLayout';
 //mport { UserTable } from '../components/ui/UserTable/UserTable';
@@ -13,5 +13,4 @@ const PropiedadesAdministradorPage = () => {
     </AdminPropiedadesLayout>
   );
 };
-
 export default PropiedadesAdministradorPage;

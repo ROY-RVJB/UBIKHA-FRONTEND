@@ -23,7 +23,7 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
       isOpen={isOpen} 
       onClose={onClose} 
       title="Crear nuevo anuncio"
-      size="md"
+      size="xl"
     >
       <div className="create-anuncio-modal">
         <p className="create-anuncio-modal__description">
@@ -42,9 +42,6 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
               <span className="create-anuncio-modal__option-icon">🏠</span>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Casa</span>
-                <span className="create-anuncio-modal__option-subtitle">
-                  Vivienda independiente completa
-                </span>
               </div>
             </div>
           </Button>
@@ -60,9 +57,6 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
               <span className="create-anuncio-modal__option-icon">🏢</span>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Departamento</span>
-                <span className="create-anuncio-modal__option-subtitle">
-                  Unidad en edificio o condominio
-                </span>
               </div>
             </div>
           </Button>
@@ -78,9 +72,7 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
               <span className="create-anuncio-modal__option-icon">🚪</span>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Cuarto</span>
-                <span className="create-anuncio-modal__option-subtitle">
-                  Habitación en vivienda compartida
-                </span>
+                
               </div>
             </div>
           </Button>
