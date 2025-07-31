@@ -7,9 +7,15 @@ export { IconButton } from './IconButton/IconButton';
 export { RetractableSearch } from './RetractableSearch/RetractableSearch';
 
 export { SidebarAdminPropiedades } from './SidebarAdmin/SidebarAdminPropiedades';
-export { TopbarAdminPropiedades } from './TopbarAdmin/TopbarAdminPropiedades';
-export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
 
+export { TopbarAdminPropiedades } from './TopbarAdmin/TopbarAdminPropiedades';
+export { TopbarAdminUsuarios} from './TopbarAdmin/TopbarAdminUsuarios'
+export { TopbarAdminReportes} from './TopbarAdmin/TopbarAdminReportes'
+export { TopbarAdminHome} from './TopbarAdmin/TopbarAdminHome'
+export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
+export { TableAdminUsuarios } from './TableAdmin/TableAdminUsuarios'
+export {TableAdminReportes } from './TableAdmin/TableAdminReportes'
+export {TableAdminHome } from './TableAdmin/TableAdminHome'
 // Types
 export type { InputProps } from './Input/Input';
 export type { ButtonProps } from './Button/Button';

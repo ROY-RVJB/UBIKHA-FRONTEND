@@ -1,0 +1,39 @@
+.wrapper {
+  margin-bottom: 2rem;
+}
+
+.seccion {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 14px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.boton {
+  background-color: #00c851;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #00933d;
+}
