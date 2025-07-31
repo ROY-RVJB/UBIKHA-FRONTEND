@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage } from '../pages';
+import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage,MisMensajesPage} from '../pages';
 import HomePageArrendatario from '../pages/HomePageArrendatario';
 import PropiedadesAdministradorPage from '../pages/PropiedadesAdministradorPage';
 
@@ -22,6 +22,7 @@ export const AppRouter = () => {
 
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage />} />
+        <Route path="/mis-mensajes" element={<MisMensajesPage />} />
 
         {/* 🏡 Detalle de propiedad (accesible para arrendatarios) */}
         <Route path="/propiedad/:id" element={<DetallePropiedadPage />} />
