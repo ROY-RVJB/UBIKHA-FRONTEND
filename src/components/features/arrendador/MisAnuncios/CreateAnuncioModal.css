@@ -57,10 +57,8 @@
 .create-anuncio-modal__option-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--color-text-main);
   line-height: 1.2;
 }
-
 
 .create-anuncio-modal__footer {
   border-top: 1px solid var(--color-divider);

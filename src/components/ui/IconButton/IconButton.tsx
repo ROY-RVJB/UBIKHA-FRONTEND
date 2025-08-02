@@ -1,41 +1,44 @@
 import React from 'react';
-import { 
-  Plus, 
-  Search, 
-  Edit, 
-  Trash2, 
-  Eye, 
-  Settings, 
-  Menu, 
-  X,
-  MoreVertical,
-  Download,
-  Upload,
-  Heart,
-  Share,
-  Rows,
-  Filter
-} from 'lucide-react';
-import './IconButton.css';
+import {
+  LuPlus,
+  LuSearch,
+  LuPencil,
+  LuTrash2,
+  LuEye,
+  LuSettings,
+  LuList,
+  LuX,
+  LuCheck,
+  LuDownload,
+  LuUpload,
+  LuHeart,
+  LuShare,
+  LuFilter,
+  LuRows2
+} from 'react-icons/lu';
 
-// Mapeo centralizado de íconos
-const iconMap = {
-  plus: Plus,
-  search: Search,
-  edit: Edit,
-  delete: Trash2,
-  eye: Eye,
-  settings: Settings,
-  menu: Menu,
-  close: X,
-  more: MoreVertical,
-  download: Download,
-  upload: Upload,
-  heart: Heart,
-  share: Share,
-  filter: Filter,
-  rows: Rows
+export const iconMap = {
+  plus: LuPlus,
+  search: LuSearch,
+  edit: LuPencil,
+  delete: LuTrash2,
+  eye: LuEye,
+  settings: LuSettings,
+  menu: LuList,
+  close: LuX,
+  check: LuCheck,
+  download: LuDownload,
+  upload: LuUpload,
+  heart: LuHeart,
+  share: LuShare,
+  filter: LuFilter,
+  rows: LuRows2
 } as const;
+
+
+import './IconButton.css';
+// Mapeo centralizado de íconos
+
 
 export type IconType = keyof typeof iconMap;
 

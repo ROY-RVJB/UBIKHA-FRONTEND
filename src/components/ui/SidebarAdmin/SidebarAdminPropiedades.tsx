@@ -1,5 +1,12 @@
 import styles from './SidebarAdminPropiedades.module.css';
-import { Home, Users, FileText, BarChart2, HomeIcon, DollarSign, LogOut } from 'lucide-react';
+import {
+  LuUsers,
+  LuFileText,
+  LuChartColumnBig,
+  LuHouse,
+  LuBadgeDollarSign,
+  LuLogOut
+} from 'react-icons/lu';
 import logoUbikha from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
 export const SidebarAdminPropiedades = () => {
   return (
@@ -7,15 +14,15 @@ export const SidebarAdminPropiedades = () => {
       <div className={styles.logo}> <img src={logoUbikha} alt="Logo Ubikha" className={styles.logoImage} />
   <span className={styles.logoText}>UBIKHA</span></div>
       <nav>
-        <ul>
-          <li><Home size={18} /> Home</li>
-          <li><Users size={18} /> Usuarios</li>
-          <li><FileText size={18} /> Reportes</li>
-          <li><BarChart2 size={18} /> Estadísticas</li>
-          <li><HomeIcon size={18} /> Propiedades</li>
-          <li><DollarSign size={18} /> Pagos y finanzas</li>
-          <li><LogOut size={18} /> Cerrar sesión</li>
-        </ul>
+   <ul>
+        <li><LuHouse size={18} /> Home</li>
+        <li><LuUsers size={18} /> Usuarios</li>
+        <li><LuFileText size={18} /> Reportes</li>
+        <li><LuChartColumnBig size={18} /> Estadísticas</li>
+        <li><LuHouse size={18} /> Propiedades</li>
+        <li><LuBadgeDollarSign size={18} /> Pagos y finanzas</li>
+        <li><LuLogOut size={18} /> Cerrar sesión</li>
+      </ul>
       </nav>
     </aside>
   );
