@@ -1,0 +1,120 @@
+/* src/arrendatario/LandlordSection/LandlordSection.css */
+
+.landlord-section { /* Nueva clase para el contenedor principal de esta sección */
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee; /* Si quieres el borde inferior, mantenlo aquí */
+}
+
+.landlord-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+/* ARRENDADOR SECTION - Contenido */
+.arrendador-contenido {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; /* Permite que se envuelva en pantallas más pequeñas */
+}
+
+.arrendador-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  flex: 1; /* Permite que crezca */
+  min-width: 280px; /* Ancho mínimo para la tarjeta */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.arrendador-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.arrendador-user h3 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.arrendador-user p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #777;
+}
+
+.arrendador-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.arrendador-badges span {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arrendador-badges svg { /* Target Lucide React SVG icons */
+  color: #071e3d; /* Color primario para los iconos */
+  width: 1em; /* Adjust size for SVG */
+  height: 1em; /* Adjust size for SVG */
+}
+
+.arrendador-info {
+  flex: 2; /* Permite que ocupe más espacio */
+  min-width: 280px; /* Ancho mínimo */
+}
+
+.arrendador-info h4 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.arrendador-info p {
+  font-size: 0.95em;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Custom Button Styles for arrendador */
+.btn-outline {
+  background: white;
+  border: 1px solid #071e3d;
+  color: #071e3d;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: #071e3d;
+  color: white;
+}
+
+/* Media Queries for Responsiveness (if needed specifically for this section) */
+@media (max-width: 992px) {
+  .arrendador-contenido {
+    flex-direction: column; /* Apila la tarjeta y la info del arrendador */
+    gap: 20px;
+  }
+  .arrendador-card,
+  .arrendador-info {
+    min-width: unset; /* Elimina la restricción de ancho mínimo */
+    width: 100%; /* Ocupa todo el ancho */
+  }
+}

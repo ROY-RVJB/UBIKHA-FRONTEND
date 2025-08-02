@@ -4,6 +4,8 @@
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
   background: white;
+  cursor: pointer;
+  position: relative;
 }
 
 .property-card:hover {
@@ -43,6 +45,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  z-index: 2;
 }
 
 .property-card__save:hover {
@@ -133,22 +136,32 @@
   color: #333;
 }
 
+/* Estilos actualizados para el botón 'Reservar' */
 .property-card__actions {
   display: flex;
   gap: 8px;
   margin-top: 12px;
+  justify-content: center;
 }
-.property-card {
+
+.property-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #1a4d2e; /* Texto verde oscuro */
+  background-color: white; /* Fondo blanco */
+  border: 1px solid #1a4d2e; /* Borde verde oscuro */
+  border-radius: 25px;
   cursor: pointer;
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
 }
 
-.property-card:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-.property-card__save {
-  z-index: 2; /* Asegura que el botón de guardar esté por encima */
+.property-card__button:hover {
+  background-color: #e0e0e0; /* Fondo gris claro al pasar el ratón */
+  color: #1a4d2e; /* Texto verde oscuro al pasar el ratón */
+  border: 1px solid #1a4d2e; /* Borde verde oscuro al pasar el ratón */
 }

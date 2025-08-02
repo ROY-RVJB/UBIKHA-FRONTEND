@@ -1,0 +1,39 @@
+/* src/arrendatario/PropertyFeatures/PropertyFeatures.css */
+
+.property-features-section { /* Nueva clase para el contenedor principal de esta sección */
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee; /* Si quieres el borde inferior, mantenlo aquí */
+}
+
+.property-features-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+/* FEATURES */
+.detalle-propiedad__features { /* Mantener el nombre de clase original para la cuadrícula de características */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.detalle-propiedad__feature { /* Mantener el nombre de clase original para cada característica individual */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+}
+
+.detalle-propiedad__feature svg { /* Target Lucide React SVG icons */
+  color: #071e3d; /* Primary color for icons */
+  width: 1.2em; /* Adjust size for SVG */
+  height: 1.2em; /* Adjust size for SVG */
+}
+
+/* Media Queries for Responsiveness (if needed specifically for this section) */
+@media (max-width: 768px) { /* Even smaller screens like phones */
+  .detalle-propiedad__features {
+    grid-template-columns: 1fr; /* Single column for features */
+  }
+}

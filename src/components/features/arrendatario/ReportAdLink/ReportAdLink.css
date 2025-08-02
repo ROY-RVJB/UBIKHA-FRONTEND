@@ -1,0 +1,22 @@
+/* src/arrendatario/ReportAdLink/ReportAdLink.css */
+
+.report-ad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.report-ad i {
+  margin-right: 5px;
+}
+
+.report-ad a {
+  color: #777;
+  text-decoration: underline;
+}
+
+.report-ad a:hover {
+  color: #333;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaHome, FaBuilding, FaBed, FaMapMarkerAlt, FaStar, FaHeart, FaRegHeart, FaCalendarAlt } from 'react-icons/fa'; // Importa los iconos de Font Awesome
 import './PropertyCard.css';
 
 export interface Property {
@@ -38,15 +39,15 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     fechaDisponible
   } = property;
 
+  // Mapeo de iconos de tipo de propiedad
   const tipoIcons = {
-    'casa': '🏠',
-    'departamento': '🏢',
-    'cuarto': '🛏️',
-    'oficina': '🏢'
+    'casa': <FaHome size={16} />,
+    'departamento': <FaBuilding size={16} />,
+    'cuarto': <FaBed size={16} />,
+    'oficina': <FaBuilding size={16} /> // Puedes usar FaBuilding para oficinas
   };
 
   const handleCardClick = (e: React.MouseEvent) => {
-    // Evita que el clic en el botón de guardar active el evento de la tarjeta
     if (!(e.target instanceof HTMLElement && e.target.closest('.property-card__save'))) {
       onViewDetails(id);
     }
@@ -78,12 +79,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             }}
             aria-label={isSaved ? 'Quitar de guardados' : 'Guardar propiedad'}
           >
-            {isSaved ? '❤️' : '🤍'}
+            {isSaved ? <FaHeart size={20} color="red" /> : <FaRegHeart size={20} />}
           </button>
         )}
         {calificacion && (
           <div className="property-card__rating">
-            ⭐ {calificacion.toFixed(1)}
+            <FaStar size={16} color="gold" /> {calificacion.toFixed(1)}
           </div>
         )}
       </div>
@@ -97,7 +98,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         <p className="property-card__location">
-          📍 {ubicacion}
+          <FaMapMarkerAlt size={16} /> {ubicacion}
         </p>
 
         <div className="property-card__price">
@@ -109,7 +110,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {fechaDisponible && (
           <p className="property-card__availability">
-            🗓️ Disponible desde {new Date(fechaDisponible).toLocaleDateString('es-PE')}
+            <FaCalendarAlt size={16} /> Disponible desde {new Date(fechaDisponible).toLocaleDateString('es-PE')}
           </p>
         )}
 
