@@ -8,13 +8,13 @@ export const SidebarAdminPropiedades = () => {
   <span className={styles.logoText}>UBIKHA</span></div>
       <nav>
         <ul>
-          <li><Home size={18} /> Home</li>
-          <li><Users size={18} /> Usuarios</li>
-          <li><FileText size={18} /> Reportes</li>
-          <li><BarChart2 size={18} /> Estadísticas</li>
-          <li><HomeIcon size={18} /> Propiedades</li>
-          <li><DollarSign size={18} /> Pagos y finanzas</li>
-          <li><LogOut size={18} /> Cerrar sesión</li>
+          <li> <Home size={18} /> Home</li>
+          <li> <Users size={18} /> Usuarios</li>
+          <li> <FileText size={18} /> Reportes</li>
+          <li> <BarChart2 size={18} /> Estadísticas</li>
+          <li> <HomeIcon size={18} /> Propiedades</li>
+          <li> <DollarSign size={18} /> Pagos y finanzas</li>
+          <li> <LogOut size={18} /> Cerrar sesión</li>
         </ul>
       </nav>
     </aside>

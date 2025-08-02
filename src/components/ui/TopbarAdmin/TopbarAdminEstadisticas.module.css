@@ -1,0 +1,44 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  height: 100px;
+}
+
+/* Contenedor del input + ícono */
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 1900px;
+}
+
+/* Estilo del input */
+.searchWrapper input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1.5rem; /* espacio para el ícono */
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+/* Posicionar el ícono dentro del input */
+.searchIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  background-color: #001f3f; /* Color del botón azul oscuro */
+  padding: 6px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.avatar {
+  background-color: #f4f4f4;
+  padding: 8px;
+  border-radius: 50%;
+}
