@@ -4,6 +4,12 @@ import HomePageArrendatario from '../pages/HomePageArrendatario';
 import PropiedadesAdministradorPage from '../pages/PropiedadesAdministradorPage';
 
 import DetallePropiedadPage from '../pages/DetallePropiedadPage';
+import UsuariosAdministradorPage from '../pages/UsuariosAdministradorPage';
+import ReporteAdministradorPage from '../pages/ReporteAdministradorPage';
+import HomeAdministradorPage from '../pages/HomeAdministradorPage';
+
+
+
 
 export const AppRouter = () => {
   return (
@@ -16,9 +22,23 @@ export const AppRouter = () => {
         <Route path="/login" element={<LoginPage />} />
 
         {/* 🏠 Dashboards por rol */}
+
+
+        <Route path="/home-arrendador" element={<HomePageArrendador/>}/>
+        <Route path="/home-arrendatario" element={<HomePageArrendatario/>}/>
+        <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage/>} />
+        <Route path="/admin-usuarios" element={<UsuariosAdministradorPage/>} />
+        <Route path="/admin-reporte" element={<ReporteAdministradorPage/>} />
+        <Route path="/admin-home" element={<HomeAdministradorPage/>} />
+        <Route path="/home-arrendador" element={<HomePageArrendador />} />
+        <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
+        
+
+
         <Route path="/home-arrendador" element={<HomePageArrendador />} />
         <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
         <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage />} />
+
 
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage />} />
