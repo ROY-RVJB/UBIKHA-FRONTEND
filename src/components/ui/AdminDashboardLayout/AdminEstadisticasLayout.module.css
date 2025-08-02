@@ -1,0 +1,24 @@
+/* src/components/ui/AdminDashboardLayout/AdminDashboardLayout.module.css */
+
+.dashboardContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contentArea {
+  flex: 1;
+  background-color: #fff;
+  padding: 1rem;
+}

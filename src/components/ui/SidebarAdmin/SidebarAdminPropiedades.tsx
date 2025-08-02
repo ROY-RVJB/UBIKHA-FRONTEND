@@ -14,6 +14,7 @@ export const SidebarAdminPropiedades = () => {
       <div className={styles.logo}> <img src={logoUbikha} alt="Logo Ubikha" className={styles.logoImage} />
   <span className={styles.logoText}>UBIKHA</span></div>
       <nav>
+
    <ul>
         <li><LuHouse size={18} /> Home</li>
         <li><LuUsers size={18} /> Usuarios</li>
@@ -23,6 +24,7 @@ export const SidebarAdminPropiedades = () => {
         <li><LuBadgeDollarSign size={18} /> Pagos y finanzas</li>
         <li><LuLogOut size={18} /> Cerrar sesión</li>
       </ul>
+
       </nav>
     </aside>
   );

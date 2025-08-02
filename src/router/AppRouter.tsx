@@ -7,8 +7,8 @@ import DetallePropiedadPage from '../pages/DetallePropiedadPage';
 import UsuariosAdministradorPage from '../pages/UsuariosAdministradorPage';
 import ReporteAdministradorPage from '../pages/ReporteAdministradorPage';
 import HomeAdministradorPage from '../pages/HomeAdministradorPage';
-
-
+import EstadisticasAdministradorPage from '../pages/EstadisticasAdministradorPage';
+import PagosAdministradorPage from '../pages/PagosAdministradorPage';
 
 
 export const AppRouter = () => {
@@ -38,6 +38,8 @@ export const AppRouter = () => {
         <Route path="/home-arrendador" element={<HomePageArrendador />} />
         <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
         <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage />} />
+        <Route path="/admin-estadisticas" element={<EstadisticasAdministradorPage />} />
+        <Route path="/admin-pagos" element={<PagosAdministradorPage />} /> 
 
 
         {/* 🏠 Funcionalidades Arrendador */}

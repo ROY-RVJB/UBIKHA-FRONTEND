@@ -12,10 +12,14 @@ export { TopbarAdminPropiedades } from './TopbarAdmin/TopbarAdminPropiedades';
 export { TopbarAdminUsuarios} from './TopbarAdmin/TopbarAdminUsuarios'
 export { TopbarAdminReportes} from './TopbarAdmin/TopbarAdminReportes'
 export { TopbarAdminHome} from './TopbarAdmin/TopbarAdminHome'
+export { TopbarAdminEstadisticas } from './TopbarAdmin/TopbarAdminEstadisticas'
+export { TopbarAdminPagos } from './TopbarAdmin/TopbarAdminPagos'
 export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
 export { TableAdminUsuarios } from './TableAdmin/TableAdminUsuarios'
-export {TableAdminReportes } from './TableAdmin/TableAdminReportes'
-export {TableAdminHome } from './TableAdmin/TableAdminHome'
+export { TableAdminReportes } from './TableAdmin/TableAdminReportes'
+export { TableAdminHome } from './TableAdmin/TableAdminHome'
+export { TableAdminEstadisticas} from './TableAdmin/TableAdminEstadisticas'
+export { TableAdminPagos } from './TableAdmin/TableAdminPagos'
 // Types
 export type { InputProps } from './Input/Input';
 export type { ButtonProps } from './Button/Button';
