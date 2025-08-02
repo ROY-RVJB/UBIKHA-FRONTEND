@@ -1,14 +1,16 @@
 import styles from './TopbarAdminHome.module.css';
-import { Search, User } from 'lucide-react';
+import {LuSearch,LuUser} from 'react-icons/lu';
 
 export const TopbarAdminHome = () => {
   return (
    <header className={styles.topbar}>
   <div className={styles.searchWrapper}>
-    <input type="text" placeholder="Buscador" />
-    <Search size={18} className={styles.searchIcon} />
+
+    <input type="text" placeholder="Buscar propiedades" />
+    <LuSearch size={18} className={styles.searchIcon} />
+
   </div>
-  <div className={styles.avatar}><User size={20} /></div>
+  <div className={styles.avatar}><LuUser size={20} /></div>
 </header>
 
   );

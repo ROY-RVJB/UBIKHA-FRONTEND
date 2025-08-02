@@ -23,7 +23,6 @@ export const NavbarArrendatario = ({
             alt="UBIKHA Logo" 
             className="navbar-logo" 
           />
-          <span className="brand-text">UBIKHA</span>
         </div>
       </div>
 

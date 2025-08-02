@@ -1,6 +1,6 @@
 /* PAlETA DE COLORES*/
 :root {
-  --color-bg: hsl(30, 33%, 94%);
+  --color-bg: #F5F0EB;
   --color-surface: #EFE6DC;
   --color-divider: #D8D6D2;
 
@@ -9,7 +9,7 @@
 
   --color-accent-warm: #A3786E;
   --color-accent-soft: #E5C3B5;
-  --color-accent-cool: #3C6E71;
+  --color-accent-cool: #0b2223;
   --color-success: #2E7D61;
   --color-accent-muted: #D4A59A;
 
@@ -24,7 +24,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Lexend', sans-serif;
   background-color:var(--color-bg);
   line-height: 1.6;
 }
