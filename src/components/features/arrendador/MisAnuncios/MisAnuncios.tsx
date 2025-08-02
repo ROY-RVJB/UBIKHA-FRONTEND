@@ -47,6 +47,46 @@ const mockAnuncios: Anuncio[] = [
     fechaCreacion: new Date('2024-01-10'),
     imageUrl: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg', 
     ubicacion: 'Santiago de Surco, Lima'
+  },
+   {
+    id: '5',
+    titulo: 'Casa moderna en Miraflores',
+    tipo: 'casa',
+    estado: 'activo',
+    precio: 2500,
+    fechaCreacion: new Date('2024-01-15'),
+    imageUrl: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg',
+    ubicacion: 'Miraflores, Lima'
+  },
+  {
+    id: '6', 
+    titulo: 'Departamento céntrico San Isidro',
+    tipo: 'departamento',
+    estado: 'accion_necesaria',
+    precio: 1800,
+    fechaCreacion: new Date('2024-01-20'),
+    imageUrl: 'https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg',
+    ubicacion: 'San Isidro, Lima'
+  },
+  {
+    id: '7',
+    titulo: 'Cuarto acogedor en Barranco',
+    tipo: 'cuarto', 
+    estado: 'pendiente_aprobacion',
+    precio: 800,
+    fechaCreacion: new Date('2024-01-25'),
+    imageUrl: 'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg',
+    ubicacion: 'Barranco, Lima'
+  },
+  {
+    id: '8',
+    titulo: 'Casa familiar en Surco',
+    tipo: 'casa',
+    estado: 'pausado',
+    precio: 3200,
+    fechaCreacion: new Date('2024-01-10'),
+    imageUrl: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg', 
+    ubicacion: 'Santiago de Surco, Lima'
   }
 ];
 

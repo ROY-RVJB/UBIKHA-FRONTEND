@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LuHouse,LuBuilding,LuDoorClosed } from "react-icons/lu";
 import { Button } from '../../../ui';
 import './AnuncioCard.css';
 
@@ -59,9 +60,9 @@ const EstadoBadge: React.FC<{ estado: Anuncio['estado'] }> = ({ estado }) => {
 
 const TipoIcon: React.FC<{ tipo: Anuncio['tipo'] }> = ({ tipo }) => {
   const iconMap = {
-    'casa': '🏠',
-    'departamento': '🏢', 
-    'cuarto': '🚪'
+    'casa': <LuHouse/>,
+    'departamento': <LuBuilding/>, 
+    'cuarto': <LuDoorClosed />
   };
   return <span className="tipo-icon">{iconMap[tipo]}</span>;
 };

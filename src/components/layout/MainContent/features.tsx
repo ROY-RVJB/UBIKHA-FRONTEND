@@ -1,25 +1,23 @@
-
+import { LuStar,LuBed,LuRefreshCcwDot  } from "react-icons/lu";
 import './features.css';
 
 export interface FeaturesProps {
   feature1Title: string;
   feature1Description: string;
-  feature1Icon: string;
   feature2Title: string;
   feature2Description: string;
-  feature2Icon: string;
   feature3Title: string;
   feature3Description: string;
-  feature3Icon: string;
+
 }
-export const Features = ({ feature1Title, feature1Description, feature1Icon,feature2Title, feature2Description, feature2Icon,feature3Title, feature3Description, feature3Icon }: FeaturesProps) => {
+export const Features = ({ feature1Title, feature1Description,feature2Title, feature2Description,feature3Title, feature3Description, }: FeaturesProps) => {
   return (
     <section className="features-section">
       <div className="features-grid">
         <div className="feature-card">
           <div className="feature-icon">
-            <i className={feature1Icon}></i>
-          </div>
+            <LuRefreshCcwDot /> 
+          </div>  
           <h3 className="feature-title">{feature1Title}</h3>
           <p className="feature-description">
             {feature1Description}
@@ -28,7 +26,7 @@ export const Features = ({ feature1Title, feature1Description, feature1Icon,feat
 
         <div className="feature-card">
           <div className="feature-icon">
-            <i className={feature2Icon}></i>
+             <LuBed /> 
           </div>
           <h3 className="feature-title">{feature2Title}</h3>
           <p className="feature-description">
@@ -38,7 +36,7 @@ export const Features = ({ feature1Title, feature1Description, feature1Icon,feat
 
         <div className="feature-card">
           <div className="feature-icon">
-            <i className={feature3Icon}></i>
+             <LuStar/> 
           </div>
           <h3 className="feature-title">{feature3Title}</h3>
           <p className="feature-description">

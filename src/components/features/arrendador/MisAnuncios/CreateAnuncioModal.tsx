@@ -1,3 +1,4 @@
+import { LuHouse,LuBuilding,LuDoorClosed } from "react-icons/lu";
 import React from 'react';
 import { Modal, Button } from '../../../ui';
 import './CreateAnuncioModal.css';
@@ -39,7 +40,7 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
             className="create-anuncio-modal__option"
           >
             <div className="create-anuncio-modal__option-content">
-              <span className="create-anuncio-modal__option-icon">🏠</span>
+              <LuHouse className="create-anuncio-modal__option-icon"/>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Casa</span>
               </div>
@@ -54,7 +55,7 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
             className="create-anuncio-modal__option"
           >
             <div className="create-anuncio-modal__option-content">
-              <span className="create-anuncio-modal__option-icon">🏢</span>
+              <LuBuilding  className="create-anuncio-modal__option-icon"/>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Departamento</span>
               </div>
@@ -69,7 +70,7 @@ export const CreateAnuncioModal: React.FC<CreateAnuncioModalProps> = ({
             className="create-anuncio-modal__option"
           >
             <div className="create-anuncio-modal__option-content">
-              <span className="create-anuncio-modal__option-icon">🚪</span>
+              <LuDoorClosed className="create-anuncio-modal__option-icon"/>
               <div className="create-anuncio-modal__option-text">
                 <span className="create-anuncio-modal__option-title">Cuarto</span>
                 
