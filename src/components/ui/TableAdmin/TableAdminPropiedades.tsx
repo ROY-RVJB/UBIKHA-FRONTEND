@@ -1,3 +1,4 @@
+import { IconTipo } from '../IconTipo/IconTipo';
 import styles from './TableAdminPropiedades.module.css';
 
 export const TableAdminPropiedades = () => {
@@ -6,7 +7,8 @@ export const TableAdminPropiedades = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>🏡 Propiedades</th>
+            <th>ID</th>
+            <th>Tipo de inmueble</th>
             <th>👨‍💼 Dueño</th>
             <th>📋 Estado</th>
             <th>⚙️ Acciones</th>
@@ -14,33 +16,38 @@ export const TableAdminPropiedades = () => {
         </thead>
         <tbody>
           <tr>
-            <td>🏡 Propiedad 1</td>
+            <td>#1</td>
+            <td><IconTipo tipo='casa' variant='table'/></td>
             <td>👨‍💼 Mark Anthony</td>
-            <td>Pendiente</td>
-            <td><button className={styles.action}>ACCIONES ⌄</button></td>
+            <td>En revision </td>
+            <td><button className={styles.action}>aprobar publicacion/recharar publicacion</button></td>
           </tr>
           <tr>
-            <td>🏡 Propiedad 2</td>
+            <td>#2</td>
+              <td><IconTipo tipo="departamento" variant='table'/></td>
             <td>👨‍💼 Anthony Mark</td>
             <td className={styles.activo}>Activo</td>
             <td><button className={styles.action}>ACCIONES ⌄</button></td>
           </tr>
           <tr>
-            <td>🏡 Propiedad 3</td>
+            <td>#3</td>
+              <td><IconTipo tipo='casa' variant='table'/></td>
             <td>👨‍💼 Anthony Villasante</td>
-            <td className={styles.suspendido}>Suspendido</td>
-            <td><button className={styles.action}>ACCIONES ⌄</button></td>
+            <td className={styles.suspendido}>Pausado</td>
+            <td><button className={styles.action}>eliminar </button></td>
           </tr>
           <tr>
-            <td>🏡 Propiedad 4</td>
+            <td>#4</td>
+             <td><IconTipo tipo='cuarto' variant='table'/></td>
             <td>👨‍💼 Mark Avalos</td>
             <td className={styles.activo}>Activo</td>
             <td><button className={styles.action}>ACCIONES ⌄</button></td>
           </tr>
           <tr>
-            <td>🏡 Propiedad 5</td>
+            <td>#5</td>
+              <td><IconTipo tipo='casa' variant='table'/></td>
             <td>👨‍💼 Jordy Mark</td>
-            <td className={styles.suspendido}>Suspendido</td>
+            <td className={styles.suspendido}>Pausado</td>
             <td><button className={styles.action}>ACCIONES ⌄</button></td>
           </tr>
         </tbody>

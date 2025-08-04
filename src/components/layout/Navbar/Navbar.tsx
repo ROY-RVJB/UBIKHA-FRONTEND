@@ -53,7 +53,7 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
           {text_4}
         </Button>
       <div>
-        <Avatar name="Roy" />
+        <Avatar name="Luis" />
       </div>
       </div>
       

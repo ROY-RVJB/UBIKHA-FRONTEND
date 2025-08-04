@@ -5,6 +5,7 @@ export { LoginForm } from './LoginForm/LoginForm';
 export { Modal } from './Modal/Modal';
 export { IconButton } from './IconButton/IconButton';
 export { RetractableSearch } from './RetractableSearch/RetractableSearch';
+export { IconTipo } from './IconTipo/IconTipo';
 
 export { SidebarAdminPropiedades } from './SidebarAdmin/SidebarAdminPropiedades';
 
@@ -20,7 +21,10 @@ export { TableAdminReportes } from './TableAdmin/TableAdminReportes'
 export { TableAdminHome } from './TableAdmin/TableAdminHome'
 export { TableAdminEstadisticas} from './TableAdmin/TableAdminEstadisticas'
 export { TableAdminPagos } from './TableAdmin/TableAdminPagos'
+
 // Types
+// UI Components
+
 export type { InputProps } from './Input/Input';
 export type { ButtonProps } from './Button/Button';
 export type { LoginFormProps } from './LoginForm/LoginForm';

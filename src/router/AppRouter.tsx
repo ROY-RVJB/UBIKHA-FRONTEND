@@ -22,21 +22,13 @@ export const AppRouter = () => {
         <Route path="/login" element={<LoginPage />} />
 
         {/* 🏠 Dashboards por rol */}
+        <Route path="/home-arrendador" element={<HomePageArrendador />} />
+        <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
 
-
-        <Route path="/home-arrendador" element={<HomePageArrendador/>}/>
-        <Route path="/home-arrendatario" element={<HomePageArrendatario/>}/>
-        <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage/>} />
+         {/* 🏠 Funcionalidades Administrador*/}
         <Route path="/admin-usuarios" element={<UsuariosAdministradorPage/>} />
         <Route path="/admin-reporte" element={<ReporteAdministradorPage/>} />
         <Route path="/admin-home" element={<HomeAdministradorPage/>} />
-        <Route path="/home-arrendador" element={<HomePageArrendador />} />
-        <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
-        
-
-
-        <Route path="/home-arrendador" element={<HomePageArrendador />} />
-        <Route path="/home-arrendatario" element={<HomePageArrendatario />} />
         <Route path="/admin-propiedades" element={<PropiedadesAdministradorPage />} />
         <Route path="/admin-estadisticas" element={<EstadisticasAdministradorPage />} />
         <Route path="/admin-pagos" element={<PagosAdministradorPage />} /> 
