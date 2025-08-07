@@ -8,7 +8,7 @@ function MisAnunciosPage() {
         text_1="Inicio" 
         text_2="Anuncios" 
         text_3="Mensajes"
-        text_4="Mi Perfil" 
+        text_4="Cambiar a modo viajero " 
       />
       
       <MisAnuncios />

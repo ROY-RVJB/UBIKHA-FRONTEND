@@ -7,7 +7,8 @@ import './RegisterStepThree.css';
 export interface RegisterStepThreeProps {
   onSubmit: (data: {
     nombres: string;
-    apellidos: string;
+    apellido_paterno: string;
+    apellido_materno: string;
     fecha_nacimiento: string;
     email: string;
     password: string;
@@ -24,7 +25,8 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
   // Estado del formulario
   const [data, setData] = useState({
     nombres: '',
-    apellidos: '',
+    apellido_paterno: '',
+    apellido_materno: '',
     fecha_nacimiento: '',
     email: '',
     password: '',
@@ -62,11 +64,18 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
       newErrors.nombres = 'El nombre debe tener al menos 2 caracteres';
     }
 
-    // Validar apellidos
-    if (!data.apellidos.trim()) {
-      newErrors.apellidos = 'Los apellidos son requeridos';
-    } else if (data.apellidos.trim().length < 2) {
-      newErrors.apellidos = 'Los apellidos deben tener al menos 2 caracteres';
+    // Validar apellido paterno
+    if (!data.apellido_paterno.trim()) {
+      newErrors.apellido_paterno = 'El apellido paterno es requerido';
+    } else if (data.apellido_paterno.trim().length < 2) {
+      newErrors.apellido_paterno = 'El apellido paterno debe tener al menos 2 caracteres';
+    }
+
+    // Validar apellido materno
+    if (!data.apellido_materno.trim()) {
+      newErrors.apellido_materno = 'El apellido materno es requerido';
+    } else if (data.apellido_materno.trim().length < 2) {
+      newErrors.apellido_materno = 'El apellido materno debe tener al menos 2 caracteres';
     }
 
     // Validar fecha de nacimiento
@@ -130,7 +139,8 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
       // Preparar datos para enviar (sin confirm_password)
       const submitData = {
         nombres: data.nombres.trim(),
-        apellidos: data.apellidos.trim(),
+        apellido_paterno: data.apellido_paterno.trim(),
+        apellido_materno: data.apellido_materno.trim(),
         fecha_nacimiento: data.fecha_nacimiento,
         email: data.email.trim().toLowerCase(),
         password: data.password
@@ -142,7 +152,7 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
       });
 
       // Llamar al callback onSubmit
-      await onSubmit(submitData);
+      onSubmit(submitData);
       
     } catch (error) {
       console.error('Error en registro:', error);
@@ -210,20 +220,37 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
             />
           </div>
 
-          {/* Apellidos */}
+          {/* Apellido Paterno */}
           <div className="register-step-three__field">
             <label className="register-step-three__label">
-              Apellidos
+              Apellido Paterno
             </label>
             <Input
               type="text"
-              placeholder="Apellidos que aparecen en el DNI"
-              value={data.apellidos}
-              onChange={handleChange('apellidos')}
-              error={!!errors.apellidos}
-              errorMessage={errors.apellidos}
+              placeholder="Apellido paterno que aparece en el DNI"
+              value={data.apellido_paterno}
+              onChange={handleChange('apellido_paterno')}
+              error={!!errors.apellido_paterno}
+              errorMessage={errors.apellido_paterno}
               required
-              name="apellidos"
+              name="apellido_paterno"
+            />
+          </div>
+
+          {/* Apellido Materno */}
+          <div className="register-step-three__field">
+            <label className="register-step-three__label">
+              Apellido Materno
+            </label>
+            <Input
+              type="text"
+              placeholder="Apellido materno que aparece en el DNI"
+              value={data.apellido_materno}
+              onChange={handleChange('apellido_materno')}
+              error={!!errors.apellido_materno}
+              errorMessage={errors.apellido_materno}
+              required
+              name="apellido_materno"
             />
           </div>
 

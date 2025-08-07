@@ -49,7 +49,7 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
         <Button
         variant='ghost'
         size='sm'
-        onClick={()=>navigate('/login')}>
+        onClick={()=>navigate('/home-arrendatario')}>
           {text_4}
         </Button>
       <div>

@@ -4,6 +4,21 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface RegistrationData {
+  email: string;
+  nombres: string;
+  apellido_paterno: string;
+  apellido_materno: string;
+  num_celular: string;
+  fecha_nacimiento: string;
+  password: string;
+}
+
+export interface RegistrationResponse {
+  message: string;
+  usuario_id?: number;
+}
+
 // Interfaz para la respuesta real del backend
 interface BackendLoginResponse {
   access_token: string;
@@ -163,6 +178,27 @@ class AuthService {
     } catch {
       return null;
     }
+  }
+
+  /**
+   * Registro de nuevo arrendatario
+   */
+  async register(data: RegistrationData): Promise<RegistrationResponse> {
+    const response = await fetch(`${this.baseURL}/auth/registro`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Error en el registro');
+    }
+
+    const result: RegistrationResponse = await response.json();
+    return result;
   }
 
   /**

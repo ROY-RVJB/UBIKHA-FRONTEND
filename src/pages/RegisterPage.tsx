@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { RegisterStepOne } from '../components/ui/RegisterStepOne/RegisterStepOne';
 import { RegisterStepTwo } from '../components/ui/RegisterStepTwo/RegisterStepTwo';
 import { RegisterStepThree } from '../components/ui/RegisterStepThree/RegisterStepThree';
+import { authService } from '../services/authService';
 
 /**
  * 🎯 REGISTRO MULTI-PASO
@@ -21,7 +22,8 @@ function RegisterPage() {
     num_celular: '',
     verification_code: '', // Código de verificación del paso 2
     nombres: '',
-    apellidos: '',
+    apellido_paterno: '',
+    apellido_materno: '',
     fecha_nacimiento: '',
     email: '',
     password: ''
@@ -50,22 +52,33 @@ function RegisterPage() {
   };
 
   // Manejador para el submit final (paso 3)
-  const handleFinalSubmit = async (finalData: any) => {
+  const handleFinalSubmit = (finalData: any) => {
     const completeData = { ...formData, ...finalData };
     
     console.log('Datos completos del registro:', completeData);
     
-    // TODO: Llamar al servicio de registro cuando esté implementado
-    // try {
-    //   await authService.register(completeData);
-    //   navigate('/login');
-    // } catch (error) {
-    //   console.error('Error en registro:', error);
-    // }
-    
-    // Por ahora, solo navegamos al login
-    alert('Registro completado (simulado). Datos en consola.');
-    navigate('/home-arrendatario');
+    // Preparar datos para el endpoint (sin verification_code)
+    const registrationData = {
+      email: completeData.email,
+      nombres: completeData.nombres,
+      apellido_paterno: completeData.apellido_paterno,
+      apellido_materno: completeData.apellido_materno,
+      num_celular: completeData.num_celular,
+      fecha_nacimiento: completeData.fecha_nacimiento,
+      password: completeData.password
+    };
+
+    // Llamar al API de registro
+    authService.register(registrationData)
+      .then((result) => {
+        console.log('Registro exitoso:', result);
+        alert(`¡Registro completado exitosamente! ${result.message}`);
+        navigate('/home-arrendatario');
+      })
+      .catch((error: any) => {
+        console.error('Error en registro:', error);
+        alert(`Error en el registro: ${error.message}`);
+      });
   };
 
   return (
@@ -75,7 +88,7 @@ function RegisterPage() {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem',
-      backgroundColor: '#f8fafc'
+      backgroundColor: 'var(--color-bg)'
     }}>
       {currentStep === 1 && (
         <RegisterStepOne
