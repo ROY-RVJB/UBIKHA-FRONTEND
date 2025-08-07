@@ -2,6 +2,9 @@
 export { Input } from './Input/Input';
 export { Button } from './Button/Button';
 export { LoginForm } from './LoginForm/LoginForm';
+export { RegisterStepOne } from './RegisterStepOne/RegisterStepOne';
+export { RegisterStepTwo } from './RegisterStepTwo/RegisterStepTwo';
+export { RegisterStepThree } from './RegisterStepThree/RegisterStepThree';
 export { Modal } from './Modal/Modal';
 export { IconButton } from './IconButton/IconButton';
 export { RetractableSearch } from './RetractableSearch/RetractableSearch';

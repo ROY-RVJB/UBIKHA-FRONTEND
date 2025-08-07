@@ -1,0 +1,228 @@
+/* RegisterStepTwo Component Styles */
+.register-step-two {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-step-two__container {
+  background-color: var(--color-text-light);
+  border: 1px solid var(--color-secondary-dark);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Header con flecha de retroceso */
+.register-step-two__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.register-step-two__back-button {
+  background: none;
+  border: none;
+  color: var(--color-text-main);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.register-step-two__back-button:hover {
+  opacity: 0.7;
+}
+
+.register-step-two__title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--color-text-main);
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.register-step-two__spacer {
+  width: 40px; /* Mismo ancho que el botón de retroceso para centrar el título */
+}
+
+/* Instrucciones */
+.register-step-two__instructions {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.register-step-two__phone-number {
+  display: block;
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-main);
+  margin-top: 0.25rem;
+}
+
+/* Formulario */
+.register-step-two__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Inputs del código */
+.register-step-two__code-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.register-step-two__code-input {
+  width: 45px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold, 700);
+  border: none;
+  border-bottom: 2px solid #333;
+  background: transparent;
+  color: var(--color-text-main);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.register-step-two__code-input:focus {
+  border-bottom-color: var(--color-primary, #2563eb);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.register-step-two__code-input--filled {
+  border-bottom-color: var(--color-primary, #2563eb);
+}
+
+.register-step-two__code-input--error {
+  border-bottom-color: #dc2626;
+  background-color: rgba(220, 38, 38, 0.05);
+}
+
+/* Ocultar spinners en inputs numéricos */
+.register-step-two__code-input::-webkit-outer-spin-button,
+.register-step-two__code-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.register-step-two__code-input[type=number] {
+  appearance: textfield;
+}
+
+/* Mensaje de error */
+.register-step-two__error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: -0.5rem;
+}
+
+/* Enlace de reenviar */
+.register-step-two__resend {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.register-step-two__resend-link {
+  background: none;
+  border: none;
+  color: var(--color-accent-cool);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.register-step-two__resend-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Nota de desarrollo */
+.register-step-two__dev-note {
+  text-align: center;
+  padding: 0.75rem;
+  background-color: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.register-step-two__dev-note small {
+  color: #92400e;
+  font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-step-two {
+    padding: 1rem;
+  }
+  
+  .register-step-two__container {
+    max-width: 380px;
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .register-step-two__title {
+    font-size: 1.25rem;
+  }
+  
+  .register-step-two__code-inputs {
+    gap: 0.5rem;
+  }
+  
+  .register-step-two__code-input {
+    width: 40px;
+    height: 45px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-step-two {
+    padding: 0.5rem;
+  }
+  
+  .register-step-two__container {
+    max-width: 340px;
+    padding: 1rem;
+    margin: 0 0.5rem;
+    border-radius: 0.75rem;
+  }
+  
+  .register-step-two__header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .register-step-two__code-inputs {
+    gap: 0.375rem;
+  }
+  
+  .register-step-two__code-input {
+    width: 35px;
+    height: 40px;
+    font-size: 1.125rem;
+  }
+}

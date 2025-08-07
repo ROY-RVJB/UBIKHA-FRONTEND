@@ -1,7 +1,6 @@
-// src/services/authService.ts
 
 export interface LoginCredentials {
-  email: string;
+  num_celular: string;
   password: string;
 }
 
@@ -10,7 +9,7 @@ interface BackendLoginResponse {
   access_token: string;
   token_type: string;
   usuario: string;
-  rol: 'client' | 'owner' | 'admin';
+  rol: 'arrendatario' | 'arrendador' | 'admin';
 }
 
 // Interfaz normalizada para el frontend
@@ -34,12 +33,12 @@ class AuthService {
   /**
    * Mapea roles del backend al frontend
    */
-  private mapRole(backendRole: 'client' | 'owner' | 'admin'): 'arrendatario' | 'arrendador' | 'administrador' {
+  private mapRole(backendRole: 'arrendatario' | 'arrendador' | 'admin'): 'arrendatario' | 'arrendador' | 'administrador' {
     const roleMap = {
-      'client': 'arrendatario' as const,
-      'owner': 'arrendador' as const, 
+      'arrendatario': 'arrendatario' as const,
+      'arrendador': 'arrendador' as const, 
       'admin': 'administrador' as const
-    };
+    };  
     return roleMap[backendRole];
   }
 
@@ -48,7 +47,7 @@ class AuthService {
    */
   getRedirectPath(role: 'arrendatario' | 'arrendador' | 'administrador'): string {
     const redirectMap = {
-      'administrador': '/admin-dashboard',
+      'administrador': '/admin-home',
       'arrendador': '/home-arrendador', 
       'arrendatario': '/home-arrendatario'
     };
@@ -59,13 +58,13 @@ class AuthService {
    * Método universal de login
    */
   private async login(credentials: LoginCredentials): Promise<LoginResponse> {
-    const response = await fetch(`${this.baseURL}/auth/login`, {
+    const response = await fetch(`${this.baseURL}/auth/login-json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: credentials.email,
+        num_celular: credentials.num_celular,
         password: credentials.password
       })
     });

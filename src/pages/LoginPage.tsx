@@ -22,7 +22,7 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const handleSubmit = async (credentials: { email: string; password: string }) => {
+  const handleSubmit = async (credentials: { num_celular: string; password: string }) => {
     setLoading(true);
     setError(undefined);
     
@@ -45,6 +45,10 @@ function LoginPage() {
     }
   };
 
+  const handleRegisterClick = () => {
+    navigate('/register');
+  };
+
   return (
     <div className="login-page">
       <LoginForm
@@ -53,6 +57,7 @@ function LoginPage() {
         onSubmit={handleSubmit}
         loading={loading}
         error={error}
+        onRegisterClick={handleRegisterClick}
       />
     </div>
   );

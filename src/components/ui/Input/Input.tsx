@@ -2,7 +2,7 @@ import React from 'react';
 import './Input.css';
 
 export interface InputProps {
-  type?: 'text' | 'email' | 'password' | 'tel' | 'number';
+  type?: 'text' | 'email' | 'password' | 'tel' | 'number' | 'date';
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +13,9 @@ export interface InputProps {
   label?: string;
   name?: string;
   className?: string;
+  maxLength?: number;
+  min?: string;
+  max?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -27,6 +30,9 @@ export const Input: React.FC<InputProps> = ({
   label,
   name,
   className = '',
+  maxLength,
+  min,
+  max,
   ...props
 }) => {
   const inputClasses = `
@@ -54,6 +60,9 @@ export const Input: React.FC<InputProps> = ({
         onChange={onChange}
         disabled={disabled}
         required={required}
+        maxLength={maxLength}
+        min={min}
+        max={max}
         className={inputClasses}
         {...props}
       />

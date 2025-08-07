@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 import './LoginForm.css';
 
 export interface LoginFormProps {
-  onSubmit?: (credentials: { email: string; password: string }) => void;
+  onSubmit?: (credentials: { num_celular: string; password: string }) => void;
   loading?: boolean;
   error?: string;
   title?: string;
@@ -26,24 +26,32 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   onForgotPassword,
   onRegisterClick,
 }) => {
-  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      setEmailError('El email es requerido');
+  // CAMBIAR A: Validación de celular
+  const validatePhone = (phone: string): boolean => {
+    // Regex para números de Perú (9 dígitos, empezando con 9)
+    const phoneRegex = /^9\d{8}$/;
+    
+    if (!phone) {
+      setPhoneError('El número de celular es requerido');
       return false;
     }
-    if (!emailRegex.test(email)) {
-      setEmailError('Ingresa un email válido');
+    
+    // Eliminar espacios y caracteres no numéricos
+    const cleanPhone = phone.replace(/\D/g, '');
+    
+    if (!phoneRegex.test(cleanPhone)) {
+      setPhoneError('Ingresa un número válido (9 dígitos)');
       return false;
     }
-    setEmailError('');
-    return true;
-  };
+  
+  setPhoneError('');
+  return true;
+};
 
   const validatePassword = (password: string): boolean => {
     if (!password) {
@@ -61,11 +69,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const isEmailValid = validateEmail(email);
+    const isPhoneValid = validatePhone(phoneNumber);
     const isPasswordValid = validatePassword(password);
     
-    if (isEmailValid && isPasswordValid && onSubmit) {
-      onSubmit({ email, password });
+    if (isPhoneValid && isPasswordValid && onSubmit) {
+      // Limpiar el número de teléfono antes de enviarlo (eliminar espacios y caracteres no numéricos)
+      const cleanPhone = phoneNumber.replace(/\D/g, '');
+      onSubmit({ num_celular: cleanPhone, password });
     }
   };
 
@@ -84,15 +94,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
       <form onSubmit={handleSubmit} className="ubikha-login-form__form">
         <Input
-          type="email"
-          label="Correo electrónico"
-          placeholder="tu@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={!!emailError}
-          errorMessage={emailError}
-          required
-          name="email"
+        type="tel"
+        label="Número de celular"
+        placeholder="999 999 999"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        error={!!phoneError}
+        errorMessage={phoneError}
+        required
+        name="phone"
+        maxLength={9}
         />
 
         <Input

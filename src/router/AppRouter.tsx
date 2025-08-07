@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginPage, HomePageArrendador, MisAnunciosPage,MisMensajesPage} from '../pages';
+import { HomePage, LoginPage, RegisterPage, HomePageArrendador, MisAnunciosPage,MisMensajesPage} from '../pages';
 import HomePageArrendatario from '../pages/HomePageArrendatario';
 import PropiedadesAdministradorPage from '../pages/PropiedadesAdministradorPage';
 
@@ -20,6 +20,9 @@ export const AppRouter = () => {
 
         {/* 🔐 Login universal */}
         <Route path="/login" element={<LoginPage />} />
+        
+        {/* 📝 Registro multi-paso */}
+        <Route path="/register" element={<RegisterPage />} />
 
         {/* 🏠 Dashboards por rol */}
         <Route path="/home-arrendador" element={<HomePageArrendador />} />
