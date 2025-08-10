@@ -43,6 +43,7 @@ class AuthService {
 
   constructor() {
     this.baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
+    console.log('🔧 Backend URL configurada:', this.baseURL);
   }
 
   /**
@@ -199,6 +200,207 @@ class AuthService {
 
     const result: RegistrationResponse = await response.json();
     return result;
+  }
+
+  /**
+   * Enviar código de verificación por WhatsApp
+   */
+  async sendWhatsAppVerification(phoneNumber: string): Promise<{message: string}> {
+    const payload = { phone_number: phoneNumber };
+    
+    console.log('🚀 Enviando a WhatsApp:', payload);
+    console.log('🔗 URL:', `${this.baseURL}/whatsapp-auth/enviar-codigo-registro`);
+    
+    const response = await fetch(`${this.baseURL}/whatsapp-auth/enviar-codigo-registro`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    console.log('📱 Status:', response.status);
+    
+    if (!response.ok) {
+      let errorMessage = 'Error enviando código WhatsApp';
+      
+      try {
+        const errorData = await response.json();
+        console.error('❌ Error del servidor:', errorData);
+        
+        // Manejar diferentes tipos de error
+        if (errorData.detail) {
+          if (Array.isArray(errorData.detail)) {
+            // Errores de validación de FastAPI
+            errorMessage = errorData.detail.map((err: any) => 
+              `${err.loc?.[1] || 'Campo'}: ${err.msg}`
+            ).join(', ');
+          } else {
+            errorMessage = errorData.detail;
+          }
+        } else if (errorData.message) {
+          errorMessage = errorData.message;
+        }
+      } catch (parseError) {
+        console.error('❌ Error parseando respuesta:', parseError);
+        errorMessage = `Error ${response.status}: ${response.statusText}`;
+      }
+      
+      throw new Error(errorMessage);
+    }
+
+    const result = await response.json();
+    console.log('✅ Respuesta exitosa:', result);
+    return result;
+  }
+
+  /**
+   * Verificar código de WhatsApp
+   */
+  async verifyWhatsAppCode(phoneNumber: string, code: string): Promise<{message: string}> {
+    const payload = { phone_number: phoneNumber, code: code };
+    
+    console.log('🔍 Verificando código WhatsApp:', payload);
+    console.log('🔗 URL:', `${this.baseURL}/whatsapp-auth/verificar-codigo-registro`);
+    
+    const response = await fetch(`${this.baseURL}/whatsapp-auth/verificar-codigo-registro`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    console.log('📱 Status verificación:', response.status);
+    
+    if (!response.ok) {
+      let errorMessage = 'Error verificando código WhatsApp';
+      
+      try {
+        const errorData = await response.json();
+        console.error('❌ Error del servidor:', errorData);
+        
+        if (errorData.detail) {
+          if (Array.isArray(errorData.detail)) {
+            errorMessage = errorData.detail.map((err: any) => 
+              `${err.loc?.[1] || 'Campo'}: ${err.msg}`
+            ).join(', ');
+          } else {
+            errorMessage = errorData.detail;
+          }
+        } else if (errorData.message) {
+          errorMessage = errorData.message;
+        }
+      } catch (parseError) {
+        console.error('❌ Error parseando respuesta:', parseError);
+        errorMessage = `Error ${response.status}: ${response.statusText}`;
+      }
+      
+      throw new Error(errorMessage);
+    }
+
+    const result = await response.json();
+    console.log('✅ Código verificado exitosamente:', result);
+    return result;
+  }
+
+  /**
+   * Completar registro después de verificación WhatsApp
+   */
+  async completeWhatsAppRegistration(data: RegistrationData): Promise<RegistrationResponse> {
+    const payload = {
+      email: data.email,
+      nombres: data.nombres,
+      apellido_paterno: data.apellido_paterno,
+      apellido_materno: data.apellido_materno,
+      num_celular: data.num_celular,
+      fecha_nacimiento: data.fecha_nacimiento,
+      password: data.password
+    };
+    
+    console.log('🎯 Completando registro WhatsApp:', payload);
+    console.log('🔗 URL:', `${this.baseURL}/whatsapp-auth/completar-registro`);
+    console.log('📋 Payload JSON:', JSON.stringify(payload, null, 2));
+    console.log('🔍 Validaciones del payload:');
+    console.log('  - Email:', payload.email, '(válido:', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email), ')');
+    console.log('  - Teléfono:', payload.num_celular, '(longitud:', payload.num_celular.length, ')');
+    console.log('  - Fecha:', payload.fecha_nacimiento, '(formato válido:', /^\d{4}-\d{2}-\d{2}$/.test(payload.fecha_nacimiento), ')');
+    console.log('  - Password:', '[OCULTO]', '(longitud:', payload.password.length, ')');
+    
+    // Configurar timeout de 30 segundos
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+    
+    try {
+      const response = await fetch(`${this.baseURL}/whatsapp-auth/completar-registro`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      console.log('📱 Status registro:', response.status);
+      
+      if (!response.ok) {
+        let errorMessage = 'Error completando registro';
+        
+        try {
+          const responseText = await response.text();
+          console.error('❌ Respuesta completa del servidor:', responseText);
+          console.error('❌ Status:', response.status);
+          console.error('❌ Headers:', Object.fromEntries(response.headers.entries()));
+          
+          try {
+            const errorData = JSON.parse(responseText);
+            console.error('❌ Error del servidor (JSON):', errorData);
+            
+            if (errorData.detail) {
+              if (Array.isArray(errorData.detail)) {
+                errorMessage = errorData.detail.map((err: any) => 
+                  `${err.loc?.[1] || 'Campo'}: ${err.msg}`
+                ).join(', ');
+              } else {
+                errorMessage = errorData.detail;
+              }
+            } else if (errorData.message) {
+              errorMessage = errorData.message;
+            }
+          } catch (jsonError) {
+            console.error('❌ Respuesta no es JSON válido:', jsonError);
+            errorMessage = `Error ${response.status}: ${responseText.substring(0, 200)}`;
+          }
+        } catch (parseError) {
+          console.error('❌ Error leyendo respuesta:', parseError);
+          errorMessage = `Error ${response.status}: ${response.statusText}`;
+        }
+        
+        throw new Error(`${errorMessage} (Status: ${response.status})`);
+      }
+
+      const result: RegistrationResponse = await response.json();
+      console.log('✅ Registro WhatsApp completado:', result);
+      return result;
+      
+    } catch (error: any) {
+      clearTimeout(timeoutId);
+      
+      if (error.name === 'AbortError') {
+        console.error('❌ Timeout - Solicitud cancelada después de 30 segundos');
+        throw new Error('La solicitud tardó demasiado tiempo. Por favor intenta nuevamente.');
+      }
+      
+      // Si ya es nuestro error custom, no lo envolvemos
+      if (error.message.includes('Status:')) {
+        throw error;
+      }
+      
+      console.error('❌ Error de red o conexión:', error);
+      throw new Error(`Error de conexión: ${error.message}`);
+    }
   }
 
   /**

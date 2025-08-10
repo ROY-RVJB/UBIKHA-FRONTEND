@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { IoArrowBack } from "react-icons/io5";
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
+import { authService } from '../../../services/authService';
 import './RegisterStepOne.css';
 
 export interface RegisterStepOneProps {
@@ -19,6 +20,7 @@ export const RegisterStepOne: React.FC<RegisterStepOneProps> = ({
 }) => {
   const [phoneNumber, setPhoneNumber] = useState(initialData?.num_celular || '');
   const [phoneError, setPhoneError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const validatePhone = (phone: string): boolean => {
     // Regex para números de Perú (9 dígitos, empezando con 9)
@@ -41,13 +43,27 @@ export const RegisterStepOne: React.FC<RegisterStepOneProps> = ({
     return true;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     if (validatePhone(phoneNumber)) {
-      // Limpiar el número antes de enviarlo
-      const cleanPhone = phoneNumber.replace(/\D/g, '');
-      onNext({ num_celular: cleanPhone });
+      try {
+        const cleanPhone = phoneNumber.replace(/\D/g, '');
+        
+        // Enviar código de verificación por WhatsApp
+        await authService.sendWhatsAppVerification(cleanPhone);
+        
+        // Avanzar al paso 2 solo si el envío fue exitoso
+        onNext({ num_celular: cleanPhone });
+        
+      } catch (error: any) {
+        setPhoneError(error.message || 'Error enviando código WhatsApp');
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setIsLoading(false);
     }
   };
 
@@ -124,8 +140,9 @@ export const RegisterStepOne: React.FC<RegisterStepOneProps> = ({
             variant="primary"
             size="lg"
             fullWidth
+            disabled={isLoading}
           >
-            Aceptar y continuar
+            {isLoading ? 'Enviando código...' : 'Aceptar y continuar'}
           </Button>
         </form>
       </div>

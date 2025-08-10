@@ -57,7 +57,14 @@ function RegisterPage() {
     
     console.log('Datos completos del registro:', completeData);
     
-    // Preparar datos para el endpoint (sin verification_code)
+    // Verificar que el número haya sido verificado (debe tener verification_code del paso 2)
+    if (!completeData.verification_code) {
+      alert('Error: El número de teléfono debe ser verificado antes de continuar');
+      setCurrentStep(2); // Regresar al paso 2
+      return;
+    }
+    
+    // Preparar datos para el endpoint WhatsApp (sin verification_code)
     const registrationData = {
       email: completeData.email,
       nombres: completeData.nombres,
@@ -68,16 +75,42 @@ function RegisterPage() {
       password: completeData.password
     };
 
-    // Llamar al API de registro
-    authService.register(registrationData)
+    console.log('🔍 Estado de verificación:', {
+      teléfono: completeData.num_celular,
+      códigoVerificado: !!completeData.verification_code,
+      código: completeData.verification_code ? '[VERIFICADO]' : '[NO VERIFICADO]'
+    });
+
+    // Llamar al API de registro WhatsApp
+    authService.completeWhatsAppRegistration(registrationData)
       .then((result) => {
-        console.log('Registro exitoso:', result);
+        console.log('Registro WhatsApp exitoso:', result);
         alert(`¡Registro completado exitosamente! ${result.message}`);
         navigate('/home-arrendatario');
       })
       .catch((error: any) => {
-        console.error('Error en registro:', error);
-        alert(`Error en el registro: ${error.message}`);
+        console.error('❌ Error completo en registro WhatsApp:', error);
+        console.error('❌ Mensaje del error:', error.message);
+        console.error('❌ Stack del error:', error.stack);
+        console.error('❌ Datos que se intentaron enviar:', registrationData);
+        
+        let userMessage = 'Error en el registro';
+        
+        if (error.message.includes('Status: 500')) {
+          userMessage = `Error del servidor (500): Posibles causas:
+• El email ${registrationData.email} ya está registrado
+• El teléfono ${registrationData.num_celular} ya existe en el sistema
+• Problema temporal del servidor
+• La verificación de WhatsApp pudo haber expirado
+
+Por favor intenta con un email diferente o contacta al administrador.`;
+        } else if (error.message.includes('timeout') || error.message.includes('tardó demasiado')) {
+          userMessage = 'La conexión tardó demasiado. Verifica tu internet e intenta nuevamente.';
+        } else {
+          userMessage = `Error en el registro: ${error.message || 'Error desconocido'}`;
+        }
+        
+        alert(userMessage);
       });
   };
 

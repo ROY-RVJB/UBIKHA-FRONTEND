@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IoArrowBack } from "react-icons/io5";
 import { Button } from '../Button/Button';
+import { authService } from '../../../services/authService';
 import './RegisterStepTwo.css';
 
 export interface RegisterStepTwoProps {
@@ -17,6 +18,7 @@ export const RegisterStepTwo: React.FC<RegisterStepTwoProps> = ({
   // Estado para cada dígito del código
   const [code, setCode] = useState<string[]>(['', '', '', '', '', '']);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   
   // Referencias para cada input
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -92,38 +94,64 @@ export const RegisterStepTwo: React.FC<RegisterStepTwoProps> = ({
   };
 
   // Valida y envía el código
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     const fullCode = code.join('');
     
     if (fullCode.length !== 6) {
       setError('Por favor ingresa el código completo de 6 dígitos');
+      setIsLoading(false);
       return;
     }
 
-    // TODO: Aquí iría la validación real del código con el backend
-    console.log('Verificando código:', fullCode);
-    
-    // Por ahora, simulamos que cualquier código de 6 dígitos es válido
-    // En producción, esto debería validarse con el backend
-    if (fullCode === '123456') {
-      // Código de prueba válido
-      onNext({ verification_code: fullCode });
-    } else {
-      // Para desarrollo, aceptamos cualquier código de 6 dígitos
+    if (!phoneNumber) {
+      setError('Error: Número de teléfono no disponible');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      console.log('Verificando código:', fullCode, 'para teléfono:', phoneNumber);
+      
+      // Llamar al endpoint de verificación WhatsApp
+      await authService.verifyWhatsAppCode(phoneNumber, fullCode);
+      
+      // Si llegamos aquí, la verificación fue exitosa
       onNext({ verification_code: fullCode });
       
-      // En producción, mostrar error:
-      // setError('Código incorrecto. Por favor intenta nuevamente.');
+    } catch (error: any) {
+      console.error('Error verificando código:', error);
+      setError(error.message || 'Código incorrecto. Por favor intenta nuevamente.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Función para reenviar código (placeholder por ahora)
-  const handleResendCode = () => {
-    console.log('Reenviar código a:', phoneNumber);
-    // TODO: Implementar lógica de reenvío
-    alert('Código reenviado (simulado)');
+  // Función para reenviar código
+  const handleResendCode = async () => {
+    if (!phoneNumber) {
+      setError('Error: Número de teléfono no disponible');
+      return;
+    }
+
+    try {
+      console.log('Reenviando código a:', phoneNumber);
+      await authService.sendWhatsAppVerification(phoneNumber);
+      
+      // Limpiar el código actual y error
+      setCode(['', '', '', '', '', '']);
+      setError('');
+      
+      // Focus en el primer input
+      inputRefs.current[0]?.focus();
+      
+      alert('Código reenviado exitosamente');
+    } catch (error: any) {
+      console.error('Error reenviando código:', error);
+      setError(error.message || 'Error enviando nuevo código');
+    }
   };
 
   return (
@@ -201,15 +229,11 @@ export const RegisterStepTwo: React.FC<RegisterStepTwoProps> = ({
             variant="primary"
             size="lg"
             fullWidth
-            disabled={code.join('').length !== 6}
+            disabled={code.join('').length !== 6 || isLoading}
           >
-            Continuar
+            {isLoading ? 'Verificando...' : 'Continuar'}
           </Button>
 
-          {/* Nota de desarrollo (eliminar en producción) */}
-          <div className="register-step-two__dev-note">
-            <small>💡 Para desarrollo: Usa cualquier código de 6 dígitos</small>
-          </div>
         </form>
       </div>
     </div>
