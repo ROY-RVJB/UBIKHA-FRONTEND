@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
 import { Button } from '../../../ui';
-import './ReportModal.css'; // We'll create this CSS file
+import './ReportModal.css';
 
 interface ReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (reason: string) => void;
+  // Cambiado de `onSubmit` a `onSelectReason`
+  onSelectReason: (reason: string) => void;
 }
 
-const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) => {
+const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSelectReason }) => {
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
 
   if (!isOpen) {
-    return null; // Don't render anything if the modal is not open
+    return null;
   }
 
   const handleReasonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedReason(e.target.value);
   };
 
-  const handleSubmit = () => {
+  // Se encarga de pasar la razón seleccionada al padre
+  const handleNext = () => {
     if (selectedReason) {
-      onSubmit(selectedReason);
-      // Optionally reset selectedReason here or in parent after onSubmit
-      setSelectedReason(null);
-    } else {
-      alert('Por favor, selecciona una razón para reportar.'); // Or a more user-friendly validation
+      onSelectReason(selectedReason);
+      setSelectedReason(null); // Reinicia el estado del radio button
     }
   };
 
@@ -99,7 +98,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
         <div className="report-modal-footer">
           <Button
             variant="primary"
-            onClick={handleSubmit}
+            onClick={handleNext}
             disabled={!selectedReason}
           >
             Siguiente

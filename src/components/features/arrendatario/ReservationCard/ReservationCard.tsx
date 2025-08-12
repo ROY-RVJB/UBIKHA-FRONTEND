@@ -40,7 +40,7 @@ const ReservationCard: React.FC<ReservationCardProps> = ({ precio, calificacion,
         Pago con garantía: + S/ {precio.toLocaleString('es-PE')}
       </div>
 
-      <Button variant="primary" size="lg" fullWidth className="btn-reserva">
+      <Button variant="outline" size="lg" fullWidth>
         Reserva
       </Button>
 

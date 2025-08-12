@@ -1,6 +1,7 @@
 // src/arrendatario/GallerySection/GallerySection.tsx
 import React, { useState } from 'react';
-import './GallerySection.css'; // Importa el CSS específico para GallerySection
+import { LuLayoutGrid } from 'react-icons/lu';
+import './GallerySection.css';
 
 interface GallerySectionProps {
   imagenes: string[];
@@ -10,6 +11,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ imagenes }) => {
   const [imagenActual, setImagenActual] = useState(0);
   const [mostrarLightbox, setMostrarLightbox] = useState(false);
   const [mostrarTodasFotos, setMostrarTodasFotos] = useState(false);
+  const [imagenOverlayActual, setImagenOverlayActual] = useState(0);
 
   const toggleLightbox = () => {
     setMostrarLightbox(!mostrarLightbox);
@@ -25,7 +27,7 @@ const GallerySection: React.FC<GallerySectionProps> = ({ imagenes }) => {
 
   return (
     <>
-      <div className="gallery-section"> {/* Usamos una clase más específica para este componente */}
+      <div className="gallery-section">
         <div className="gallery-left">
           <img
             src={imagenes[imagenActual]}
@@ -33,9 +35,6 @@ const GallerySection: React.FC<GallerySectionProps> = ({ imagenes }) => {
             className="gallery-main-image"
             onClick={() => setMostrarLightbox(true)}
           />
-          <div className="show-all-photos-btn" onClick={toggleTodasFotos}>
-            <span className="photos-icon">📷</span> Mostrar todas las fotos ({imagenes.length})
-          </div>
         </div>
         <div className="gallery-right">
           {imagenes
@@ -51,32 +50,40 @@ const GallerySection: React.FC<GallerySectionProps> = ({ imagenes }) => {
               </div>
             ))}
         </div>
+        {/* Botón movido al final del contenedor de la galería */}
+        <button className="show-all-photos-btn" onClick={toggleTodasFotos}>
+          <span className="photos-icon">
+            <LuLayoutGrid />
+          </span>
+          Mostrar todas las fotos ({imagenes.length})
+        </button>
       </div>
 
       {mostrarTodasFotos && (
         <div className="todas-fotos-overlay">
-          <div className="todas-fotos-container">
+          <div className="todas-fotos-container-horizontal">
             <div className="todas-fotos-header">
-              <h2>Todas las fotos ({imagenes.length})</h2>
+              <h2>Recorrido fotográfico</h2>
               <button onClick={toggleTodasFotos} className="todas-fotos-close">
                 &times;
               </button>
             </div>
-            <div className="todas-fotos-grid">
+            <div className="todas-fotos-thumbnails">
               {imagenes.map((img, index) => (
                 <div
-                  className={`todas-fotos-item ${index === imagenActual ? 'active' : ''}`}
+                  className={`thumbnail-item ${index === imagenOverlayActual ? 'active' : ''}`}
                   key={index}
-                  onClick={() => {
-                    cambiarImagenPrincipal(index);
-                    setMostrarTodasFotos(false);
-                    setMostrarLightbox(true);
-                  }}
+                  onClick={() => setImagenOverlayActual(index)}
                 >
-                  <img src={img} alt={`Foto ${index + 1}`} />
+                  <img src={img} alt={`Miniatura ${index + 1}`} />
                 </div>
               ))}
             </div>
+            {imagenes.length > 0 && (
+              <div className="todas-fotos-main-image">
+                <img src={imagenes[imagenOverlayActual]} alt={`Foto principal ${imagenOverlayActual + 1}`} />
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './PropertyMap.css';
 
 interface LocationGroup {
@@ -11,44 +11,58 @@ interface PropertyMapProps {
   longitude: number;
   locationGroups: LocationGroup[];
   zoom?: number;
+  apiKey: string; // Reintroducir la clave de API como prop
 }
 
 const PropertyMap: React.FC<PropertyMapProps> = ({
   latitude,
   longitude,
-  locationGroups,
-  zoom = 14
+  zoom = 14,
 }) => {
-  const mapUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&z=${zoom}&output=embed`;
+  const mapRef = useRef<HTMLDivElement>(null);
+  const panoramaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const initializeMap = async () => {
+      if (window.google && mapRef.current && panoramaRef.current) {
+        const { Map } = await google.maps.importLibrary("maps");
+        const { StreetViewPanorama } = await google.maps.importLibrary("streetView");
+
+        const location = { lat: latitude, lng: longitude };
+
+        const map = new Map(mapRef.current, {
+          center: location,
+          zoom: zoom,
+        });
+
+        const panorama = new StreetViewPanorama(
+          panoramaRef.current,
+          {
+            position: location,
+            pov: {
+              heading: 34,
+              pitch: 10,
+            },
+          }
+        );
+        map.setStreetView(panorama);
+      }
+    };
+
+    // Asignar la función de inicialización a window.initMap
+    // Esto se ejecutará cuando el script de Google Maps se cargue
+    (window as any).initMap = initializeMap;
+
+    // Limpiar la asignación al desmontar el componente
+    return () => {
+      delete (window as any).initMap;
+    };
+  }, [latitude, longitude, zoom]);
 
   return (
-    <div className="cusco-map-container">
-      <div className="map-sidebar">
-        {locationGroups.map((group, index) => (
-          <div key={index} className="location-group">
-            <h3>{group.title}</h3>
-            <ul>
-              {group.locations.map((location, locIndex) => (
-                <li key={locIndex}>{location}</li>
-              ))}
-            </ul>
-            {index < locationGroups.length - 1 && <hr className="divider" />}
-          </div>
-        ))}
-      </div>
-      
-      <div className="map-container">
-        <iframe
-          title="Mapa de Cusco"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          loading="lazy"
-          allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
-          src={mapUrl}
-        ></iframe>
-      </div>
+    <div className="property-map-section">
+      <div id="map" ref={mapRef} className="map-container"></div>
+      <div id="pano" ref={panoramaRef} className="pano-container"></div>
     </div>
   );
 };
