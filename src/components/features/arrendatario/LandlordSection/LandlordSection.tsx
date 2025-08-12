@@ -2,7 +2,6 @@
 import React from 'react';
 import { FaUser } from 'react-icons/fa'; // Importa el icono de usuario de Font Awesome
 import './LandlordSection.css'; // Importa el CSS específico para LandlordSection
-import { Button } from '../../../ui'; // Importar el componente Button
 
 interface LandlordSectionProps {
   arrendador: {
@@ -29,9 +28,7 @@ const LandlordSection: React.FC<LandlordSectionProps> = ({ arrendador }) => {
               <p>Se unió en {arrendador.fechaUnion}</p>
             </div>
           </div>
-          <Button variant="outline" onClick={() => alert('Ver información del arrendador')}>
-            Información del arrendador
-          </Button>
+          <button className="btn-outline">Información del arrendador</button>
         </div>
         <div className="arrendador-info">
           <h4>{arrendador.nombre} es un anfitrión</h4>

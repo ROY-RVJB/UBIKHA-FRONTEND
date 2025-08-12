@@ -3,6 +3,7 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  font-family: Arial, sans-serif;
   color: #333;
 }
 
@@ -32,14 +33,11 @@
 
 .detalle-propiedad__info {
   flex: 1; /* Ocupa el espacio restante */
-  margin-top: 2rem; /* Añadido para separar del collage de fotos */
 }
 
 .detalle-propiedad__sidebar {
   width: 350px; /* Ancho fijo para la barra lateral */
   flex-shrink: 0; /* Evita que se encoja */
-  margin-top: 2rem; /* Añadido para separar del collage de fotos */
-  min-height: auto; /* Restablecer para este nuevo comportamiento */
 }
 
 .detalle-propiedad__section {
@@ -59,109 +57,52 @@
 
 /* Contenedor de la barra lateral */
 .sidebar-sticky-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-  position: static; /* No es necesario que sea sticky aquí */
-}
-
-/* --- Nuevos estilos para la barra de navegación fija --- */
-.sticky-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--color-bg); /* Usar el mismo color de fondo que el header */
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between; /* Distribuir los elementos a los extremos */
-  align-items: center;
-  padding: 0 4rem; /* Aumentar el padding horizontal */
-  height: 80px;
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: all 0.3s ease-in-out;
-}
-
-.sticky-nav.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.sticky-nav__links {
-  display: flex;
-  gap: 2rem; /* Aumentar el espacio entre los enlaces */
-}
-
-.sticky-nav__links a {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 10px 0;
-  transition: color 0.2s ease;
-}
-
-.sticky-nav__links a:hover {
-  color: var(--color-accent-cool);
-  border-bottom: 2px solid var(--color-accent-cool);
-}
-
-.sticky-nav__actions {
-  display: flex;
-  align-items: center;
-  gap: 2rem; /* Aumentar el espacio entre los elementos de acción */
-}
-
-.sticky-nav__price-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.sticky-nav__price {
-  font-weight: 600;
-}
-
-.sticky-nav__rating {
-  font-size: 0.875rem;
-}
-
-.sticky-nav__star {
-  color: gold;
+  display: flex; /* Usa flexbox para organizar los elementos verticalmente */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  gap: 15px; /* Espacio entre la tarjeta y el enlace de reporte */
+  width: 100%; /* Asegura que ocupe el ancho completo de su barra lateral padre */
+  /* Removed temporary styling */
 }
 
 /* --- Media Queries para Responsividad --- */
-@media (max-width: 992px) {
+@media (max-width: 992px) { /* Ajusta el breakpoint según sea necesario, común para tablets/laptops */
   .detalle-propiedad__content {
-    flex-direction: column;
-    gap: 30px;
+    flex-direction: column; /* Apila el contenido y la barra lateral verticalmente */
+    gap: 30px; /* Ajusta el espacio cuando están apilados */
   }
 
   .detalle-propiedad__sidebar {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    min-height: auto;
+    width: 100%; /* La barra lateral ocupa todo el ancho */
+    max-width: 500px; /* Opcional: limita el ancho máximo de la barra lateral en pantallas más pequeñas */
+    margin: 0 auto; /* Centra la barra lateral si se aplica un ancho máximo */
   }
 
   .sidebar-sticky-container {
-    position: static;
+    position: static; /* Elimina el comportamiento sticky en pantallas pequeñas */
+    /* O, si quieres que sea sticky pero en la parte inferior, podrías usar: */
+    /* position: sticky; */
+    /* top: unset; */
+    /* bottom: 0; */
+    /* width: 100%; */
+    /* background-color: white; */
+    /* z-index: 99; */
+    /* box-shadow: 0 -2px 10px rgba(0,0,0,0.1); */
   }
 
+  /* Ajustes de diseño de la galería para pantallas más pequeñas (si GallerySection no maneja sus propios estilos responsivos) */
+  /* Si GallerySection.css maneja esto, estas reglas pueden eliminarse */
   .detalle-propiedad__gallery {
-    grid-template-columns: 1fr;
-    height: auto;
+    grid-template-columns: 1fr; /* Una sola columna para imágenes */
+    height: auto; /* Altura automática para la galería */
   }
 
   .gallery-left,
   .gallery-right {
-    border-radius: 12px;
+    border-radius: 12px; /* Redondea todas las esquinas para una sola columna */
   }
 
   .gallery-right {
-    display: none;
+    display: none; /* Oculta las miniaturas más pequeñas en pantallas pequeñas */
   }
 
   .show-all-photos-btn {
@@ -171,37 +112,41 @@
     font-size: 0.8em;
   }
 
+  /* Ajustes de la sección del arrendador para pantallas más pequeñas (si LandlordSection no maneja sus propios estilos responsivos) */
+  /* Si LandlordSection.css maneja esto, estas reglas pueden eliminarse */
   .arrendador-contenido {
-    flex-direction: column;
+    flex-direction: column; /* Apila la tarjeta y la información del arrendador */
     gap: 20px;
   }
 
   .arrendador-card,
   .arrendador-info {
-    min-width: unset;
-    width: 100%;
+    min-width: unset; /* Elimina la restricción de ancho mínimo */
+    width: 100%; /* Ocupa todo el ancho */
   }
 
   .detalle-propiedad__info h1 {
-    font-size: 2em;
+    font-size: 2em; /* Fuente más pequeña para el título */
   }
 
+  /* Ajustes de características para pantallas más pequeñas (si PropertyFeatures no maneja sus propios estilos responsivos) */
+  /* Si PropertyFeatures.css maneja esto, estas reglas pueden eliminarse */
   .detalle-propiedad__features {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Una sola columna para características */
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Pantallas aún más pequeñas como teléfonos */
   .detalle-propiedad {
-    padding: 15px;
+    padding: 15px; /* Menos padding en pantallas muy pequeñas */
   }
 
   .detalle-propiedad__meta {
-    flex-direction: column;
+    flex-direction: column; /* Apila la meta info */
     gap: 5px;
   }
 
   .detalle-propiedad__section h2 {
-    font-size: 1.5em;
+    font-size: 1.5em; /* Títulos de sección más pequeños */
   }
 }

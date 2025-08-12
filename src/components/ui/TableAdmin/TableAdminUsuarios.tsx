@@ -25,9 +25,9 @@ const [usuarios, setUsuarios] = useState<Usuario[]>([]);
 
 
   useEffect(() => {
-     const fetchUsuarios = async () => {
+    const fetchUsuarios = async () => {
       try {
-        const response = await axios.get<Usuario[]>(`${backendUrl}/usuarios`); // <--- Aquí se especifica el tipo
+        const response = await axios.get(`${backendUrl}/usuarios`);
         setUsuarios(response.data);
       } catch (error) {
         console.error('Error al obtener usuarios:', error);
