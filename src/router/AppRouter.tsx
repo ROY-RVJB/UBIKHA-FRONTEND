@@ -9,6 +9,18 @@ import ReporteAdministradorPage from '../pages/ReporteAdministradorPage';
 import HomeAdministradorPage from '../pages/HomeAdministradorPage';
 import EstadisticasAdministradorPage from '../pages/EstadisticasAdministradorPage';
 import PagosAdministradorPage from '../pages/PagosAdministradorPage';
+import CrearAnuncio from '../pages/CrearAnuncio';
+
+
+import PropertySetupIntro from '../pages/crear/PropertySetupIntro'; // CSS
+import AccommodationTypeSelector from '../pages/crear/AccommodationTypeSelector';
+import PropertyCapacityForm from '../pages/crear/PropertyCapacityForm';
+import PropertyPresentationIntro from '../pages/crear/PropertyPresentationIntro';
+import PropertyPhotoUploader from '../pages/crear/PropertyPhotoUploader';
+import PropertyTitleEditor from '../pages/crear/PropertyTitleEditor';
+import PropertyDescriptionEditor from '../pages/crear/PropertyDescriptionEditor';
+import PropertyPublishingIntro from '../pages/crear/PropertyPublishingIntro';
+import PropertyPricingCalculator from '../pages/crear/PropertyPricingCalculator';
 
 
 export const AppRouter = () => {
@@ -40,6 +52,20 @@ export const AppRouter = () => {
         {/* 🏠 Funcionalidades Arrendador */}
         <Route path="/mis-anuncios" element={<MisAnunciosPage />} />
         <Route path="/mis-mensajes" element={<MisMensajesPage />} />
+        <Route path="/crear-anuncio/:tipo" element={<CrearAnuncio/>} />
+
+        {/* PASOS PARA CREAR  */}
+        <Route path="/step1" element={<PropertySetupIntro/>} />
+        <Route path="/step1/accommodation" element={<AccommodationTypeSelector />} />
+        <Route path="/step1/basic-info" element={<PropertyCapacityForm />} />
+        <Route path="/step2" element={<PropertyPresentationIntro />} />
+        <Route path="/step2/photos" element={<PropertyPhotoUploader />} />
+        <Route path="/step2/title" element={<PropertyTitleEditor />} />
+        <Route path="/step2/description" element={<PropertyDescriptionEditor />} />
+        <Route path="/step3" element={<PropertyPublishingIntro />} />
+        <Route path="/step3/price" element={<PropertyPricingCalculator />} />
+
+        
 
         {/* 🏡 Detalle de propiedad (accesible para arrendatarios) */}
         <Route path="/propiedad/:id" element={<DetallePropiedadPage />} />

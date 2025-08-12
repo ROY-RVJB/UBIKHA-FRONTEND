@@ -5,3 +5,4 @@ export { default as RegisterPage } from './RegisterPage';  // ✅ Nueva página 
 export { default as HomePageArrendador } from './HomePageArrendador';
 export { default as MisAnunciosPage } from './MisAnunciosPage';  // ✅ Nueva página de anunciosz
 export { default as MisMensajesPage} from './MisMensajesPage';  // ✅ Nueva página de anunciosz
+export { default as CrearAnuncio} from './CrearAnuncio';  // ✅ Nueva página de anunciosz
