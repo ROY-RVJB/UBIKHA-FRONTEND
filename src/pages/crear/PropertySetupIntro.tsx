@@ -15,8 +15,7 @@ function PropertySetupIntro() {
               Describe tu espacio
             </h2>
             <p className="step-description-large">
-              En este paso, te preguntaremos qué tipo de propiedad tienes y si los huéspedes 
-              reservarán el alojamiento entero o solo una habitación. A continuación, 
+              En este paso, te preguntaremos qué tipo de propiedad tienes, 
               indícanos la ubicación y cuántos huéspedes pueden quedarse.
             </p>
           </div>
@@ -29,11 +28,10 @@ function PropertySetupIntro() {
         </section>
       </main>
 
-      <div className="progress-wrapper">
-        <WizardProgressIndicator />
-      </div>
-
       <footer className="footer">
+        <div className="progress-wrapper">
+          <WizardProgressIndicator />
+        </div>
         <div className="footer-buttons">
           <button 
             className="btn-back" 
@@ -44,7 +42,7 @@ function PropertySetupIntro() {
           </button>
           <button 
             className="btn-next" 
-            onClick={() => navigate('/step1/accommodation')}
+            onClick={() => navigate('/step1/location')}
             aria-label="Continuar al siguiente paso"
           >
             Siguiente

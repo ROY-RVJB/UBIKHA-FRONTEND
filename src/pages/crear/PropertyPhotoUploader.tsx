@@ -123,15 +123,14 @@ function PropertyPhotoUploader() {
         </div>
       </main>
 
-      <div className="progress-wrapper">
-        <WizardProgressIndicator />
-      </div>
-
       <footer className="footer">
+        <div className="progress-wrapper">
+          <WizardProgressIndicator />
+        </div>
         <div className="footer-buttons">
           <button 
             className="btn-back" 
-            onClick={() => navigate('/step2')}
+            onClick={() => navigate('/step2/amenities')}
             aria-label="Volver al paso anterior"
           >
             Atrás

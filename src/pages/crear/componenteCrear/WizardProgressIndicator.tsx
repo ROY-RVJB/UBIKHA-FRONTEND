@@ -9,9 +9,10 @@ interface Step {
 
 const steps: Step[] = [
   { path: '/step1', title: 'INICIO', heading: 'Describe tu espacio' },
-  { path: '/step1/accommodation', title: 'Paso 1', heading: 'Tipo de alojamiento' },
-  { path: '/step1/basic-info', title: 'Paso 1', heading: 'Información básica' },
+  { path: '/step1/location', title: 'Paso 1', heading: 'Ubicación' },
+  { path: '/step1/capacity', title: 'Paso 1', heading: 'Capacidad' },
   { path: '/step2', title: 'Paso 2', heading: 'Haz que destaque' },
+  { path: '/step2/amenities', title: 'Paso 2', heading: 'Comodidades' },
   { path: '/step2/photos', title: 'Paso 2', heading: 'Agregar fotos' },
   { path: '/step2/title', title: 'Paso 2', heading: 'Título del inmueble' },
   { path: '/step2/description', title: 'Paso 2', heading: 'Descripción' },

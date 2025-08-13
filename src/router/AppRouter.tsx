@@ -13,9 +13,10 @@ import CrearAnuncio from '../pages/CrearAnuncio';
 
 
 import PropertySetupIntro from '../pages/crear/PropertySetupIntro'; // CSS
-import AccommodationTypeSelector from '../pages/crear/AccommodationTypeSelector';
+import PropertyLocationForm from '../pages/crear/PropertyLocationForm';
 import PropertyCapacityForm from '../pages/crear/PropertyCapacityForm';
 import PropertyPresentationIntro from '../pages/crear/PropertyPresentationIntro';
+import PropertyAmenitiesSelector from '../pages/crear/PropertyAmenitiesSelector';
 import PropertyPhotoUploader from '../pages/crear/PropertyPhotoUploader';
 import PropertyTitleEditor from '../pages/crear/PropertyTitleEditor';
 import PropertyDescriptionEditor from '../pages/crear/PropertyDescriptionEditor';
@@ -56,9 +57,10 @@ export const AppRouter = () => {
 
         {/* PASOS PARA CREAR  */}
         <Route path="/step1" element={<PropertySetupIntro/>} />
-        <Route path="/step1/accommodation" element={<AccommodationTypeSelector />} />
-        <Route path="/step1/basic-info" element={<PropertyCapacityForm />} />
+        <Route path="/step1/location" element={<PropertyLocationForm />} />
+        <Route path="/step1/capacity" element={<PropertyCapacityForm />} />
         <Route path="/step2" element={<PropertyPresentationIntro />} />
+        <Route path="/step2/amenities" element={<PropertyAmenitiesSelector />} />
         <Route path="/step2/photos" element={<PropertyPhotoUploader />} />
         <Route path="/step2/title" element={<PropertyTitleEditor />} />
         <Route path="/step2/description" element={<PropertyDescriptionEditor />} />

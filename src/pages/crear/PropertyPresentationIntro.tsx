@@ -29,22 +29,21 @@ function PropertyPresentationIntro() {
         </section>
       </main>
 
-      <div className="progress-wrapper">
-        <WizardProgressIndicator />
-      </div>
-
       <footer className="footer">
+        <div className="progress-wrapper">
+          <WizardProgressIndicator />
+        </div>
         <div className="footer-buttons">
           <button 
             className="btn-back" 
-            onClick={() => navigate('/step1/basic-info')}
+            onClick={() => navigate('/step1/capacity')}
             aria-label="Volver al paso anterior"
           >
             Atrás
           </button>
           <button 
             className="btn-next" 
-            onClick={() => navigate('/step2/photos')}
+            onClick={() => navigate('/step2/amenities')}
             aria-label="Continuar al siguiente paso"
           >
             Siguiente

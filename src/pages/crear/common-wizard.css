@@ -1,0 +1,106 @@
+/* Common styles for wizard footer with progress bar */
+.footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  border-top: none;
+  width: 100%;
+}
+
+.progress-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 4rem; /* Padding for the buttons area */
+}
+
+.btn-back,
+.btn-next {
+  padding: 1rem 2.5rem; /* Wider buttons */
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 200ms var(--anim-ease);
+  font-family: inherit;
+  min-width: 140px; /* Increased min width */
+  border: none;
+}
+
+.btn-back {
+  background-color: transparent;
+  color: var(--color-text-main);
+  border: 2px solid var(--color-text-main);
+}
+
+.btn-back:hover {
+  background-color: var(--color-text-main);
+  color: var(--color-text-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28, 28, 28, 0.15);
+}
+
+.btn-next {
+  background-color: var(--color-text-main);
+  color: var(--color-text-light);
+}
+
+.btn-next:hover:not(:disabled) {
+  background-color: #0a4d42;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(30, 233, 230, 0.28);
+}
+
+.btn-next:disabled {
+  background-color: var(--color-divider);
+  color: var(--color-accent-cool);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem;
+  }
+  
+  .footer-buttons {
+    padding: 0 2rem; /* Reduce padding on tablets */
+  }
+  
+  .btn-back,
+  .btn-next {
+    padding: 1rem 2rem;
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0; /* Remove padding on mobile */
+  }
+  
+  .btn-back,
+  .btn-next {
+    width: 100%;
+    max-width: 320px;
+  }
+}

@@ -1,3 +1,15 @@
+@import './common-wizard.css';
+
+/* Main content centered */
+.main-content-centered {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem;
+  width: 100%;
+}
+
 .price-container {
   display: flex;
   flex-direction: column;
@@ -147,79 +159,7 @@
   text-align: right;
 }
 
-.progress-wrapper {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-buttons {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.btn-back,
-.btn-next {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 120ms var(--anim-ease), box-shadow 120ms var(--anim-ease), background-color 120ms var(--anim-ease);
-  font-family: inherit;
-  min-width: 120px;
-  border: none;
-}
-
-.btn-back {
-  background-color: var(--color-surface);
-  color: var(--color-text-main);
-  border: 1px solid var(--color-divider);
-}
-
-.btn-back:hover {
-  background-color: var(--color-accent-soft);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(163, 120, 110, 0.2);
-}
-
-.btn-next {
-  background-color: var(--color-text-main);
-  color: var(--color-text-light);
-}
-
-.btn-next:hover:not(:disabled) {
-  background-color: #C2185B;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(233, 30, 99, 0.28);
-}
-
-.btn-next:disabled {
-  background-color: var(--color-divider);
-  color: var(--color-accent-cool);
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.btn-next:disabled:hover {
-  background-color: var(--color-divider);
-  transform: none;
-  box-shadow: none;
-}
-
-.btn-back:active,
-.btn-next:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.btn-back:focus-visible,
-.btn-next:focus-visible {
-  outline: 3px solid var(--color-accent-warm);
-  outline-offset: 3px;
-  box-shadow: 0 0 0 4px rgba(163, 120, 110, 0.25);
-}
+/* Button styles are imported from common-wizard.css */
 
 /* Animations */
 @keyframes fadeUp {

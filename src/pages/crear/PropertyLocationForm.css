@@ -1,0 +1,249 @@
+@import './common-wizard.css';
+
+/* Main content centered - mismo estilo que PropertyCapacityForm */
+.main-content-centered {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3rem;
+  width: 100%;
+}
+
+.location-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.location-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.location-main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.2;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp var(--anim-duration) var(--anim-ease) forwards;
+}
+
+.location-description {
+  font-size: 1.1rem;
+  color: var(--color-accent-cool);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp var(--anim-duration) var(--anim-ease) forwards;
+  animation-delay: 100ms;
+}
+
+/* Form styles */
+.location-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+}
+
+/* Info section for fixed location data */
+.form-info {
+  background: var(--color-accent-soft, #f8f9fa);
+  border: 2px solid var(--color-divider);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp var(--anim-duration) var(--anim-ease) forwards;
+  animation-delay: 300ms;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent-cool);
+}
+
+.info-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp var(--anim-duration) var(--anim-ease) forwards;
+  animation-delay: 200ms;
+}
+
+.form-group--small {
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin: 0;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid var(--color-divider);
+  border-radius: 12px;
+  background: var(--color-surface);
+  color: var(--color-text-main);
+  transition: all 200ms var(--anim-ease);
+  width: 100%;
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: var(--color-accent-warm);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-text-main);
+  box-shadow: 0 0 0 3px rgba(28, 28, 28, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-accent-cool);
+  opacity: 0.6;
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%231C1C1C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Progress wrapper */
+.progress-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .location-main-title,
+  .location-description,
+  .form-group {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .location-main-title {
+    font-size: 2rem;
+  }
+  
+  .location-description {
+    font-size: 1rem;
+  }
+  
+  .location-form {
+    max-width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .footer-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-back,
+  .btn-next {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-main-title {
+    font-size: 1.7rem;
+  }
+  
+  .location-description {
+    font-size: 0.95rem;
+  }
+  
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 0.95rem;
+    padding: 0.75rem 0.875rem;
+  }
+}
