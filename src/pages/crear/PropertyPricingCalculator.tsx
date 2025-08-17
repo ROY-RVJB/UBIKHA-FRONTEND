@@ -17,15 +17,17 @@ function PropertyPricingCalculator() {
   const totalToPay = basePrice + ubikhaFee;
   const netEarnings = basePrice;
 
-  const handleNext = () => {
+  const handleCreate = () => {
     if (basePrice > 0) {
-      console.log("Configuración de precio:", {
+      console.log("Anuncio creado con precio:", {
         basePrice,
         ubikhaFee,
         totalToPay,
         netEarnings
       });
-      // TODO: navigate to next step
+      // TODO: Guardar el anuncio en la base de datos
+      alert(`¡Anuncio creado exitosamente!\n\nPrecio base: S/ ${basePrice}\nTus ganancias netas: S/ ${netEarnings}`);
+      navigate('/mis-anuncios');
     }
   };
 
@@ -113,11 +115,11 @@ function PropertyPricingCalculator() {
           </button>
           <button 
             className="btn-next" 
-            onClick={handleNext}
+            onClick={handleCreate}
             disabled={basePrice <= 0}
-            aria-label="Continuar al siguiente paso"
+            aria-label="Crear anuncio"
           >
-            Siguiente
+            Crear anuncio
           </button>
         </div>
       </footer>

@@ -1,4 +1,5 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { IoBedOutline } from "react-icons/io5";
 import { FaDoorClosed, FaCameraRetro } from "react-icons/fa";
 import './CrearAnuncio.css';
@@ -6,6 +7,15 @@ import './CrearAnuncio.css';
  
 
 function CrearAnuncio() {
+  const { tipo } = useParams<{ tipo: string }>();
+  
+  useEffect(() => {
+    // Guardar el tipo de propiedad en localStorage cuando se accede con el parámetro
+    if (tipo) {
+      localStorage.setItem('propertyType', tipo);
+    }
+  }, [tipo]);
+  
   return (
     <Routes>
       <Route path="/" element={<HomeCrear/>} />

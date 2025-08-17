@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import NumericCounter from '../crear/componenteCrear/NumericCounter';
@@ -13,17 +13,24 @@ interface SpaceData {
 
 function PropertyCapacityForm() {
   const navigate = useNavigate();
+  const [propertyType, setPropertyType] = useState<string | null>(null);
   const [spaceData, setSpaceData] = useState<SpaceData>({
-    guests: 1,
-    bedrooms: 1,
-    beds: 1,
-    bathrooms: 1
+    guests: 0,
+    bedrooms: 0,
+    beds: 0,
+    bathrooms: 0
   });
+
+  useEffect(() => {
+    // Cargar el tipo de propiedad desde localStorage
+    const savedType = localStorage.getItem('propertyType');
+    setPropertyType(savedType);
+  }, []);
 
   const updateCount = (field: keyof SpaceData, value: number) => {
     setSpaceData(prev => ({
       ...prev,
-      [field]: Math.max(1, value)
+      [field]: Math.max(0, value)
     }));
   };
 
@@ -50,7 +57,7 @@ function PropertyCapacityForm() {
               label="Huéspedes"
               value={spaceData.guests}
               onChange={(value) => updateCount('guests', value)}
-              min={1}
+              min={0}
               max={16}
             />
             
@@ -58,15 +65,16 @@ function PropertyCapacityForm() {
               label="Habitaciones"
               value={spaceData.bedrooms}
               onChange={(value) => updateCount('bedrooms', value)}
-              min={1}
+              min={0}
               max={10}
+              disabled={propertyType === 'cuarto'}
             />
             
             <NumericCounter
               label="Camas"
               value={spaceData.beds}
               onChange={(value) => updateCount('beds', value)}
-              min={1}
+              min={0}
               max={16}
             />
             
@@ -74,8 +82,8 @@ function PropertyCapacityForm() {
               label="Baños"
               value={spaceData.bathrooms}
               onChange={(value) => updateCount('bathrooms', value)}
-              min={1}
-              max={10}
+              min={0}
+              max={propertyType === 'cuarto' ? 1 : 10}
             />
           </div>
         </div>

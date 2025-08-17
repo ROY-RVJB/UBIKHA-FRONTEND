@@ -5,7 +5,6 @@ import './PropertyLocationForm.css';
 
 interface LocationData {
   direccion: string;
-  numero: string;
   zona: string;
   ciudad: string;
   departamento: string;
@@ -17,7 +16,6 @@ function PropertyLocationForm() {
   const navigate = useNavigate();
   const [locationData, setLocationData] = useState<LocationData>({
     direccion: '',
-    numero: '',
     zona: '',
     ciudad: 'Puerto Maldonado',
     departamento: 'Madre de Dios',
@@ -93,20 +91,6 @@ function PropertyLocationForm() {
                 onChange={(e) => handleInputChange('direccion', e.target.value)}
                 placeholder="Ej: Av. Larco, Jr. de la Unión"
                 required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="numero" className="form-label">
-                Número / Lote / Manzana
-              </label>
-              <input
-                type="text"
-                id="numero"
-                className="form-input"
-                value={locationData.numero}
-                onChange={(e) => handleInputChange('numero', e.target.value)}
-                placeholder="Ej: 123, Lote 5, Mz. A"
               />
             </div>
 

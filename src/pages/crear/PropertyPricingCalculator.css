@@ -142,7 +142,8 @@
 }
 
 .price-input[type=number] {
-  -moz-appearance: textfield;
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Standard property */
 }
 
 .price-value {

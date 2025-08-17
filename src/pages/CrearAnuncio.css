@@ -139,9 +139,9 @@
 }
 
 .btn-comenzar:hover {
-  background-color: #C2185B;
+  background-color: #0a4d42;
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(233, 30, 99, 0.28);
+  box-shadow:0 6px 16px rgba(30, 233, 230, 0.28);
 }
 
 .btn-comenzar:active {

@@ -163,23 +163,25 @@ export const MisAnuncios: React.FC = () => {
           />
         </div>
         
-        {/* Botón de cambio de vista (grid/filas) */}
-        <IconButton 
-          icon="rows"
-          onClick={handleToggleViewMode}
-          variant={viewMode === 'rows' ? 'primary' :'primary' }
-          size="lg"
-          tooltip={viewMode === 'grid' ? 'Vista en filas' : 'Vista en cuadrícula'}
-        />
-        
-        <IconButton 
-          icon="plus"
-          onClick={handleCreateAnuncio}
-          variant="primary"
-          size="lg"
-          shape="circle"
-          tooltip="Crear nuevo anuncio"
-        />
+        {/* Botones de acción - solo visibles en desktop */}
+        <div className="mis-anuncios__desktop-actions">
+          <IconButton 
+            icon="rows"
+            onClick={handleToggleViewMode}
+            variant={viewMode === 'rows' ? 'primary' :'primary' }
+            size="lg"
+            tooltip={viewMode === 'grid' ? 'Vista en filas' : 'Vista en cuadrícula'}
+          />
+          
+          <IconButton 
+            icon="plus"
+            onClick={handleCreateAnuncio}
+            variant="primary"
+            size="lg"
+            shape="circle"
+            tooltip="Crear nuevo anuncio"
+          />
+        </div>
       </div>
 
       {/* Estadísticas */}
@@ -303,6 +305,18 @@ export const MisAnuncios: React.FC = () => {
         onClose={() => setShowCreateModal(false)}
         onSelectType={handleTypeSelect}
       />
+      
+      {/* Botones flotantes para móvil */}
+      <div className="mis-anuncios__mobile-actions">
+        <IconButton 
+          icon="plus"
+          onClick={handleCreateAnuncio}
+          variant="primary"
+          size="lg"
+          shape="circle"
+          tooltip="Crear anuncio"
+        />
+      </div>
     </div>
   );
 };
