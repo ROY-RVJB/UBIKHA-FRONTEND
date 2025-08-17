@@ -307,23 +307,28 @@ class AuthService {
   /**
    * Completar registro después de verificación WhatsApp
    */
-  async completeWhatsAppRegistration(data: RegistrationData): Promise<RegistrationResponse> {
+  async completeWhatsAppRegistration(data: RegistrationData & { confirmar_password?: string }): Promise<RegistrationResponse> {
+    // Separar num_celular del payload ya que va como parámetro
+    const { num_celular, ...bodyData } = data;
+    
     const payload = {
-      email: data.email,
-      nombres: data.nombres,
-      apellido_paterno: data.apellido_paterno,
-      apellido_materno: data.apellido_materno,
-      num_celular: data.num_celular,
-      fecha_nacimiento: data.fecha_nacimiento,
-      password: data.password
+      email: bodyData.email,
+      nombres: bodyData.nombres,
+      apellido_paterno: bodyData.apellido_paterno,
+      apellido_materno: bodyData.apellido_materno,
+      fecha_nacimiento: bodyData.fecha_nacimiento,
+      password: bodyData.password,
+      confirmar_password: bodyData.confirmar_password || bodyData.password
     };
     
-    console.log('🎯 Completando registro WhatsApp:', payload);
-    console.log('🔗 URL:', `${this.baseURL}/whatsapp-auth/completar-registro`);
+    console.log('🎯 Completando registro WhatsApp:');
+    console.log('📱 Número celular (parámetro):', num_celular);
+    console.log('📋 Datos del body:', payload);
+    console.log('🔗 URL:', `${this.baseURL}/whatsapp-auth/completar-registro?num_celular=${num_celular}`);
     console.log('📋 Payload JSON:', JSON.stringify(payload, null, 2));
-    console.log('🔍 Validaciones del payload:');
+    console.log('🔍 Validaciones:');
     console.log('  - Email:', payload.email, '(válido:', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email), ')');
-    console.log('  - Teléfono:', payload.num_celular, '(longitud:', payload.num_celular.length, ')');
+    console.log('  - Teléfono:', num_celular, '(longitud:', num_celular.length, ')');
     console.log('  - Fecha:', payload.fecha_nacimiento, '(formato válido:', /^\d{4}-\d{2}-\d{2}$/.test(payload.fecha_nacimiento), ')');
     console.log('  - Password:', '[OCULTO]', '(longitud:', payload.password.length, ')');
     
@@ -332,7 +337,7 @@ class AuthService {
     const timeoutId = setTimeout(() => controller.abort(), 30000);
     
     try {
-      const response = await fetch(`${this.baseURL}/whatsapp-auth/completar-registro`, {
+      const response = await fetch(`${this.baseURL}/whatsapp-auth/completar-registro?num_celular=${num_celular}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -64,7 +64,7 @@ function RegisterPage() {
       return;
     }
     
-    // Preparar datos para el endpoint WhatsApp (sin verification_code)
+    // Preparar datos para el endpoint WhatsApp
     const registrationData = {
       email: completeData.email,
       nombres: completeData.nombres,
@@ -72,7 +72,8 @@ function RegisterPage() {
       apellido_materno: completeData.apellido_materno,
       num_celular: completeData.num_celular,
       fecha_nacimiento: completeData.fecha_nacimiento,
-      password: completeData.password
+      password: completeData.password,
+      confirmar_password: completeData.confirmar_password
     };
 
     console.log('🔍 Estado de verificación:', {

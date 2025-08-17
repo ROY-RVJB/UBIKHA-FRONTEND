@@ -10,7 +10,7 @@ function HomePage() {
       <Header 
         title="UBIKHA"
         text_1="Pon tu espacio en UBIKHA"
-        text_2="Registrate"
+        text_2="Ver anuncios"
       />
       <MainContent
         headline="Encuentra lugares para quedarte en Ubikha"

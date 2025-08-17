@@ -33,7 +33,7 @@ export const Header = ({ title,text_1,text_2 }: HeaderProps) => {
         <Button 
         variant='ghost' 
         size='sm' 
-        onClick={()=>navigate('/login')}>
+        onClick={()=>navigate('/home-arrendatario')}>
           {text_2}
         </Button>
 

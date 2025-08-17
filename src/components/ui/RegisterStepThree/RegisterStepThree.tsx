@@ -12,6 +12,7 @@ export interface RegisterStepThreeProps {
     fecha_nacimiento: string;
     email: string;
     password: string;
+    confirmar_password: string;
   }) => void;
   onBack: () => void;
   formData: any; // Datos acumulados de pasos anteriores
@@ -136,14 +137,15 @@ export const RegisterStepThree: React.FC<RegisterStepThreeProps> = ({
     setLoading(true);
 
     try {
-      // Preparar datos para enviar (sin confirm_password)
+      // Preparar datos para enviar (incluyendo confirmar_password)
       const submitData = {
         nombres: data.nombres.trim(),
         apellido_paterno: data.apellido_paterno.trim(),
         apellido_materno: data.apellido_materno.trim(),
         fecha_nacimiento: data.fecha_nacimiento,
         email: data.email.trim().toLowerCase(),
-        password: data.password
+        password: data.password,
+        confirmar_password: data.confirm_password
       };
 
       console.log('Datos completos del registro:', {
