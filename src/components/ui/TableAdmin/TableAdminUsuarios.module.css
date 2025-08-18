@@ -1,32 +1,89 @@
+/* ===== Scroll interno + header sticky ===== */
+.viewport {
+  max-height: 70vh;
+  overflow: auto;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
 .tabla {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
 
+/* Header pegado durante el scroll */
+.tabla thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f2f2f2;
+  color: #111;
+}
+
+/* Override por si otro módulo puso th negro global */
+.viewport .tabla thead th {
+  background: #f2f2f2 !important;
+  color: #111 !important;
+}
+
+/* Celdas */
 .tabla th,
 .tabla td {
   padding: 12px;
   border: 1px solid #ccc;
 }
 
-.tabla th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
+.tabla th { font-weight: bold; }
 
-.activo {
-  color: green;
-  font-weight: bold;
-}
+/* Estados */
+.activo { color: green; font-weight: bold; }
+.suspendido { color: red; font-weight: bold; }
 
-.suspendido {
-  color: red;
-  font-weight: bold;
-}
+/* Hover filas */
+.tabla tbody tr:hover { background: #fafafa; }
 
-.eliminar {
-  color: red;
+/* ===== Pill “Eliminar” (estilo cápsula) ===== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid #cfd8dc;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: bold;
+  transition: transform .06s ease, box-shadow .12s ease, background .12s;
+  user-select: none;
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(2, 6, 23, 0.08);
+}
+
+.pill:active { transform: translateY(0); box-shadow: none; }
+
+.pill:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pillIcon { line-height: 1; font-size: 14px; }
+
+.pillDanger {
+  border-color: #fecaca;
+  background: #fff1f2;
+  color: #b91c1c;
+}
+
+.pillDanger:hover {
+  background: #ffe4e6;
+  box-shadow: 0 2px 10px rgba(185, 28, 28, 0.15);
 }

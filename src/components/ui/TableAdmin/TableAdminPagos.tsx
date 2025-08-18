@@ -1,5 +1,4 @@
-// src/components/ui/TableAdmin/TableAdminPagos.tsx
-import styles from './TableAdminPagos.module.css';
+import styles from "./TableAdminPagos.module.css";
 
 interface Pago {
   ganancia: string;
@@ -16,6 +15,7 @@ export const TableAdminPagos = ({ titulo, datos }: TableAdminPagosProps) => {
   return (
     <div className={styles.wrapper}>
       <h4 className={styles.seccion}>{titulo}</h4>
+
       <table className={styles.tabla}>
         <thead>
           <tr>
@@ -24,14 +24,23 @@ export const TableAdminPagos = ({ titulo, datos }: TableAdminPagosProps) => {
             <th>MÉTODO DE PAGO</th>
           </tr>
         </thead>
+
         <tbody>
-          {datos.map((item, idx) => (
+          {datos.map((p, idx) => (
             <tr key={idx}>
-              <td>{item.ganancia}</td>
-              <td>{item.comision}</td>
-              <td>{item.metodo}</td>
+              <td>{p.ganancia}</td>
+              <td>{p.comision}</td>
+              <td>{p.metodo}</td>
             </tr>
           ))}
+
+          {datos.length === 0 && (
+            <tr>
+              <td colSpan={3} style={{ padding: 16, textAlign: "center", color: "#6b7280" }}>
+                No hay datos.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

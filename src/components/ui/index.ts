@@ -18,7 +18,9 @@ export { TopbarAdminReportes} from './TopbarAdmin/TopbarAdminReportes'
 export { TopbarAdminHome} from './TopbarAdmin/TopbarAdminHome'
 export { TopbarAdminEstadisticas } from './TopbarAdmin/TopbarAdminEstadisticas'
 export { TopbarAdminPagos } from './TopbarAdmin/TopbarAdminPagos'
-export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
+//import TableAdminPropiedades from "@/components/ui/TableAdmin/TableAdminPropiedades";
+import TableAdminPropiedades from "./TableAdmin/TableAdminPropiedades"
+//export { TableAdminPropiedades } from './TableAdmin/TableAdminPropiedades'
 export { TableAdminUsuarios } from './TableAdmin/TableAdminUsuarios'
 export { TableAdminReportes } from './TableAdmin/TableAdminReportes'
 export { TableAdminHome } from './TableAdmin/TableAdminHome'

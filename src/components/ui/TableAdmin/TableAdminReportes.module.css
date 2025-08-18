@@ -1,42 +1,73 @@
-.wrapper {
-  margin-bottom: 2rem;
+.container { display: grid; gap: 24px; }
 
+.msg { padding: 8px; color: #374151; }
+.err { padding: 8px; color: #e11d48; }
+
+.section { display: grid; gap: 10px; }
+.head { display: flex; align-items: center; gap: 10px; }
+
+.badge{
+  font-size:12px; line-height:1; padding:6px 10px; border-radius:9999px;
+  background:#eef2ff; color:#3730a3; border:1px solid #c7d2fe;
 }
 
-.seccion {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  border: 1px solid black;
-  display: inline-block;
-  padding: 2px 6px;
-  font-size: 14px;
+/* Scroll interno + header sticky */
+.viewport{
+  max-height: 55vh;
+  overflow: auto;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
 }
 
-.tabla {
-  color: var(--color-text-light);
+.table{
   width: 100%;
   border-collapse: collapse;
+  text-align: left;
   font-size: 14px;
 }
 
-.tabla th,
-.tabla td {
-  color: salmon;
-  border: 1px solid #ccc;
-  padding: 10px;
+.table thead th{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f2f2f2;
+  color: #111;
+}
+
+.table th, .table td{
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.table tbody tr:hover{ background:#fafafa; }
+
+.empty{
   text-align: center;
+  padding: 16px;
+  color: #6b7280;
 }
 
-.boton {
-  background-color: #00c851;
-  color: white;
-  padding: 6px 14px;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
+/* Botón cápsula */
+.pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid #cfd8dc;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform .06s ease, box-shadow .12s ease, background .12s;
+  user-select: none;
 }
+.pill:hover{ transform: translateY(-1px); box-shadow: 0 2px 8px rgba(2,6,23,.08); }
+.pill:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
 
-.boton:hover {
-  background-color: #00933d;
+.pillOk{
+  border-color: #a7f3d0; background:#ecfdf5; color:#065f46;
 }
+.pillOk:hover{ background:#dcfce7; }

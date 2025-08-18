@@ -3,10 +3,12 @@ import { AdminUsuariosLayout } from '../components/ui/AdminDashboardLayout/Admin
 
 //import { TableAdminPropiedades } from '../components/ui/TableAdmin/TableAdminPropiedades';
 import { TableAdminUsuarios } from '../components/ui/TableAdmin/TableAdminUsuarios';
-const UsuariosAdministradorPage = () => {
+
+
+export const UsuariosAdministradorPage = () => {
   return (
     <AdminUsuariosLayout>
-      <h2>Tabla de usuarios</h2>
+      
       <TableAdminUsuarios />
     </AdminUsuariosLayout>
   );
