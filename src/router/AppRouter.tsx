@@ -4,6 +4,7 @@ import HomePageArrendatario from '../pages/HomePageArrendatario';
 import PropiedadesAdministradorPage from '../pages/PropiedadesAdministradorPage';
 
 import DetallePropiedadPage from '../pages/DetallePropiedadPage';
+
 import UsuariosAdministradorPage from '../pages/UsuariosAdministradorPage';
 import ReporteAdministradorPage from '../pages/ReporteAdministradorPage';
 import HomeAdministradorPage from '../pages/HomeAdministradorPage';
@@ -23,6 +24,8 @@ import PropertyDescriptionEditor from '../pages/crear/PropertyDescriptionEditor'
 import PropertyPublishingIntro from '../pages/crear/PropertyPublishingIntro';
 import PropertyPricingCalculator from '../pages/crear/PropertyPricingCalculator';
 
+import MisReservasPage from '../pages/MisReservasPage';
+import MisResenasPage from '../pages/MisResenasPage';
 
 export const AppRouter = () => {
   return (
@@ -71,6 +74,11 @@ export const AppRouter = () => {
 
         {/* 🏡 Detalle de propiedad (accesible para arrendatarios) */}
         <Route path="/propiedad/:id" element={<DetallePropiedadPage />} />
+        <Route path="/mis-reservas" element={<MisReservasPage />} />
+        <Route path="/mis-reseñas" element={<MisResenasPage />} />
+
+        
+
       </Routes>
     </Router>
   );

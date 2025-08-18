@@ -1,0 +1,53 @@
+.mis-resenas-container {
+    max-width: 900px; /* Ancho más pequeño para una lista simple */
+    margin: 40px auto;
+    padding: 20px;
+    
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mis-resenas-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.resenas-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.resena-item {
+  
+    
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resena-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.resena-rating {
+    color: #FF385C;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.resena-item p {
+    margin: 5px 0;
+    color: #555;
+    font-style: italic;
+}
+
+.resena-date {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: right;
+}

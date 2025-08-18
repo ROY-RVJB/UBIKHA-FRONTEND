@@ -67,73 +67,38 @@
   gap: 0; /* No gap needed, borders will provide separation */
 }
 
-.radio-option {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 16px;
-  color: #333;
-  position: relative;
-  padding: 15px 20px; /* Padding for each option, as seen in the image */
-  border-bottom: 1px solid #eee; /* Grey line separator */
+.form-group {
+  margin-bottom: 20px;
 }
 
-/* Remove border from the last radio option */
-.report-modal-body > .radio-option:last-child {
-  border-bottom: none;
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-/* Hide the default radio input */
-.radio-option input[type="radio"] {
-  position: absolute;
-  opacity: 0;
+.star-rating {
+  font-size: 2.5em;
   cursor: pointer;
-  height: 100%; /* Make input cover the label for easier clicking */
+}
+
+.star {
+  color: #ddd;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+textarea {
   width: 100%;
-  left: 0;
-  top: 0;
-  margin: 0; /* Remove default margin */
-  z-index: 1; /* Ensure it's clickable over the custom elements */
+  min-height: 120px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  resize: vertical;
 }
-
-/* Custom radio button appearance */
-.radio-custom {
-  position: absolute; /* Position relative to .radio-option */
-  right: 20px; /* Position on the right side as per image */
-  top: 50%;
-  transform: translateY(-50%);
-  height: 20px;
-  width: 20px;
-  background-color: white; /* Background of the circle */
-  border-radius: 50%;
-  border: 1px solid #ccc; /* Border color when not checked */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  transition: all 0.2s ease;
-}
-
-/* Inner circle for checked state */
-.radio-option input[type="radio"]:checked ~ .radio-custom {
-  border-color: #071e3d; /* Dark blue border when checked */
-  background-color: white; /* Keep background white */
-}
-
-.radio-option input[type="radio"]:checked ~ .radio-custom::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 10px; /* Size of the inner dot */
-  height: 10px; /* Size of the inner dot */
-  border-radius: 50%;
-  background: #071e3d; /* Dark blue inner dot */
-}
-
-/* Hover effect on custom radio button */
-.radio-option:hover .radio-custom {
-  border-color: #777; /* Slightly darker border on hover */
-}
-
 
 .report-modal-footer {
   padding: 15px 20px;

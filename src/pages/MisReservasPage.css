@@ -1,0 +1,150 @@
+.mis-reservas-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.mis-reservas-container h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.loading-overlay,
+.error-overlay,
+.no-reservas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.loading-overlay svg,
+.error-overlay svg,
+.no-reservas svg {
+    margin-bottom: 1.5rem;
+}
+
+.loading-text,
+.error-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.reservas-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reserva-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reserva-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reserva-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+    font-size: 1.2rem;
+    color: #007bff;
+    margin: 0 0 1rem;
+}
+
+.reserva-item p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+    color: #555;
+}
+
+.reserva-item p strong {
+    color: #333;
+}
+
+.reserva-item p svg {
+    flex-shrink: 0;
+}
+
+.reserva-actions {
+    grid-column: 1 / -1; /* Ocupa todo el ancho */
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.btn-accion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn-detalles {
+    background-color: #f0f8ff;
+    color: #007bff;
+}
+
+.btn-detalles:hover {
+    background-color: #e0f0ff;
+}
+
+.btn-editar {
+    background-color: #fdfae0;
+    color: #ffc107;
+}
+
+.btn-editar:hover {
+    background-color: #f7f3d5;
+}
+
+.btn-cancelar {
+    background-color: #ffeaea;
+    color: #dc3545;
+}
+
+.btn-cancelar:hover {
+    background-color: #ffdbdb;
+}
+
+/* Animaciones e iconos de estado */
+
+
+.flame-icon { color: #ff5555; animation: flicker 1.5s infinite alternate; }
+.ghost-icon { opacity: 0.7; animation: float 3s ease-in-out infinite; }
+.lightning-icon { color: #ffff00; animation: zap 0.5s infinite alternate; }
+
+@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes zap { from { opacity: 0.3; } to { opacity: 1; } }
+
+.icon-confirmada { color: #28a745; }
+.icon-cancelada { color: #dc3545; }
+.icon-pendiente { color: #ffc107; }
+.icon-expirada { color: #6c757d; }

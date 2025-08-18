@@ -1,152 +1,86 @@
-/* Estilos para DetallePropiedad.tsx */
-.detalle-propiedad {
-  padding: 20px;
-  max-width: 1200px;
+/* Contenedor principal de la página */
+.detalle-propiedad-container {
+  padding: 2rem;
+  max-width: 900px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
-  color: #333;
 }
 
-.detalle-propiedad__header {
-  margin-bottom: 20px;
-}
-
-.detalle-propiedad__info h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
-}
-
-.detalle-propiedad__meta {
+/* Estilos para el encabezado de la propiedad */
+.detalle-propiedad-header {
   display: flex;
-  gap: 15px;
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-/* DISEÑO DEL CONTENIDO PRINCIPAL */
+.detalle-propiedad-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Estilos para los botones del encabezado */
+.detalle-propiedad__buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.detalle-propiedad__buttons button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+}
+
+/* Estilos para la sección principal de contenido */
 .detalle-propiedad__content {
   display: flex;
-  gap: 40px; /* Espacio entre el contenido principal y la barra lateral */
-  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
+/* Estilos para la sección de información */
 .detalle-propiedad__info {
-  flex: 1; /* Ocupa el espacio restante */
+  flex: 2;
 }
 
+/* Estilos para las secciones de la propiedad */
+.detalle-propiedad-section {
+  margin-bottom: 2rem;
+}
+
+.detalle-propiedad-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para la lista de características */
+.detalle-propiedad-features ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.detalle-propiedad-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Estilos para la barra lateral (sidebar) */
 .detalle-propiedad__sidebar {
-  width: 350px; /* Ancho fijo para la barra lateral */
-  flex-shrink: 0; /* Evita que se encoja */
+  flex: 1;
+  padding-top: 1rem;
 }
 
-.detalle-propiedad__section {
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.detalle-propiedad__section h2 {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-}
-
-.detalle-propiedad__section p {
-  line-height: 1.6;
-}
-
-/* Contenedor de la barra lateral */
-.sidebar-sticky-container {
-  display: flex; /* Usa flexbox para organizar los elementos verticalmente */
-  flex-direction: column; /* Apila los elementos verticalmente */
-  gap: 15px; /* Espacio entre la tarjeta y el enlace de reporte */
-  width: 100%; /* Asegura que ocupe el ancho completo de su barra lateral padre */
-  /* Removed temporary styling */
-}
-
-/* --- Media Queries para Responsividad --- */
-@media (max-width: 992px) { /* Ajusta el breakpoint según sea necesario, común para tablets/laptops */
-  .detalle-propiedad__content {
-    flex-direction: column; /* Apila el contenido y la barra lateral verticalmente */
-    gap: 30px; /* Ajusta el espacio cuando están apilados */
-  }
-
-  .detalle-propiedad__sidebar {
-    width: 100%; /* La barra lateral ocupa todo el ancho */
-    max-width: 500px; /* Opcional: limita el ancho máximo de la barra lateral en pantallas más pequeñas */
-    margin: 0 auto; /* Centra la barra lateral si se aplica un ancho máximo */
-  }
-
-  .sidebar-sticky-container {
-    position: static; /* Elimina el comportamiento sticky en pantallas pequeñas */
-    /* O, si quieres que sea sticky pero en la parte inferior, podrías usar: */
-    /* position: sticky; */
-    /* top: unset; */
-    /* bottom: 0; */
-    /* width: 100%; */
-    /* background-color: white; */
-    /* z-index: 99; */
-    /* box-shadow: 0 -2px 10px rgba(0,0,0,0.1); */
-  }
-
-  /* Ajustes de diseño de la galería para pantallas más pequeñas (si GallerySection no maneja sus propios estilos responsivos) */
-  /* Si GallerySection.css maneja esto, estas reglas pueden eliminarse */
-  .detalle-propiedad__gallery {
-    grid-template-columns: 1fr; /* Una sola columna para imágenes */
-    height: auto; /* Altura automática para la galería */
-  }
-
-  .gallery-left,
-  .gallery-right {
-    border-radius: 12px; /* Redondea todas las esquinas para una sola columna */
-  }
-
-  .gallery-right {
-    display: none; /* Oculta las miniaturas más pequeñas en pantallas pequeñas */
-  }
-
-  .show-all-photos-btn {
-    bottom: 10px;
-    right: 10px;
-    padding: 6px 12px;
-    font-size: 0.8em;
-  }
-
-  /* Ajustes de la sección del arrendador para pantallas más pequeñas (si LandlordSection no maneja sus propios estilos responsivos) */
-  /* Si LandlordSection.css maneja esto, estas reglas pueden eliminarse */
-  .arrendador-contenido {
-    flex-direction: column; /* Apila la tarjeta y la información del arrendador */
-    gap: 20px;
-  }
-
-  .arrendador-card,
-  .arrendador-info {
-    min-width: unset; /* Elimina la restricción de ancho mínimo */
-    width: 100%; /* Ocupa todo el ancho */
-  }
-
-  .detalle-propiedad__info h1 {
-    font-size: 2em; /* Fuente más pequeña para el título */
-  }
-
-  /* Ajustes de características para pantallas más pequeñas (si PropertyFeatures no maneja sus propios estilos responsivos) */
-  /* Si PropertyFeatures.css maneja esto, estas reglas pueden eliminarse */
-  .detalle-propiedad__features {
-    grid-template-columns: 1fr; /* Una sola columna para características */
-  }
-}
-
-@media (max-width: 768px) { /* Pantallas aún más pequeñas como teléfonos */
-  .detalle-propiedad {
-    padding: 15px; /* Menos padding en pantallas muy pequeñas */
-  }
-
-  .detalle-propiedad__meta {
-    flex-direction: column; /* Apila la meta info */
-    gap: 5px;
-  }
-
-  .detalle-propiedad__section h2 {
-    font-size: 1.5em; /* Títulos de sección más pequeños */
-  }
+/* Estilo para la línea divisora */
+.detalle-propiedad-container hr {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #b3acac;
 }

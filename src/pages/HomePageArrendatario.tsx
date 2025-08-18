@@ -1,127 +1,130 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Footer } from "../components/layout";
 import { NavbarArrendatario, SearchBar } from '../components/layout';
 import { PropertyCard } from '../components/features/arrendatario/PropertyCard/PropertyCard';
+import { useInmuebles } from '../hooks/useInmuebles';
+
+// Importa las funciones de la API y el servicio de autenticación
+import { getReservasUsuario } from '../services/reservas';
+import { getMisReviews } from '../services/reviews';
+import { getMisFavoritos, addFavorito } from '../services/favoritos'; // Solo se importa addFavorito
+import { authService } from '../services/authService';
 
 function HomePageArrendatario() {
-  const navigate = useNavigate();
-  const [savedProperties, setSavedProperties] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const [savedProperties, setSavedProperties] = useState<string[]>([]);
+  const { inmuebles, loading, error } = useInmuebles();
 
-  const handleViewDetails = (id: string) => {
-    navigate(`/propiedad/${id}`);
-  };
+  // Estados para el navbar y la carga
+  const [hasReservas, setHasReservas] = useState(false);
+  const [hasReviews, setHasReviews] = useState(false);
+  const [hasFavorites, setHasFavorites] = useState(false);
+  const [isNavbarLoading, setIsNavbarLoading] = useState(true);
 
-  const handleSaveProperty = (id: string) => {
-    setSavedProperties(prev => 
-      prev.includes(id) 
-        ? prev.filter(propId => propId !== id)
-        : [...prev, id]
-    );
-  };
+  const handleViewDetails = (id: string) => {
+    navigate(`/propiedad/${id}`);
+  };
 
-  const properties = [
-    {
-      id: '1',
-      titulo: 'Casa familiar con jardín',
-      tipo: 'casa' as const,
-      precio: 800,
-      imageUrl: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg ',
-      ubicacion: 'Puerto Maldonado Centro',
-      caracteristicas: ['2 habitaciones', '1 baño', 'Jardín', 'Cocina equipada'],
-      calificacion: 4.5,
-      fechaDisponible: '2025-08-01'
-    },
-    {
-      id: '2',
-      titulo: 'Apartamento cerca a UNAMAD',
-      tipo: 'departamento' as const,
-      precio: 600,
-      imageUrl: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg ',
-      ubicacion: 'Zona Universitaria',
-      caracteristicas: ['1 habitación', '1 baño', 'Amueblado', 'Area de estudio'],
-      calificacion: 4.2,
-      fechaDisponible: '2025-07-15'
-    },
-    {
-      id: '3',
-      titulo: 'Habitación privada',
-      tipo: 'cuarto' as const,
-      precio: 300,
-      imageUrl: 'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg ',
-      ubicacion: 'Centro de Puerto Maldonado',
-      caracteristicas: ['Habitación individual', 'Baño compartido', 'Incluye servicios'],
-      calificacion: 4.0
-    },
-    {
-      id: '4',
-      titulo: 'Habitación privada',
-      tipo: 'cuarto' as const,
-      precio: 300,
-      imageUrl: 'https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg ',
-      ubicacion: 'Centro de Puerto Maldonado',
-      caracteristicas: ['Habitación individual', 'Baño compartido', 'Incluye servicios'],
-      calificacion: 4.0
-    },
-    {
-      id: '5',
-      titulo: 'Habitación privada',
-      tipo: 'cuarto' as const,
-      precio: 300,
-      imageUrl: 'https://picsum.photos/400/250?random=3',
-      ubicacion: 'Centro de Puerto Maldonado',
-      caracteristicas: ['Habitación individual', 'Baño compartido', 'Incluye servicios'],
-      calificacion: 4.0
-    },
-    {
-      id: '6',
-      titulo: 'Habitación privada',
-      tipo: 'cuarto' as const,
-      precio: 300,
-      imageUrl: 'https://picsum.photos/400/250?random=3',
-      ubicacion: 'Centro de Puerto Maldonado',
-      caracteristicas: ['Habitación individual', 'Baño compartido', 'Incluye servicios'],
-      calificacion: 4.0
-    }
-  ];
+  // Lógica SIMPLIFICADA para agregar un favorito (solo añade, no elimina)
+  const handleSaveProperty = async (id: string) => {
+    const token = authService.getToken();
+    if (!token) {
+      alert('Debes iniciar sesión para guardar favoritos.');
+      return;
+    }
 
-  return (
-    <div>
-      <NavbarArrendatario
-        becomeHostText="Conviértete en Arrendador"
-        userProfileText=""
-      />
-      
-      <SearchBar 
-        locationPlaceholder="Ubicación"
-        durationPlaceholder="¿Cuánto tiempo?"
-      />
-      
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-        gap: '20px', 
-        padding: '20px',
-        maxWidth: '1400px',
-        margin: '0 auto'
-      }}>
-        {properties.map((property) => (
-          <PropertyCard 
-            key={property.id}
-            property={property}
-            onViewDetails={handleViewDetails}
-            onSave={handleSaveProperty}
-            isSaved={savedProperties.includes(property.id)}
-          />
-        ))}
-      </div>
-      
-      <Footer 
-        companyName="UBIKHA"
-        year={2025}
-      />
-    </div>
-  );
+    const isSaved = savedProperties.includes(id);
+
+    // Si ya está guardado, no hacemos nada. Si no, lo agregamos.
+    if (!isSaved) {
+      try {
+        const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+        await addFavorito(id, tokenPayload.sub, token);
+        setSavedProperties(prev => [...prev, id]);
+      } catch (err) {
+        console.error("Error al agregar a favoritos:", err);
+        alert('Hubo un error al agregar a tus favoritos.');
+      }
+    }
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setIsNavbarLoading(true);
+      const token = authService.getToken();
+
+      if (token) {
+        try {
+          const reservasData = await getReservasUsuario(token);
+          setHasReservas(reservasData.reservas.length > 0);
+
+          const reviewsData = await getMisReviews(token);
+          setHasReviews(reviewsData.length > 0);
+
+          const favoritosData = await getMisFavoritos(token);
+          setHasFavorites(favoritosData.length > 0);
+          setSavedProperties(favoritosData.map(id => id.toString()));
+        } catch (err) {
+          console.error("Error al cargar datos del usuario:", err);
+        } finally {
+          setIsNavbarLoading(false);
+        }
+      } else {
+        setIsNavbarLoading(false);
+      }
+    };
+    fetchUserData();
+  }, []);
+
+  if (loading || isNavbarLoading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div>
+      <NavbarArrendatario
+        becomeHostText="Conviértete en Arrendador"
+        userProfileText=""
+        hasReservas={hasReservas}
+        hasReviews={hasReviews}
+        hasFavorites={hasFavorites}
+      />
+      
+      <SearchBar 
+        locationPlaceholder="Ubicación"
+        durationPlaceholder="¿Cuánto tiempo?"
+      />
+      
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+        gap: '20px', 
+        padding: '20px',
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}>
+        {inmuebles.map((property) => (
+          <PropertyCard 
+            key={property.id}
+            property={property}
+            onViewDetails={handleViewDetails}
+            onSave={handleSaveProperty}
+            isSaved={savedProperties.includes(property.id)}
+          />
+        ))}
+      </div>
+      
+      <Footer 
+        companyName="UBIKHA"
+        year={2025}
+      />
+    </div>
+  );
 }
 
 export default HomePageArrendatario;

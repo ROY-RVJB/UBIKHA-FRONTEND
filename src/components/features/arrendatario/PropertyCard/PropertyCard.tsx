@@ -1,18 +1,20 @@
 import React from 'react';
-import { FaHome, FaBuilding, FaBed, FaMapMarkerAlt, FaStar, FaHeart, FaRegHeart, FaCalendarAlt } from 'react-icons/fa'; // Importa los iconos de Font Awesome
+import { LuHouse, LuBuilding, LuBed, LuMapPin, LuStar, LuHeart, LuHeartOff, LuCalendar, LuDoorClosed, LuBath, LuTreePine, LuUtensils, LuSofa, LuArmchair, LuDroplet, LuWifi } from 'react-icons/lu';
 import './PropertyCard.css';
+import type { Property } from '../../../../types/property'; // Importa la interfaz Property global
 
-export interface Property {
-  id: string;
-  titulo: string;
-  tipo: 'casa' | 'departamento' | 'cuarto' | 'oficina';
-  precio: number;
-  imageUrl: string;
-  ubicacion: string;
-  caracteristicas: string[];
-  calificacion?: number;
-  fechaDisponible?: string;
-}
+// Mapeo de los nombres de los iconos a los componentes de React-Icons/lu
+const iconMap: { [key: string]: React.ElementType } = {
+  "habitaciones": LuDoorClosed,
+  "baños": LuBath,
+  "piscina": LuTreePine,
+  "jardin": LuTreePine,
+  "estacionamiento": LuArmchair,
+  "balcón": LuUtensils,
+  "vista a la ciudad": LuWifi,
+  "servicios incluidos": LuDroplet,
+  "cerca a universidades": LuSofa,
+};
 
 interface PropertyCardProps {
   property: Property;
@@ -35,16 +37,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     imageUrl,
     ubicacion,
     caracteristicas,
-    calificacion,
-    fechaDisponible
-  } = property;
+    calificacion  } = property;
 
   // Mapeo de iconos de tipo de propiedad
   const tipoIcons = {
-    'casa': <FaHome size={16} />,
-    'departamento': <FaBuilding size={16} />,
-    'cuarto': <FaBed size={16} />,
-    'oficina': <FaBuilding size={16} /> // Puedes usar FaBuilding para oficinas
+    'casa': <LuHouse size={16} />,
+    'departamento': <LuBuilding size={16} />,
+    'cuarto': <LuBed size={16} />,
+    'oficina': <LuBuilding size={16} /> // Puedes usar LuBuilding para oficinas
   };
 
   const handleCardClick = (e: React.MouseEvent) => {
@@ -70,6 +70,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             (e.target as HTMLImageElement).src = '/placeholder-property.jpg';
           }}
         />
+        <div className="property-card__type-floating">
+            {tipoIcons[tipo]} {tipo}
+        </div>
         {onSave && (
           <button 
             className={`property-card__save ${isSaved ? 'saved' : ''}`}
@@ -79,12 +82,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             }}
             aria-label={isSaved ? 'Quitar de guardados' : 'Guardar propiedad'}
           >
-            {isSaved ? <FaHeart size={20} color="red" /> : <FaRegHeart size={20} />}
+            {isSaved ? <LuHeart size={20} color="red" /> : <LuHeartOff size={20} />}
           </button>
         )}
         {calificacion && (
           <div className="property-card__rating">
-            <FaStar size={16} color="gold" /> {calificacion.toFixed(1)}
+            <LuStar size={16} color="gold" /> {calificacion.toFixed(1)}
           </div>
         )}
       </div>
@@ -92,13 +95,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
       <div className="property-card__content">
         <div className="property-card__header">
           <h3 className="property-card__title">{titulo}</h3>
-          <span className="property-card__type">
-            {tipoIcons[tipo]} {tipo}
-          </span>
         </div>
 
         <p className="property-card__location">
-          <FaMapMarkerAlt size={16} /> {ubicacion}
+          <LuMapPin size={16} /> {ubicacion}
         </p>
 
         <div className="property-card__price">
@@ -108,16 +108,16 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           <span className="property-card__price-period">/mes</span>
         </div>
 
-        {fechaDisponible && (
-          <p className="property-card__availability">
-            <FaCalendarAlt size={16} /> Disponible desde {new Date(fechaDisponible).toLocaleDateString('es-PE')}
-          </p>
-        )}
+
+        <p className="property-card__description">
+          {property.descripcion?.slice(0, 100)}...
+        </p>
 
         <div className="property-card__features">
-          {caracteristicas.slice(0, 3).map((feature, index) => (
+          {caracteristicas.slice(0, 5).map((feature, index) => (
             <span key={index} className="property-card__feature">
-              {feature}
+              {iconMap[feature.icono] && React.createElement(iconMap[feature.icono], { size: 16 })}
+              {feature.nombre}
             </span>
           ))}
         </div>

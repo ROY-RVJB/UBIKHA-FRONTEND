@@ -6,4 +6,4 @@ export { default as PropertyFeatures } from './PropertyFeatures/PropertyFeatures
 export { default as ReportAdLink } from './ReportAdLink/ReportAdLink';
 export { default as ReportModal } from './ReportModal/ReportModal';
 export { default as ReservationCard } from './ReservationCard/ReservationCard';
-export { default as PropertyMap } from './DetallePropiedad/PropertyMap/PropertyMap';
+

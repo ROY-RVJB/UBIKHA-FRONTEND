@@ -1,0 +1,109 @@
+/* ReportConfirmationModal.css */
+
+/* Reutiliza los estilos del modal principal */
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.report-modal-content {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 480px;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  position: relative;
+}
+
+.report-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.report-modal-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.report-modal-close {
+  position: absolute;
+  top: 15px;
+  left: 15px; /* Posicionado a la izquierda */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+  padding: 0;
+  line-height: 1;
+}
+
+.report-modal-close:hover {
+  color: #000;
+}
+
+.report-modal-body {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center; /* Centrar el texto del cuerpo */
+}
+
+.report-modal-body h3 {
+  font-size: 22px; /* Tamaño de fuente para el título "Recibimos la denuncia" */
+  margin-bottom: 10px;
+}
+
+.report-modal-body p {
+  font-size: 16px;
+  color: #555;
+}
+
+.report-modal-footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  text-align: center; /* Centrar el botón "Aceptar" */
+}
+
+.report-modal-footer .btn-primary {
+  background-color: #071e3d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+  width: 100%; /* Hacer que el botón ocupe todo el ancho */
+  max-width: 200px; /* Limitar el ancho máximo del botón */
+}
+
+.report-modal-footer .btn-primary:hover:not(:disabled) {
+  background-color: #0c2a54;
+}
+
+.report-modal-footer .btn-primary:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

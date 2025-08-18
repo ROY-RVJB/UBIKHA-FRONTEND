@@ -1,31 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../../ui';
-import './ReportModal.css'; // We'll create this CSS file
+import './ReportModal.css';
+import axios from 'axios';
 
 interface ReportModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (reason: string) => void;
+  onSelectReason: (reason: string) => void;
 }
 
-const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) => {
+interface TipoReporte {
+  codigo: string;
+  descripcion: string;
+  valor: string;
+}
+
+const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSelectReason }) => {
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
+  const [tiposReporte, setTiposReporte] = useState<TipoReporte[]>([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://26.196.154.46:8000';
+
+  useEffect(() => {
+    const fetchTiposReporte = async () => {
+      try {
+        const response = await axios.get(`${backendUrl}/reportes/tipos`);
+        setTiposReporte(response.data.tipos_reporte);
+      } catch (error) {
+        console.error('Error al obtener los tipos de reporte:', error);
+      }
+    };
+
+    fetchTiposReporte();
+  }, []);
 
   if (!isOpen) {
-    return null; // Don't render anything if the modal is not open
+    return null;
   }
 
-  const handleReasonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedReason(e.target.value);
+ const handleReasonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== selectedReason) {
+      setSelectedReason(e.target.value);
+    }
   };
 
-  const handleSubmit = () => {
+  const handleNext = () => {
     if (selectedReason) {
-      onSubmit(selectedReason);
-      // Optionally reset selectedReason here or in parent after onSubmit
+      onSelectReason(selectedReason);
       setSelectedReason(null);
-    } else {
-      alert('Por favor, selecciona una razón para reportar.'); // Or a more user-friendly validation
     }
   };
 
@@ -40,66 +61,24 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
           </button>
         </div>
         <div className="report-modal-body">
-          <label className="radio-option">
-            <input
-              type="radio"
-              name="reportReason"
-              value="Es incorrecto o poco preciso"
-              checked={selectedReason === "Es incorrecto o poco preciso"}
-              onChange={handleReasonChange}
-            />
-            Es incorrecto o poco preciso
-            <span className="radio-custom"></span>
-          </label>
-          <label className="radio-option">
-            <input
-              type="radio"
-              name="reportReason"
-              value="No es un alojamiento real"
-              checked={selectedReason === "No es un alojamiento real"}
-              onChange={handleReasonChange}
-            />
-            No es un alojamiento real
-            <span className="radio-custom"></span>
-          </label>
-          <label className="radio-option">
-            <input
-              type="radio"
-              name="reportReason"
-              value="Es una estafa"
-              checked={selectedReason === "Es una estafa"}
-              onChange={handleReasonChange}
-            />
-            Es una estafa
-            <span className="radio-custom"></span>
-          </label>
-          <label className="radio-option">
-            <input
-              type="radio"
-              name="reportReason"
-              value="Es ofensivo"
-              checked={selectedReason === "Es ofensivo"}
-              onChange={handleReasonChange}
-            />
-            Es ofensivo
-            <span className="radio-custom"></span>
-          </label>
-          <label className="radio-option">
-            <input
-              type="radio"
-              name="reportReason"
-              value="Es otra cosa"
-              checked={selectedReason === "Es otra cosa"}
-              onChange={handleReasonChange}
-            />
-            Es otra cosa
-            <span className="radio-custom"></span>
-          </label>
+          {tiposReporte.map((tipo) => (
+            <label className="radio-option" key={tipo.codigo}>
+              <input
+                type="radio"
+                name="reportReason"
+                value={tipo.codigo}
+                checked={selectedReason === tipo.codigo}
+                onChange={handleReasonChange}
+              />
+              {tipo.valor}
+              <span className="radio-custom"></span>
+            </label>
+          ))}
         </div>
         <div className="report-modal-footer">
           <Button
             variant="primary"
-            onClick={handleSubmit}
+            onClick={handleNext}
             disabled={!selectedReason}
           >
             Siguiente
