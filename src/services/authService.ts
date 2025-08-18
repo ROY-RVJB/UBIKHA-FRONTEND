@@ -25,6 +25,10 @@ interface BackendLoginResponse {
   token_type: string;
   usuario: string;
   rol: 'arrendatario' | 'arrendador' | 'admin';
+  nombres?: string;
+  apellido_paterno?: string;
+  apellido_materno?: string;
+  num_celular?: string;
 }
 
 // Interfaz normalizada para el frontend
@@ -33,6 +37,10 @@ export interface LoginResponse {
   user: {
     email: string;
     role: 'arrendatario' | 'arrendador' | 'administrador';
+    nombres?: string;
+    apellido_paterno?: string;
+    apellido_materno?: string;
+    num_celular?: string;
   };
 }
 
@@ -74,7 +82,7 @@ class AuthService {
    * Método universal de login
    */
   private async login(credentials: LoginCredentials): Promise<LoginResponse> {
-    const response = await fetch(`${this.baseURL}/auth/login-json`, {
+    const response = await fetch(`${this.baseURL}/auth/login-json `, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -97,7 +105,11 @@ class AuthService {
       token: backendData.access_token,
       user: {
         email: backendData.usuario,
-        role: this.mapRole(backendData.rol)
+        role: this.mapRole(backendData.rol),
+        nombres: backendData.nombres,
+        apellido_paterno: backendData.apellido_paterno,
+        apellido_materno: backendData.apellido_materno,
+        num_celular: backendData.num_celular
       }
     };
 
@@ -177,6 +189,111 @@ class AuthService {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return this.mapRole(payload.rol);
     } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Obtener datos completos del usuario por email
+   */
+  async getUserByEmail(email: string): Promise<{
+    nombres: string;
+    apellido_paterno: string;
+    apellido_materno: string;
+    email: string;
+    num_celular: string;
+    tipo_usuario: string;
+  } | null> {
+    try {
+      const token = this.getToken();
+      if (!token) {
+        console.error('No hay token de autenticación');
+        return null;
+      }
+
+      // Intentar primero con el endpoint específico por email
+      const response = await fetch(`${this.baseURL}/usuarios/${encodeURIComponent(email)}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        return userData;
+      }
+
+      // Si falla, intentar obtener todos los usuarios y filtrar (como fallback)
+      console.log('Intentando endpoint alternativo /usuarios');
+      const allUsersResponse = await fetch(`${this.baseURL}/usuarios`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (allUsersResponse.ok) {
+        const allUsers = await allUsersResponse.json();
+        const user = allUsers.find((u: any) => u.email === email);
+        return user || null;
+      }
+
+      console.error('No se pudieron obtener los datos del usuario');
+      return null;
+    } catch (error) {
+      console.error('Error obteniendo datos del usuario:', error);
+      return null;
+    }
+  }
+
+  /**
+   * Obtener datos completos del usuario por número de celular
+   */
+  async getUserByPhone(phoneNumber: string): Promise<{
+    nombres: string;
+    apellido_paterno: string;
+    apellido_materno: string;
+    email: string;
+    num_celular: string;
+    tipo_usuario: string;
+  } | null> {
+    try {
+      const token = this.getToken();
+      if (!token) {
+        console.error('No hay token de autenticación');
+        return null;
+      }
+
+      // Intentar obtener todos los usuarios y filtrar por número de celular
+      console.log('Obteniendo datos del usuario por número de celular:', phoneNumber);
+      const response = await fetch(`${this.baseURL}/usuarios`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        }
+      });
+
+      if (response.ok) {
+        const allUsers = await response.json();
+        const user = allUsers.find((u: any) => u.num_celular === phoneNumber);
+        
+        if (user) {
+          console.log('Usuario encontrado:', user);
+          return user;
+        } else {
+          console.log('No se encontró usuario con el número:', phoneNumber);
+        }
+      } else {
+        console.error('Error al obtener usuarios:', response.status);
+      }
+
+      return null;
+    } catch (error) {
+      console.error('Error obteniendo datos del usuario por teléfono:', error);
       return null;
     }
   }

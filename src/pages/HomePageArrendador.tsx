@@ -9,7 +9,7 @@ function HomePageArrendador() {
         text_1="Inicio" 
         text_2="Anuncios" 
         text_3="Mensajes"
-        text_4="Conviértete en Arrendador" 
+        text_4="Conviértete en Arrendatario" 
       />
       
       <ArrendadorInicio userName="Luis" />

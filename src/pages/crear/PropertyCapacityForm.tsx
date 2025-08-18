@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import NumericCounter from '../crear/componenteCrear/NumericCounter';
 import './PropertyCapacityForm.css';
@@ -13,18 +14,26 @@ interface SpaceData {
 
 function PropertyCapacityForm() {
   const navigate = useNavigate();
+  const { formData, updateFormData } = usePropertyForm();
   const [propertyType, setPropertyType] = useState<string | null>(null);
   const [spaceData, setSpaceData] = useState<SpaceData>({
-    guests: 0,
-    bedrooms: 0,
-    beds: 0,
-    bathrooms: 0
+    guests: formData.huespedes || 0,
+    bedrooms: formData.habitaciones || 0,
+    beds: formData.camas || 0,
+    bathrooms: formData.banos || 0
   });
 
   useEffect(() => {
     // Cargar el tipo de propiedad desde localStorage
     const savedType = localStorage.getItem('propertyType');
     setPropertyType(savedType);
+    
+    // Actualizar el tipo de inmueble en el contexto
+    if (savedType) {
+      updateFormData({ 
+        tipo_inmueble: savedType as 'casa' | 'departamento' | 'cuarto' 
+      });
+    }
   }, []);
 
   const updateCount = (field: keyof SpaceData, value: number) => {
@@ -35,7 +44,15 @@ function PropertyCapacityForm() {
   };
 
   const handleNext = () => {
-    console.log("Datos del espacio:", spaceData);
+    // Guardar en el contexto con los nombres correctos para el backend
+    updateFormData({
+      huespedes: spaceData.guests,
+      habitaciones: spaceData.bedrooms,
+      camas: spaceData.beds,
+      banos: spaceData.bathrooms
+    });
+    
+    console.log("Datos del espacio guardados:", spaceData);
     navigate('/step2');
   };
 

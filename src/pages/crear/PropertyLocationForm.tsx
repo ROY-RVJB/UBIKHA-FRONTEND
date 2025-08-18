@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import './PropertyLocationForm.css';
 
@@ -14,14 +15,27 @@ interface LocationData {
 
 function PropertyLocationForm() {
   const navigate = useNavigate();
+  const { formData, updateFormData } = usePropertyForm();
+  
   const [locationData, setLocationData] = useState<LocationData>({
-    direccion: '',
+    direccion: formData.direccion || '',
     zona: '',
     ciudad: 'Puerto Maldonado',
     departamento: 'Madre de Dios',
     pais: 'Perú',
-    referencias: ''
+    referencias: formData.referencias || ''
   });
+
+  useEffect(() => {
+    // Cargar datos existentes del contexto si hay
+    if (formData.direccion || formData.referencias) {
+      setLocationData(prev => ({
+        ...prev,
+        direccion: formData.direccion || '',
+        referencias: formData.referencias || ''
+      }));
+    }
+  }, [formData.direccion, formData.referencias]);
 
   const handleInputChange = (field: keyof LocationData, value: string) => {
     setLocationData(prev => ({
@@ -37,7 +51,14 @@ function PropertyLocationForm() {
       return;
     }
     
-    console.log("Datos de ubicación:", locationData);
+    // Guardar en el contexto
+    const direccionCompleta = `${locationData.direccion}, ${locationData.zona}, ${locationData.ciudad}`;
+    updateFormData({
+      direccion: direccionCompleta,
+      referencias: locationData.referencias
+    });
+    
+    console.log("Datos de ubicación guardados:", { direccion: direccionCompleta, referencias: locationData.referencias });
     navigate('/step1/capacity');
   };
 

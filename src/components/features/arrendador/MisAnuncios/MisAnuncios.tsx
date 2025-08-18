@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, IconButton, RetractableSearch } from '../../../ui';
 import { AnuncioCard, type Anuncio } from './AnuncioCard';
 import { AnuncioTableRow } from './AnuncioTableRow';
 import { CreateAnuncioModal } from './CreateAnuncioModal';
+import { propertyService, type Property } from '../../../../services/propertyService';
 import './MisAnuncios.css';
 
-// Mock data temporal para demostración
+// Mock data temporal para demostración (se usará como fallback)
 const mockAnuncios: Anuncio[] = [
   {
     id: '1',
@@ -94,8 +95,65 @@ export const MisAnuncios: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [anuncios] = useState<Anuncio[]>(mockAnuncios);
+  const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'rows'>('grid');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Cargar inmuebles del backend
+  useEffect(() => {
+    const loadProperties = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        const properties = await propertyService.getProperties();
+        
+        // Log para ver qué devuelve el backend
+        console.log('📦 Inmuebles recibidos del backend:', properties);
+        if (properties.length > 0) {
+          console.log('📝 Estructura del primer inmueble:', properties[0]);
+        }
+        
+        // Convertir las propiedades del backend al formato de Anuncio con validaciones
+        const convertedAnuncios: Anuncio[] = properties.map((property: Property, index: number) => {
+          console.log(`🏠 Procesando inmueble ${index + 1}:`, property);
+          
+          // Validar y manejar campos que podrían ser undefined
+          const anuncio: Anuncio = {
+            id: property.id_inmueble ? property.id_inmueble.toString() : `temp-${index}`,
+            titulo: property.titulo || 'Sin título',
+            tipo: property.tipo_inmueble || 'casa',
+            estado: property.estado || 'activo', // Usar directamente el estado del backend
+            precio: property.precio_mensual || 0,
+            fechaCreacion: property.fecha_creacion ? new Date(property.fecha_creacion) : new Date(),
+            imageUrl: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg', // Imagen por defecto
+            ubicacion: property.direccion || 'Sin dirección especificada'
+          };
+          
+          console.log(`✅ Anuncio convertido:`, anuncio);
+          return anuncio;
+        });
+        
+        setAnuncios(convertedAnuncios);
+        console.log(`✅ Se cargaron ${convertedAnuncios.length} inmuebles del backend`);
+        
+      } catch (error: any) {
+        console.error('❌ Error cargando inmuebles:', error);
+        setError(error.message || 'Error al cargar los inmuebles');
+        
+        // Si hay error, usar datos mock como fallback
+        if (error.message?.includes('No hay token')) {
+          console.log('⚠️ Usuario no autenticado, mostrando datos de ejemplo');
+          setAnuncios(mockAnuncios);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProperties();
+  }, []);
 
   // Filtrar anuncios por búsquedaa
   const filteredAnuncios = anuncios.filter(anuncio =>
@@ -107,8 +165,9 @@ export const MisAnuncios: React.FC = () => {
   const estadisticas = {
     total: anuncios.length,
     activos: anuncios.filter(a => a.estado === 'activo').length,
-    pendientes: anuncios.filter(a => a.estado === 'pendiente_aprobacion').length,
-    accionNecesaria: anuncios.filter(a => a.estado === 'accion_necesaria').length
+    enRevision: anuncios.filter(a => a.estado === 'en revisión').length,
+    pausados: anuncios.filter(a => a.estado === 'pausado').length,
+    rechazados: anuncios.filter(a => a.estado === 'rechazado').length
   };
 
   const handleCreateAnuncio = () => {
@@ -195,18 +254,38 @@ export const MisAnuncios: React.FC = () => {
           <span className="stat-card__label">Activos</span>
         </div>
         <div className="stat-card stat-card--pending">
-          <span className="stat-card__number">{estadisticas.pendientes}</span>
-          <span className="stat-card__label">Pendientes</span>
+          <span className="stat-card__number">{estadisticas.enRevision}</span>
+          <span className="stat-card__label">En revisión</span>
+        </div>
+        <div className="stat-card stat-card--paused">
+          <span className="stat-card__number">{estadisticas.pausados}</span>
+          <span className="stat-card__label">Pausados</span>
         </div>
         <div className="stat-card stat-card--warning">
-          <span className="stat-card__number">{estadisticas.accionNecesaria}</span>
-          <span className="stat-card__label">Acción necesaria</span>
+          <span className="stat-card__number">{estadisticas.rechazados}</span>
+          <span className="stat-card__label">Rechazados</span>
         </div>
       </div>
 
       {/* Lista de anuncios */}
       <div className="mis-anuncios__content">
-        {filteredAnuncios.length > 0 ? (
+        {isLoading ? (
+          <div className="mis-anuncios__loading" style={{ textAlign: 'center', padding: '40px' }}>
+            <p>Cargando tus inmuebles...</p>
+          </div>
+        ) : error && anuncios.length === 0 ? (
+          <div className="mis-anuncios__error" style={{ textAlign: 'center', padding: '40px', color: '#d32f2f' }}>
+            <p>{error}</p>
+            <div style={{ marginTop: '16px' }}>
+              <Button 
+                variant="outline" 
+                onClick={() => window.location.reload()}
+              >
+                Reintentar
+              </Button>
+            </div>
+          </div>
+        ) : filteredAnuncios.length > 0 ? (
           <div className={`mis-anuncios__grid mis-anuncios__grid--${viewMode}`}>
             {viewMode === 'grid' ? (
               // Vista en cuadrícula (cards)

@@ -3,6 +3,7 @@ import logo from '../../../assets/LOGO-UBIKHA/ISOTIPO_1.png';
 import { Button } from '../../ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import  Avatar    from '../../ui/Avatar/Avatar';
+import { useUser } from '../../../contexts/UserContext';
 export interface NavbarArrendatarioProps {
   becomeHostText?: string;
   userProfileText?: string;
@@ -13,6 +14,7 @@ export const NavbarArrendatario = ({
   userProfileText = "Perfil de usuario"
 }: NavbarArrendatarioProps) => {
   const navigate = useNavigate();
+  const { user } = useUser();
 
   return (
     <nav className="navbar-arrendatario">
@@ -31,7 +33,7 @@ export const NavbarArrendatario = ({
           variant='ghost' 
           size='sm'
           className="become-host-btn"
-          onClick={() => navigate('/login')}>
+          onClick={() => navigate('/register?role=arrendador')}>
           {becomeHostText}
         </Button>
 
@@ -42,7 +44,7 @@ export const NavbarArrendatario = ({
           {userProfileText}
         </Button>
       <div>
-        <Avatar name="Roy" />
+        <Avatar name={user?.nombres || ''} />
       </div>
       </div>
     </nav>

@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
+import { propertyService } from '../../services/propertyService';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import './PropertyPricingCalculator.css';
 
 function PropertyPricingCalculator() {
   const navigate = useNavigate();
-  const [basePrice, setBasePrice] = useState(850);
+  const { formData, updateFormData, resetForm } = usePropertyForm();
+  const [basePrice, setBasePrice] = useState(formData.precio_mensual || 850);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleBasePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(event.target.value) || 0;
@@ -17,17 +22,44 @@ function PropertyPricingCalculator() {
   const totalToPay = basePrice + ubikhaFee;
   const netEarnings = basePrice;
 
-  const handleCreate = () => {
-    if (basePrice > 0) {
-      console.log("Anuncio creado con precio:", {
-        basePrice,
-        ubikhaFee,
-        totalToPay,
-        netEarnings
-      });
-      // TODO: Guardar el anuncio en la base de datos
-      alert(`¡Anuncio creado exitosamente!\n\nPrecio base: S/ ${basePrice}\nTus ganancias netas: S/ ${netEarnings}`);
+  const handleCreate = async () => {
+    if (basePrice <= 0) {
+      setError('Por favor ingresa un precio válido');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Actualizar el precio en el contexto
+      updateFormData({ precio_mensual: basePrice });
+
+      // Preparar los datos finales para enviar
+      const propertyData = {
+        ...formData,
+        precio_mensual: basePrice
+      };
+
+      console.log('📤 Enviando datos del inmueble:', propertyData);
+
+      // Enviar al backend
+      const result = await propertyService.createProperty(propertyData);
+
+      console.log('✅ Inmueble creado:', result);
+
+      // Limpiar el formulario
+      resetForm();
+
+      // Mostrar mensaje de éxito y redirigir
+      alert(`¡Inmueble creado exitosamente!\n\nID: ${result.id_inmueble}\nTítulo: ${result.titulo}\nPrecio: S/ ${result.precio_mensual}`);
+      
       navigate('/mis-anuncios');
+    } catch (error: any) {
+      console.error('❌ Error al crear el inmueble:', error);
+      setError(error.message || 'Error al crear el inmueble. Por favor intenta nuevamente.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -98,6 +130,20 @@ function PropertyPricingCalculator() {
               </div>
             </div>
           </div>
+
+          {/* Mostrar error si hay */}
+          {error && (
+            <div className="error-message" style={{ 
+              color: 'red', 
+              marginTop: '16px', 
+              padding: '12px', 
+              backgroundColor: '#fee', 
+              borderRadius: '8px',
+              textAlign: 'center' 
+            }}>
+              {error}
+            </div>
+          )}
         </div>
       </main>
 
@@ -116,10 +162,10 @@ function PropertyPricingCalculator() {
           <button 
             className="btn-next" 
             onClick={handleCreate}
-            disabled={basePrice <= 0}
+            disabled={basePrice <= 0 || isLoading}
             aria-label="Crear anuncio"
           >
-            Crear anuncio
+            {isLoading ? 'Creando...' : 'Crear anuncio'}
           </button>
         </div>
       </footer>

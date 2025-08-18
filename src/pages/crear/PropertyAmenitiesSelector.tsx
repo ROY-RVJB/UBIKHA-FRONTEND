@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaWifi, FaParking, FaTv, FaSnowflake, FaPaw } from 'react-icons/fa';
 import { MdKitchen, MdLocalLaundryService } from 'react-icons/md';
 import { BsCameraVideoFill } from 'react-icons/bs';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import './PropertyAmenitiesSelector.css';
 
@@ -10,23 +11,38 @@ interface Amenity {
   id: string;
   name: string;
   icon: React.ComponentType;
+  backendField: keyof import('../../services/propertyService').PropertyData;
 }
 
 function PropertyAmenitiesSelector() {
   const navigate = useNavigate();
+  const { formData, updateFormData } = usePropertyForm();
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 
-  // Todas las comodidades disponibles
+  // Mapeo de IDs a campos del backend
   const amenities: Amenity[] = [
-    { id: 'wifi', name: 'Wi-Fi', icon: FaWifi },
-    { id: 'kitchen', name: 'Cocina', icon: MdKitchen },
-    { id: 'parking', name: 'Estacionamiento', icon: FaParking },
-    { id: 'tv', name: 'Televisión', icon: FaTv },
-    { id: 'ac', name: 'Aire acondicionado', icon: FaSnowflake },
-    { id: 'laundry', name: 'Servicio de lavandería', icon: MdLocalLaundryService },
-    { id: 'security_camera', name: 'Cámara de seguridad', icon: BsCameraVideoFill },
-    { id: 'pets', name: 'Mascotas', icon: FaPaw },
+    { id: 'wifi', name: 'Wi-Fi', icon: FaWifi, backendField: 'wifi' },
+    { id: 'kitchen', name: 'Cocina', icon: MdKitchen, backendField: 'cocina' },
+    { id: 'parking', name: 'Estacionamiento', icon: FaParking, backendField: 'estacionamiento' },
+    { id: 'tv', name: 'Televisión', icon: FaTv, backendField: 'television' },
+    { id: 'ac', name: 'Aire acondicionado', icon: FaSnowflake, backendField: 'aire_acondicionado' },
+    { id: 'laundry', name: 'Servicio de lavandería', icon: MdLocalLaundryService, backendField: 'servicio_lavanderia' },
+    { id: 'security_camera', name: 'Cámara de seguridad', icon: BsCameraVideoFill, backendField: 'camaras_seguridad' },
+    { id: 'pets', name: 'Mascotas', icon: FaPaw, backendField: 'mascotas_permitidas' },
   ];
+
+  useEffect(() => {
+    // Cargar amenidades existentes del contexto
+    const preSelected: string[] = [];
+    amenities.forEach(amenity => {
+      if (formData[amenity.backendField] === true) {
+        preSelected.push(amenity.id);
+      }
+    });
+    if (preSelected.length > 0) {
+      setSelectedAmenities(preSelected);
+    }
+  }, []);
 
   const toggleAmenity = (amenityId: string) => {
     setSelectedAmenities(prev => {
@@ -39,7 +55,16 @@ function PropertyAmenitiesSelector() {
   };
 
   const handleNext = () => {
-    console.log("Comodidades seleccionadas:", selectedAmenities);
+    // Convertir las amenidades seleccionadas a formato del backend
+    const amenitiesData: Partial<import('../../services/propertyService').PropertyData> = {};
+    
+    amenities.forEach(amenity => {
+      amenitiesData[amenity.backendField] = selectedAmenities.includes(amenity.id);
+    });
+
+    updateFormData(amenitiesData);
+    
+    console.log("Comodidades guardadas:", amenitiesData);
     navigate('/step2/photos');
   };
 

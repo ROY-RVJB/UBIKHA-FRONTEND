@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { RegisterStepOne } from '../components/ui/RegisterStepOne/RegisterStepOne';
 import { RegisterStepTwo } from '../components/ui/RegisterStepTwo/RegisterStepTwo';
 import { RegisterStepThree } from '../components/ui/RegisterStepThree/RegisterStepThree';
 import { authService } from '../services/authService';
+import { useUser } from '../contexts/UserContext';
 
 /**
  * 🎯 REGISTRO MULTI-PASO
@@ -15,7 +16,20 @@ import { authService } from '../services/authService';
  */
 function RegisterPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isArrendadorFlow, setIsArrendadorFlow] = useState(false);
+  const { setUser } = useUser();
+  
+  // Detectar si viene del flujo de arrendador
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const role = searchParams.get('role');
+    if (role === 'arrendador') {
+      setIsArrendadorFlow(true);
+      console.log('🏠 Flujo de registro como arrendador activado');
+    }
+  }, [location]);
   
   // Estado para almacenar todos los datos del formulario
   const [formData, setFormData] = useState({
@@ -86,8 +100,26 @@ function RegisterPage() {
     authService.completeWhatsAppRegistration(registrationData)
       .then((result) => {
         console.log('Registro WhatsApp exitoso:', result);
+        
+        // Guardar datos del usuario en el contexto
+        setUser({
+          nombres: registrationData.nombres,
+          apellido_paterno: registrationData.apellido_paterno,
+          apellido_materno: registrationData.apellido_materno,
+          email: registrationData.email,
+          num_celular: registrationData.num_celular,
+          role: isArrendadorFlow ? 'arrendador' : 'arrendatario'
+        });
+        
         alert(`¡Registro completado exitosamente! ${result.message}`);
-        navigate('/home-arrendatario');
+        // Redirigir según el flujo
+        if (isArrendadorFlow) {
+          console.log('🏠 Redirigiendo a home-arrendador');
+          navigate('/home-arrendador');
+        } else {
+          console.log('🏢 Redirigiendo a home-arrendatario');
+          navigate('/home-arrendatario');
+        }
       })
       .catch((error: any) => {
         console.error('❌ Error completo en registro WhatsApp:', error);

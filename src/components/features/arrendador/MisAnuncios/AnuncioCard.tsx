@@ -7,7 +7,7 @@ export interface Anuncio {
   id: string;
   titulo: string;
   tipo: 'casa' | 'departamento' | 'cuarto';
-  estado: 'accion_necesaria' | 'pendiente_aprobacion' | 'activo' | 'pausado';
+  estado: 'activo' | 'en revisión' | 'pausado' | 'rechazado' | string;
   precio: number;
   fechaCreacion: Date;
   imageUrl: string;
@@ -23,29 +23,34 @@ export interface AnuncioCardProps {
 
 const EstadoBadge: React.FC<{ estado: Anuncio['estado'] }> = ({ estado }) => {
   const getEstadoConfig = () => {
-    const config = {
-      'accion_necesaria': { 
-        label: 'Acción necesaria', 
-        className: 'estado-badge--warning',
-        icon: '⚠️'
-      },
-      'pendiente_aprobacion': { 
-        label: 'Pendiente aprobación', 
-        className: 'estado-badge--pending',
-        icon: '⏳'
-      },
+    const config: Record<string, { label: string; className: string; icon: string }> = {
       'activo': { 
         label: 'Activo', 
         className: 'estado-badge--active',
         icon: '✅'
       },
+      'en revisión': { 
+        label: 'En revisión', 
+        className: 'estado-badge--pending',
+        icon: '⏳'
+      },
       'pausado': { 
         label: 'Pausado', 
         className: 'estado-badge--paused',
         icon: '⏸️'
+      },
+      'rechazado': { 
+        label: 'Rechazado', 
+        className: 'estado-badge--warning',
+        icon: '⚠️'
       }
     };
-    return config[estado];
+    // Si el estado no está en el config, usar valores por defecto
+    return config[estado] || {
+      label: estado,
+      className: 'estado-badge--default',
+      icon: '📋'
+    };
   };
 
   const config = getEstadoConfig();

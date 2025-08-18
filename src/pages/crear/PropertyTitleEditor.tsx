@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import './PropertyTitleEditor.css';
 
 function PropertyTitleEditor() {
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
+  const { formData, updateFormData } = usePropertyForm();
+  const [title, setTitle] = useState(formData.titulo || '');
+
+  useEffect(() => {
+    // Cargar título existente del contexto si hay
+    if (formData.titulo) {
+      setTitle(formData.titulo);
+    }
+  }, [formData.titulo]);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -13,7 +22,9 @@ function PropertyTitleEditor() {
 
   const handleNext = () => {
     if (title.trim()) {
-      console.log("Título ingresado:", title.trim());
+      // Guardar en el contexto
+      updateFormData({ titulo: title.trim() });
+      console.log("Título guardado:", title.trim());
       navigate('/step2/description');
     }
   };

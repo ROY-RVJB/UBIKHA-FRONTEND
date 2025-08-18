@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePropertyForm } from '../../contexts/PropertyFormContext';
 import WizardProgressIndicator from '../crear/componenteCrear/WizardProgressIndicator';
 import './PropertyDescriptionEditor.css';
 
 function PropertyDescriptionEditor() {
   const navigate = useNavigate();
-  const [description, setDescription] = useState('');
+  const { formData, updateFormData } = usePropertyForm();
+  const [description, setDescription] = useState(formData.descripcion || '');
+
+  useEffect(() => {
+    // Cargar descripción existente del contexto si hay
+    if (formData.descripcion) {
+      setDescription(formData.descripcion);
+    }
+  }, [formData.descripcion]);
 
   const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(event.target.value);
@@ -13,7 +22,9 @@ function PropertyDescriptionEditor() {
 
   const handleNext = () => {
     if (description.trim()) {
-      console.log("Descripción ingresada:", description.trim());
+      // Guardar en el contexto
+      updateFormData({ descripcion: description.trim() });
+      console.log("Descripción guardada:", description.trim());
       navigate('/step3');
     }
   };

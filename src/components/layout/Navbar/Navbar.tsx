@@ -5,6 +5,7 @@ import { useNavigate} from 'react-router-dom';
 import  Avatar    from '../../ui/Avatar/Avatar';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useUser } from '../../../contexts/UserContext';
 
 
 export interface NavbarProps {
@@ -16,6 +17,7 @@ export interface NavbarProps {
 export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, getUserInitial } = useUser();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -72,7 +74,7 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
             {text_4}
           </Button>
           <div className='avatar-wrapper'>
-            <Avatar name="Luis" />
+            <Avatar name={user?.nombres || ''} />
           </div>
         </div>
 
@@ -128,8 +130,8 @@ export const Navbar = ({ text_1, text_2,text_3,text_4 }: NavbarProps) => {
             </div>
 
             <div className="mobile-menu-user">
-              <Avatar name="Luis" />
-              <span>Luis</span>
+              <Avatar name={user?.nombres || ''} />
+              <span>{user?.nombres || 'Usuario'}</span>
             </div>
           </div>
         </div>
